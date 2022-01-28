@@ -47,7 +47,7 @@ export default function SignIn() {
 
           <CardContent
             sx={{
-              width: 400,
+              width: 368,
               backgroundColor: '#f3f4f6',
               display: 'flex',
               flexDirection: 'column',
@@ -56,16 +56,20 @@ export default function SignIn() {
             }}
           >
             <Typography
-              fontWeight="black"
-              variant="h1"
-              fontSize={'2.25rem'}
+              fontWeight="extraBold"
+              variant="h3"
+              // fontSize={'2.25rem'}
               component="div"
-              sx={{ letterSpacing: '-1px' }}
+              sx={{ letterSpacing: '-.05em', lineHeight: 1 }}
               // gutterBottom
             >
               GetFIT
             </Typography>
-            <Typography gutterBottom variant="h6" color="text.primary">
+            <Typography
+              sx={{ marginBottom: '1rem', fontSize: '1.125rem' }}
+              variant="h6"
+              color="text.primary"
+            >
               Stay fit.
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
@@ -77,7 +81,7 @@ export default function SignIn() {
                 display: 'flex',
                 flexDirection: 'column',
 
-                marginTop: '3rem',
+                marginTop: '1.5rem',
                 width: 250,
               }}
             >
