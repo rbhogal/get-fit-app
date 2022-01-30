@@ -10,11 +10,6 @@ import UserProfile from './pages/UserProfile';
 import WeightLog from './pages/WeightLog';
 
 const theme = createTheme({
-  // palette: {
-  //   primary: {
-  //     // main: '#0ea5e9',
-  //   },
-  // },
   typography: {
     fontFamily: ['Inter', 'sans-serif'].join(','),
     fontWeightLight: 300,
@@ -27,20 +22,18 @@ const theme = createTheme({
 });
 
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(true);
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <Routes>
-          {!isSignedIn && <Route path="/" element={<SignIn />} />}
-          {isSignedIn && (
-            <Route element={<Layout />}>
-              <Route path="mealplanner" element={<MealPlanner />} />
-              <Route path="profile" element={<UserProfile />} />
-              <Route path="weightlog" element={<WeightLog />} />
-            </Route>
-          )}
+          <Route path="/" element={<SignIn />} />
+          <Route element={<Layout />}>
+            <Route path="mealplanner" element={<MealPlanner />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="weightlog" element={<WeightLog />} />
+          </Route>
         </Routes>
       </div>
     </ThemeProvider>

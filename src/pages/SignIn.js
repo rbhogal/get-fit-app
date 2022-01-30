@@ -8,8 +8,6 @@ import GoogleIcon from '@mui/icons-material/Google';
 import PersonIcon from '@mui/icons-material/Person';
 
 import signInImg from '../images/sign-in-img.jpg';
-import signInImg2 from '../images/kyle-smith-tlowJ-oYAjU-unsplash.jpg';
-import signInImg3 from '../images/julia-rekamie-Z72YujnOrlY-unsplash.jpg';
 import { Box } from '@mui/system';
 
 export default function SignIn() {
@@ -37,7 +35,6 @@ export default function SignIn() {
             <CardMedia
               component="img"
               alt="Sign In Hero"
-              // height="550"
               src={signInImg}
               width="400"
               height="600"
@@ -58,10 +55,8 @@ export default function SignIn() {
             <Typography
               fontWeight="extraBold"
               variant="h3"
-              // fontSize={'2.25rem'}
               component="div"
               sx={{ letterSpacing: '-.05em', lineHeight: 1 }}
-              // gutterBottom
             >
               GetFIT
             </Typography>
