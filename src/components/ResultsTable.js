@@ -7,11 +7,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(name, calories) {
+  return { name, calories };
 }
 
-const rows = [createData('', 159, 6.0, 24, 4.0)];
+const rows = [
+  createData('BMR', 159),
+  createData('TDEE (Maintenance)', 2500),
+  createData('Daily Calories', 1900),
+];
 
 export default function ResultsTable() {
   return (
@@ -20,10 +24,7 @@ export default function ResultsTable() {
         <TableHead>
           <TableRow>
             <TableCell>RESULTS</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="right">{''}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,9 +37,6 @@ export default function ResultsTable() {
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
