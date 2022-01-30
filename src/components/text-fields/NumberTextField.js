@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 export default function NumberTextField({ handleChange, name }) {
+  const [error, setError] = useState(false);
+
   return (
     <Box
       component="form"
@@ -14,6 +16,7 @@ export default function NumberTextField({ handleChange, name }) {
     >
       <TextField
         size="small"
+        margin="dense"
         id="standard-number"
         label={name}
         type="number"
@@ -34,9 +37,10 @@ export default function NumberTextField({ handleChange, name }) {
               .toString()
               .slice(0, 3);
           }
-
           if (name === 'Age') {
-            e.target.value = e.target.value > 99 ? 1 : e.target.value;
+            e.target.value = Math.max(0, parseInt(e.target.value))
+              .toString()
+              .slice(0, 2);
           }
         }}
       />

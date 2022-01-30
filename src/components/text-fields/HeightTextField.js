@@ -48,10 +48,9 @@ const HeightTextField = ({ name, handleChange, value }) => {
         }}
         variant="standard"
         onInput={e => {
-          e.target.value = e.target.value > 12 ? 1 : e.target.value;
+          e.target.value =
+            (e.target.value > 12) | (e.target.value < 1) ? 0 : e.target.value;
         }}
-        error={false}
-        helperText={false ? 'too high' : ''}
       />
     </div>
   );

@@ -10,31 +10,27 @@ import TableRow from '@mui/material/TableRow';
 import SelectDropdown from '../components/SelectDropdown';
 import NumberTextField from '../components/text-fields/NumberTextField';
 import HeightTextField from '../components/text-fields/HeightTextField';
+import ResultsTable from '../components/ResultsTable';
 
-function createData(label, input) {
-  return { label, input };
-}
-
-const renderSexInput = () => {
-  return <SelectDropdown />;
-};
-
-const rows = [
-  { label: 'Sex', input: renderSexInput },
-  createData('Goal', 237),
-  createData('Fat Loss Deficit/Muscle Gain (%)', 262),
-  createData('Cupcake', 305),
-  createData('Gingerbread', 356),
-];
-
-const selectSexData = {
+const selectSex = {
   label: 'Sex',
   selectItems: ['Male', 'Female'],
 };
 
-const selectAgeData = {
-  label: 'Age',
-  selectItems: Array.from(Array(10).keys()),
+const selectGoal = {
+  label: 'Goal',
+  selectItems: ['Fat Loss', 'Muscle Gain'],
+};
+
+const selectActivityLevel = {
+  label: 'Activity Level',
+  selectItems: [
+    'Sedentary — Desk job and little to no exercise',
+    'Lightly Active — Light exercise/sports 1-3 day/week',
+    'Moderately Active — Moderate exercise/sport 3-5 days/week',
+    'Very Active — Hard exercise/sports 6-7 days/week',
+    'Extremely Active — Hard daily exercise/sports and physical job',
+  ],
 };
 
 const UserProfile = () => {
@@ -49,83 +45,121 @@ const UserProfile = () => {
     tdee: '',
     calories: '',
   });
-  const [value, setValue] = useState('');
 
   console.log(userData);
 
   const handleChange = e => {
-    if (e.target.name === 'Sex') {
+    if (e.target.name === 'Sex')
       setUserData({ ...userData, sex: e.target.value });
-    }
 
-    if (e.target.name === 'Age') {
+    if (e.target.name === 'Age')
       setUserData({ ...userData, age: e.target.value });
-    }
 
-    if (e.target.name === 'Height') {
-      setUserData({ ...userData, height: e.target.value });
-    }
+    if (e.target.name === 'Height') console.log(e.target.value);
+
+    // if (e.target.name === 'Weight') setUserData({...userData, weight})
+
+    if (e.target.name === 'Goal')
+      setUserData({ ...userData, goal: e.target.value });
   };
 
   return (
-    <Paper sx={{ margin: '5rem 25% 0 25%' }} elevation={2}>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableBody>
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {'Sex'}
-              </TableCell>
-              <TableCell size="small" align="right">
-                <SelectDropdown
-                  userData={userData}
-                  selectData={selectSexData}
-                  handleChange={handleChange}
-                  value={userData.sex}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {'Age'}
-              </TableCell>
-              <TableCell size="small" align="right">
-                <NumberTextField name={'Age'} handleChange={handleChange} />
-              </TableCell>
-            </TableRow>
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {'Height'}
-              </TableCell>
-              <TableCell size="small" align="right">
-                <HeightTextField
-                  name={'Height'}
-                  handleChange={handleChange}
-                  value={userData.height}
-                />
-              </TableCell>
-            </TableRow>
+    <div>
+      <Paper sx={{ margin: '5rem 25% 0 25%' }} elevation={2}>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableBody>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong style={{ opacity: 0.8 }}> Sex</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <SelectDropdown
+                    userData={userData}
+                    selectData={selectSex}
+                    handleChange={handleChange}
+                    value={userData.sex}
+                  />
+                </TableCell>
+              </TableRow>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong style={{ opacity: 0.8 }}>Age</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <NumberTextField name={'Age'} handleChange={handleChange} />
+                </TableCell>
+              </TableRow>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong style={{ opacity: 0.8 }}>Height</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <HeightTextField
+                    name={'Height'}
+                    handleChange={handleChange}
+                    value={userData.height}
+                  />
+                </TableCell>
+              </TableRow>
 
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {'Weight'}
-              </TableCell>
-              <TableCell size="small" align="right">
-                <NumberTextField name={'Weight'} handleChange={handleChange} />
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong style={{ opacity: 0.8 }}>Weight</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <NumberTextField
+                    name={'Weight'}
+                    handleChange={handleChange}
+                  />
+                </TableCell>
+              </TableRow>
+
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong style={{ opacity: 0.8 }}>Goal</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <SelectDropdown
+                    userData={userData}
+                    selectData={selectGoal}
+                    handleChange={handleChange}
+                    value={userData.goal}
+                  />
+                </TableCell>
+              </TableRow>
+
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong style={{ opacity: 0.8 }}>Activity Level</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <SelectDropdown
+                    userData={userData}
+                    selectData={selectActivityLevel}
+                    handleChange={handleChange}
+                    value={userData.activityLevel}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+      <ResultsTable />
+    </div>
   );
 };
 
