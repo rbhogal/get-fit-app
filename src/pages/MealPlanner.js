@@ -51,7 +51,7 @@ export default function MealPlanner() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box>
       <Box
         sx={{
           borderBottom: 1,

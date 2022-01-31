@@ -9,9 +9,10 @@ export default function SelectDropdown({ selectData, handleChange, value }) {
 
   return (
     <div>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel>{selectData.label}</InputLabel>
         <Select
+          size="small"
           value={value}
           onChange={handleChange}
           name={selectData.label}

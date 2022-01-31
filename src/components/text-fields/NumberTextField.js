@@ -5,6 +5,10 @@ import TextField from '@mui/material/TextField';
 export default function NumberTextField({ handleChange, name }) {
   const [error, setError] = useState(false);
 
+  /* 
+    Covert weight (lbs) to kg
+  */
+
   return (
     <Box
       component="form"
@@ -28,7 +32,7 @@ export default function NumberTextField({ handleChange, name }) {
         InputLabelProps={{
           shrink: true,
         }}
-        variant="standard"
+        variant="outlined"
         onChange={handleChange}
         required
         onInput={e => {

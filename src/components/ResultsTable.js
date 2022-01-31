@@ -23,7 +23,9 @@ export default function ResultsTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>RESULTS</TableCell>
+            <TableCell>
+              <strong>RESULTS</strong>
+            </TableCell>
             <TableCell align="right">{''}</TableCell>
           </TableRow>
         </TableHead>

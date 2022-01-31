@@ -6,9 +6,8 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 
 const Layout = () => {
   return (
-    <div sx={{ backgroundColor: '#f3f4f6' }}>
+    <div>
       <ResponsiveAppBar />
-
       <Box sx={{ padding: '1rem 15% 5rem 15%' }}>
         <Outlet />
       </Box>

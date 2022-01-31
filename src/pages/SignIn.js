@@ -6,20 +6,20 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GoogleIcon from '@mui/icons-material/Google';
 import PersonIcon from '@mui/icons-material/Person';
+import { Paper } from '@mui/material';
 
 import signInImg from '../images/sign-in-img.jpg';
 import { Box } from '@mui/system';
 
 export default function SignIn() {
   return (
-    <Box
+    <Paper
       sx={{
         width: '100%',
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 7,
       }}
     >
       <Card
@@ -100,8 +100,11 @@ export default function SignIn() {
                   padding: '.5rem',
                   textTransform: 'none',
                   fontSize: '0.875rem',
-                  // backgroundColor: '#f9fafb',
-                  // color: '#4b5563',
+                  backgroundColor: 'white',
+                  color: 'dimgrey',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255,255,255,0.04)',
+                  },
                 }}
                 variant="contained"
                 size="small"
@@ -113,6 +116,6 @@ export default function SignIn() {
           </CardContent>
         </Box>
       </Card>
-    </Box>
+    </Paper>
   );
 }

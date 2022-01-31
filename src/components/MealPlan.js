@@ -3,6 +3,7 @@ import { Button, IconButton } from '@mui/material';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Delete } from '@mui/icons-material';
+import { Paper } from '@mui/material';
 
 const renderDeleteButton = params => {
   return (
@@ -41,15 +42,15 @@ const breakfastColumns = [
   ...columns,
 ];
 const lunchColumns = [
-  { field: 'id', headerName: 'LUNCH', flex: 1 },
+  { field: 'id', headerName: 'LUNCH', flex: 1, sortable: false },
   ...columns,
 ];
 const dinnerColumns = [
-  { field: 'id', headerName: 'DINNER', flex: 1 },
+  { field: 'id', headerName: 'DINNER', flex: 1, sortable: false },
   ...columns,
 ];
 const snacksColumns = [
-  { field: 'id', headerName: 'SNACKS', flex: 1 },
+  { field: 'id', headerName: 'SNACKS', flex: 1, sortable: false },
   ...columns,
 ];
 
@@ -102,7 +103,7 @@ const rows = [
 const MealPlan = () => {
   return (
     <Box sx={{ padding: '0 15%' }}>
-      <Box
+      <Paper
         sx={{
           position: 'relative',
           boxShadow:
@@ -135,9 +136,15 @@ const MealPlan = () => {
         >
           Add Food
         </Button>
-      </Box>
+      </Paper>
 
-      <Box sx={{ position: 'relative' }}>
+      <Paper
+        sx={{
+          position: 'relative',
+          boxShadow:
+            '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        }}
+      >
         <DataGrid
           rows={rows}
           columns={lunchColumns}
@@ -168,9 +175,15 @@ const MealPlan = () => {
         >
           Add Food
         </Button>
-      </Box>
+      </Paper>
 
-      <Box sx={{ position: 'relative' }}>
+      <Paper
+        sx={{
+          position: 'relative',
+          boxShadow:
+            '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        }}
+      >
         <DataGrid
           rows={rows}
           columns={dinnerColumns}
@@ -201,9 +214,15 @@ const MealPlan = () => {
         >
           Add Food
         </Button>
-      </Box>
+      </Paper>
 
-      <Box sx={{ position: 'relative' }}>
+      <Paper
+        sx={{
+          position: 'relative',
+          boxShadow:
+            '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        }}
+      >
         <DataGrid
           rows={rows}
           columns={snacksColumns}
@@ -234,26 +253,34 @@ const MealPlan = () => {
         >
           Add Food
         </Button>
-      </Box>
-      <DataGrid
-        rows={[]}
-        columns={totalColumns}
-        autoHeight
-        rowsPerPageOptions={[5]}
-        density="compact"
-        disableColumnFilter
-        disableColumnMenu
-        editMode="row"
-        hideFooter
-        isRowSelectable={false}
+      </Paper>
+
+      <Paper
         sx={{
-          marginBottom: '2.8rem',
           boxShadow:
             '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
         }}
-        rowHeight={35}
-        headerHeight={40}
-      />
+      >
+        <DataGrid
+          rows={[]}
+          columns={totalColumns}
+          autoHeight
+          rowsPerPageOptions={[5]}
+          density="compact"
+          disableColumnFilter
+          disableColumnMenu
+          editMode="row"
+          hideFooter
+          isRowSelectable={false}
+          sx={{
+            marginBottom: '2.8rem',
+            boxShadow:
+              '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+          }}
+          rowHeight={35}
+          headerHeight={40}
+        />
+      </Paper>
     </Box>
   );
 };
