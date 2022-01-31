@@ -1,5 +1,7 @@
 <div id="top"></div>
 
+### ⚠ Work in progress
+
 <!-- PROJECT HEADER -->
 <br />
 <div align="center">
@@ -7,7 +9,7 @@
 <h3 align="center">GetFIT</h3>
 
   <p align="center">
-    A simmple meal tracking app
+    A simple meal tracking app
     <br />
     <br />
     <!--<a href="https://game-save.web.app">View Site</a> -->
