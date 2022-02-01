@@ -51,7 +51,7 @@
 
 <div align="center">
 
-![GetFIT](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/sign-in-screenshot-desktop.png)
+![GetFIT](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/sign-in-screenshot-desktop.pg)
 
 </div>
 <br />
