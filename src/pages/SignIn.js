@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,11 +8,75 @@ import Typography from '@mui/material/Typography';
 import GoogleIcon from '@mui/icons-material/Google';
 import PersonIcon from '@mui/icons-material/Person';
 import { Paper } from '@mui/material';
-
-import signInImg from '../images/sign-in-img.jpg';
 import { Box } from '@mui/system';
 
+import { signInWithPopup, signInAnonymously } from 'firebase/auth';
+import { set, ref, get, child } from 'firebase/database';
+
+import { auth, provider, dbRef, db } from '../firebase';
+import signInImg from '../images/sign-in-img.jpg';
+import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 export default function SignIn() {
+  const authCtx = useContext(AuthContext);
+  let navigate = useNavigate();
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then(result => {
+        const userId = result.user.uid;
+        const name = result.user.displayName;
+        const email = result.user.email;
+        const profilePic = result.user.photoURL;
+        const token = result.user.accessToken;
+
+        // Check if new user
+        get(child(dbRef, `users/${userId}`))
+          .then(snapshot => {
+            if (snapshot.exists()) {
+              // User exists
+              authCtx.signIn(token);
+
+              // Navigate user to account
+              navigate('mealplanner');
+            } else {
+              // Create new user
+              createNewUser(userId, name, email, profilePic);
+              // Sign in user
+              authCtx.signIn(token);
+              // Navigate user to account
+              navigate('mealplanner');
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const signInAsGuest = () => {
+    signInAnonymously(auth)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+  };
+
+  const createNewUser = (userId, name, email, imageUrl) => {
+    set(ref(db, 'users/' + userId), {
+      userId: userId,
+      username: name,
+      email: email,
+      profilePic: imageUrl,
+    });
+  };
+
   return (
     <Paper
       sx={{
@@ -109,6 +174,7 @@ export default function SignIn() {
                 variant="contained"
                 size="small"
                 startIcon={<GoogleIcon />}
+                onClick={signInWithGoogle}
               >
                 Sign in with Google
               </Button>

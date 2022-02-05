@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import MealPlanner from './pages/MealPlanner';
 import UserProfile from './pages/UserProfile';
 import WeightLog from './pages/WeightLog';
+import AuthContext from './context/AuthContext';
 
 const theme = createTheme({
   components: {
@@ -34,19 +35,22 @@ const theme = createTheme({
 });
 
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(true);
+  const authCtx = useContext(AuthContext);
+  const isSignedIn = authCtx.isSignedIn;
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
         <div>
           <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route element={<Layout />}>
-              <Route path="mealplanner" element={<MealPlanner />} />
-              <Route path="profile" element={<UserProfile />} />
-              <Route path="weightlog" element={<WeightLog />} />
-            </Route>
+            {!isSignedIn && <Route path="/" element={<SignIn />} />}
+            {isSignedIn && (
+              <Route element={<Layout />}>
+                <Route path="mealplanner" element={<MealPlanner />} />
+                <Route path="profile" element={<UserProfile />} />
+                <Route path="weightlog" element={<WeightLog />} />
+              </Route>
+            )}
           </Routes>
         </div>
       </CssBaseline>

@@ -6,6 +6,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
+import { Button } from '@mui/material';
 
 import SelectDropdown from '../components/SelectDropdown';
 import NumberTextField from '../components/text-fields/NumberTextField';
@@ -51,7 +52,7 @@ const UserProfile = () => {
     calories: '',
   });
 
-  console.log(userData);
+  // console.log(userData);
 
   /* 
     Text Fields
@@ -63,27 +64,29 @@ const UserProfile = () => {
 
   const handleChange = e => {
     if (e.target.name === 'Sex') {
-      console.log(e.target.value);
       setUserData({ ...userData, sex: e.target.value });
     }
-
-    if (e.target.name === 'Age')
+    if (e.target.name === 'Age') {
       setUserData({ ...userData, age: e.target.value });
+    }
 
-    if (e.target.name === 'feet' || 'inches') {
+    if (e.target.name === 'feet' || e.target.name === 'inches') {
       //  if(e.target.name === 'feet')
       const height = convertHeightUnits();
       setUserData({ ...userData, height: height });
     }
 
-    if (e.target.name === 'Weight')
+    if (e.target.name === 'Weight') {
       setUserData({ ...userData, weight: e.target.value });
+    }
 
-    if (e.target.name === 'Goal')
+    if (e.target.name === 'Goal') {
       setUserData({ ...userData, goal: e.target.value });
+    }
 
-    if (e.target.name === 'Activity Level')
+    if (e.target.name === 'Activity Level') {
       setUserData({ ...userData, activityLevel: e.target.value });
+    }
   };
 
   return (
@@ -100,7 +103,6 @@ const UserProfile = () => {
                 </TableCell>
                 <TableCell size="small" align="right">
                   <SelectDropdown
-                    userData={userData}
                     selectData={selectSex}
                     handleChange={handleChange}
                     value={userData.sex}
@@ -154,7 +156,6 @@ const UserProfile = () => {
                 </TableCell>
                 <TableCell size="small" align="right">
                   <SelectDropdown
-                    userData={userData}
                     selectData={selectGoal}
                     handleChange={handleChange}
                     value={userData.goal}
@@ -170,7 +171,6 @@ const UserProfile = () => {
                 </TableCell>
                 <TableCell size="small" align="right">
                   <SelectDropdown
-                    userData={userData}
                     selectData={selectActivityLevel}
                     handleChange={handleChange}
                     value={userData.activityLevel}
@@ -180,6 +180,18 @@ const UserProfile = () => {
             </TableBody>
           </Table>
         </TableContainer>
+
+        <Box sx={{ textAlign: 'right', marginRight: '1.25rem' }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            style={{ marginLeft: 'auto', marginRight: 'auto' }}
+          >
+            Calculate
+          </Button>
+        </Box>
+
         <ResultsTable />
       </Box>
     </div>
