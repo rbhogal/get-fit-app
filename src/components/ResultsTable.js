@@ -19,7 +19,7 @@ const rows = [
 
 export default function ResultsTable() {
   return (
-    <TableContainer sx={{ marginTop: '2rem' }} component={Paper}>
+    <TableContainer sx={{ marginTop: '.5rem' }} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>

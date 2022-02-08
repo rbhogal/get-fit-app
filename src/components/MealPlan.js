@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Button, IconButton } from '@mui/material';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -93,14 +93,28 @@ const totalColumns = [
   },
 ];
 
-const rows = [
-  { id: 'Burrito', calories: 486, protein: 36, carbs: 35, fats: 15 },
-  { id: 'Bulgogi Meal Prep', calories: 545, protein: 38, carbs: 27, fats: 14 },
-  // { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-];
+// const rows = [
+//   { id: 'Burrito', calories: 486, protein: 36, carbs: 35, fats: 15 },
+//   { id: 'Bulgogi Meal Prep', calories: 545, protein: 38, carbs: 27, fats: 14 },
+//   // { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+//   // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+// ];
 
 const MealPlan = () => {
+  const [rows, setRows] = useState([
+    {
+      id: '',
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
+    },
+  ]);
+
+  const addFood = () => {
+    setRows([...rows]);
+  };
+
   return (
     <Box sx={{ padding: '0 15%' }}>
       <Paper
@@ -132,6 +146,7 @@ const MealPlan = () => {
             bottom: '-2.2rem',
             fontSize: '.7rem',
           }}
+          onClick={addFood}
           variant="contained"
         >
           Add Food
@@ -157,8 +172,6 @@ const MealPlan = () => {
           hideFooter
           sx={{
             marginBottom: '2.8rem',
-            boxShadow:
-              '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
           }}
           rowHeight={35}
           headerHeight={40}
@@ -196,8 +209,6 @@ const MealPlan = () => {
           hideFooter
           sx={{
             marginBottom: '2.8rem',
-            boxShadow:
-              '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
           }}
           rowHeight={35}
           headerHeight={40}
@@ -235,8 +246,6 @@ const MealPlan = () => {
           hideFooter
           sx={{
             marginBottom: '2.8rem',
-            boxShadow:
-              '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
           }}
           rowHeight={35}
           headerHeight={40}
@@ -271,11 +280,8 @@ const MealPlan = () => {
           disableColumnMenu
           editMode="row"
           hideFooter
-          isRowSelectable={false}
           sx={{
             marginBottom: '2.8rem',
-            boxShadow:
-              '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
           }}
           rowHeight={35}
           headerHeight={40}

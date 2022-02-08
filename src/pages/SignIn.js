@@ -9,6 +9,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import PersonIcon from '@mui/icons-material/Person';
 import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
+import Alert from '@mui/material/Alert';
 
 import { signInWithPopup, signInAnonymously } from 'firebase/auth';
 import { set, ref, get, child } from 'firebase/database';
@@ -38,15 +39,17 @@ export default function SignIn() {
               // User exists
               authCtx.signIn(token);
 
+              // alert
+
               // Navigate user to account
-              navigate('mealplanner');
+              navigate('/');
             } else {
               // Create new user
               createNewUser(userId, name, email, profilePic);
               // Sign in user
               authCtx.signIn(token);
               // Navigate user to account
-              navigate('mealplanner');
+              navigate('/');
             }
           })
           .catch(err => {
@@ -61,7 +64,9 @@ export default function SignIn() {
   const signInAsGuest = () => {
     signInAnonymously(auth)
       .then(result => {
-        console.log(result);
+        const token = result.user.accessToken;
+        authCtx.signIn(token);
+        navigate('/');
       })
       .catch(err => {
         console.log(err.message);
@@ -156,6 +161,7 @@ export default function SignIn() {
                 variant="contained"
                 size="small"
                 startIcon={<PersonIcon />}
+                onClick={signInAsGuest}
               >
                 Sign in as Guest
               </Button>

@@ -44,9 +44,11 @@ function App() {
         <div>
           <Routes>
             {!isSignedIn && <Route path="/" element={<SignIn />} />}
+            {!isSignedIn && <Route path="*" element={<SignIn />} />}
+
             {isSignedIn && (
               <Route element={<Layout />}>
-                <Route path="mealplanner" element={<MealPlanner />} />
+                <Route path="/" element={<MealPlanner />} />
                 <Route path="profile" element={<UserProfile />} />
                 <Route path="weightlog" element={<WeightLog />} />
               </Route>

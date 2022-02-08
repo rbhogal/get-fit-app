@@ -33,6 +33,14 @@ const selectActivityLevel = {
     'Extremely Active — Hard daily exercise/sports and physical job',
   ],
 };
+const selectRateOfFatLossMuscleGain = {
+  label: 'Rate',
+  selectItems: [
+    'Slow - 0.5% per lb of bodyweight',
+    'Moderate - 0.7% per lb of bodyweight',
+    'Fast - 1% per lb of bodyweight',
+  ],
+};
 
 const convertHeightUnits = (feet, inches) => {
   const heightInCm = feet * 30.48 + inches * 2.54;
@@ -47,6 +55,7 @@ const UserProfile = () => {
     weight: '',
     goal: '',
     activityLevel: '',
+    rateOfFatLossMuscleGain: '',
     bmr: '',
     tdee: '',
     calories: '',
@@ -55,11 +64,62 @@ const UserProfile = () => {
   // console.log(userData);
 
   /* 
-    Text Fields
-    * Age
-    * Height: ft, inches
-    * Weight: lbs
-    * 
+    Calculate Calories & Macros
+    /////////////////////////////////////////////////
+
+    **Notes:
+    ------------------------------------------------
+
+    Don't go below 0.3 g per lb for FATS
+
+
+    Equations:
+    --------------------------------------------------
+    
+    The Mifflin St. Jeor Equation (kcal/day)
+
+    Men:
+    (10 x weight in kg) + (6.25 heigh in cm) - (5 x age in years) + 5
+    Women: 
+    (10 x weight in kg) + (6.25 height in cm) - (5 x age in years) -161
+
+    Macros:
+    Protein & Carbs: = 4 kcal / 1 g
+    Fats = 9 calories / 1 g
+
+    1) BMR = Mifflin & St. Jeor Equation 
+    2) TDEE = (BMR x Activity Level)
+    3) Daily Calories = TDEE x (Rate of Fat Loss/ Muscle Gain)
+    4) Macros:
+       Protein (g) = weight (lbs) 
+       Fats (g) = 0.3g x weight (lbs)
+       Carbs (g) = ( Daily Calories (kcal) - [fats (g) * 9 kcal/g] kcal  - [protein (g) * 4 kcal/g] kcal  ) / 4 grams of carbs
+
+    
+
+
+    Variables
+    --------------------------------------------------
+    BRM: weight (kg), height (cm), age (yrs)
+
+    Activity Levels =
+    * Sedentary —  (multiply by 1.2)
+    * Lightly Active —  (multiply by 1.375)
+    * Moderately Active —  (multiply by 1.55)
+    * Very Active — (multiply by 1.725)
+    * Extremely Active —  (multiply by 1.9) 
+
+    Rate of Fat Loss/ Muscle Gain
+    Slow/Safest = 0.5% per lb of bodyweight
+    Moderate = 0.7% per lb of bodyweight
+    Fast = 1% of per lb of bodyweight
+    
+
+    Calculations
+    -------------------------------------------------- 
+    
+    
+
   */
 
   const handleChange = e => {
@@ -71,13 +131,13 @@ const UserProfile = () => {
     }
 
     if (e.target.name === 'feet' || e.target.name === 'inches') {
-      //  if(e.target.name === 'feet')
-      const height = convertHeightUnits();
-      setUserData({ ...userData, height: height });
+      const heightInCm = convertHeightUnits();
+      setUserData({ ...userData, height: heightInCm });
     }
 
     if (e.target.name === 'Weight') {
-      setUserData({ ...userData, weight: e.target.value });
+      const weightInKg = e.target.value * 2.20462;
+      setUserData({ ...userData, weight: weightInKg });
     }
 
     if (e.target.name === 'Goal') {
@@ -86,6 +146,10 @@ const UserProfile = () => {
 
     if (e.target.name === 'Activity Level') {
       setUserData({ ...userData, activityLevel: e.target.value });
+    }
+
+    if (e.target.name === 'Rate of Fat Loss/Muscle Gain') {
+      setUserData({ ...userData, rateOfFatLossMuscleGain: e.target.value });
     }
   };
 
@@ -177,6 +241,20 @@ const UserProfile = () => {
                   />
                 </TableCell>
               </TableRow>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <strong>Rate of Fat Loss/Muscle Gain</strong>
+                </TableCell>
+                <TableCell size="small" align="right">
+                  <SelectDropdown
+                    selectData={selectRateOfFatLossMuscleGain}
+                    handleChange={handleChange}
+                    value={userData.rateOfFatLossMuscleGain}
+                  />
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -191,7 +269,6 @@ const UserProfile = () => {
             Calculate
           </Button>
         </Box>
-
         <ResultsTable />
       </Box>
     </div>

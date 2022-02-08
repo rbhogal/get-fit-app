@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,24 +13,44 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+
+import { auth } from '../firebase';
+import AuthContext from '../context/AuthContext';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const pages = [
   { title: 'Profile', path: 'profile' },
   {
     title: 'Meal Planner',
-    path: 'mealplanner',
+    path: '/',
   },
   {
     title: 'Weight Log',
     path: 'weightlog',
   },
 ];
-const settings = ['Logout'];
+const settings = ['Sign Out'];
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [userData, setUserData] = useState({
+    photoURL: '',
+  });
+
+  useEffect(() => {
+    // Get user's profile pic from firebase
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        setUserData({ ...userData, photoURL: user.photoURL });
+      } else {
+        // user is signed out....
+      }
+    });
+  }, []);
+
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -41,7 +63,15 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = e => {
+    if (e.target.innerHTML === 'Sign Out') {
+      console.log(e); // Sign out from google and redirect page
+
+      auth.signOut();
+      authCtx.signOut();
+      navigate('/');
+    }
+
     setAnchorElUser(null);
   };
 
@@ -126,7 +156,7 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <Avatar alt="Remy Sharp" src={userData.photoURL} />
             </IconButton>
             <Menu
               sx={{ mt: '45px' }}
