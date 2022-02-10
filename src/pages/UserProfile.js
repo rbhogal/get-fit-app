@@ -8,44 +8,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
 
-import SelectDropdown from '../components/SelectDropdown';
-import NumberTextField from '../components/text-fields/NumberTextField';
-import HeightTextField from '../components/text-fields/HeightTextField';
+import SelectSex from '../components/select/SelectSex';
+import SelectGoal from '../components/select/SelectGoal';
+import AgeTextField from '../components/text-fields/AgeTextField';
+import WeightTextField from '../components/text-fields/WeightTextField';
 import ResultsTable from '../components/ResultsTable';
-
-const selectSex = {
-  label: 'Sex',
-  selectItems: ['Male', 'Female'],
-};
-
-const selectGoal = {
-  label: 'Goal',
-  selectItems: ['Fat Loss', 'Muscle Gain'],
-};
-
-const selectActivityLevel = {
-  label: 'Activity Level',
-  selectItems: [
-    'Sedentary — Desk job and little to no exercise',
-    'Lightly Active — Light exercise/sports 1-3 day/week',
-    'Moderately Active — Moderate exercise/sport 3-5 days/week',
-    'Very Active — Hard exercise/sports 6-7 days/week',
-    'Extremely Active — Hard daily exercise/sports and physical job',
-  ],
-};
-const selectRateOfFatLossMuscleGain = {
-  label: 'Rate',
-  selectItems: [
-    'Slow - 0.5% per lb of bodyweight',
-    'Moderate - 0.7% per lb of bodyweight',
-    'Fast - 1% per lb of bodyweight',
-  ],
-};
-
-const convertHeightUnits = (feet, inches) => {
-  const heightInCm = feet * 30.48 + inches * 2.54;
-  return heightInCm;
-};
+import SelectActivityLevel from '../components/select/SelectActivityLevel';
+import SelectRate from '../components/select/SelectRate';
+import useInput from '../hooks/useInput';
+import FeetTextField from '../components/text-fields/FeetTextField';
+import InchesTextField from '../components/text-fields/InchesTextField';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState({
@@ -60,6 +32,7 @@ const UserProfile = () => {
     tdee: '',
     calories: '',
   });
+  const formIsValid = false;
 
   // console.log(userData);
 
@@ -122,6 +95,103 @@ const UserProfile = () => {
 
   */
 
+  const {
+    value: enteredSex,
+    isValid: enteredSexIsValid,
+    hasError: sexInputHasError,
+    valueChangeHandler: sexChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueSex,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredAge,
+    isValid: enteredAgeIsValid,
+    hasError: ageInputHasError,
+    valueChangeHandler: ageChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueAge,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredFeet,
+    isValid: enteredFeetIsValid,
+    hasError: feetInputHasError,
+    valueChangeHandler: feetChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueFeet,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredInches,
+    isValid: enteredInchesIsValid,
+    hasError: inchesInputHasError,
+    valueChangeHandler: inchesChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueInches,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredWeight,
+    isValid: enteredWeightIsValid,
+    hasError: weightInputHasError,
+    valueChangeHandler: weightChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueWeight,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredGoal,
+    isValid: enteredGoalIsValid,
+    hasError: goalInputHasError,
+    valueChangeHandler: goalChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueGoal,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredActivityLevel,
+    isValid: enteredActivityLevelIsValid,
+    hasError: activityLevelInputHasError,
+    valueChangeHandler: activityLevelChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueActivityLevel,
+  } = useInput(value => value !== '');
+
+  const {
+    value: enteredRate,
+    isValid: enteredRateIsValid,
+    hasError: rateInputHasError,
+    valueChangeHandler: rateChangeHandler,
+    setIsFormSubmittedToTrue: setIsFormSubmittedToTrueRate,
+  } = useInput(value => value !== '');
+
+  const convertHeightUnits = (feet, inches) => {
+    const heightInCm = feet * 30.48 + inches * 2.54;
+    return heightInCm;
+  };
+
+  const handleSubmit = () => {
+    setIsFormSubmittedToTrueSex();
+    setIsFormSubmittedToTrueAge();
+    setIsFormSubmittedToTrueFeet();
+    setIsFormSubmittedToTrueInches();
+    setIsFormSubmittedToTrueWeight();
+    setIsFormSubmittedToTrueGoal();
+    setIsFormSubmittedToTrueActivityLevel();
+    setIsFormSubmittedToTrueRate();
+
+    if (
+      enteredSexIsValid &&
+      enteredAgeIsValid &&
+      enteredFeetIsValid &&
+      enteredInchesIsValid &&
+      enteredWeightIsValid &&
+      enteredGoalIsValid &&
+      enteredActivityLevelIsValid &&
+      enteredRateIsValid
+    ) {
+      // calc the suff yada yada...
+      console.log('submit data');
+      // console.log(enteredSex);
+      // console.log(enteredFeet);
+    }
+  };
+
+  /* 
   const handleChange = e => {
     if (e.target.name === 'Sex') {
       setUserData({ ...userData, sex: e.target.value });
@@ -148,14 +218,15 @@ const UserProfile = () => {
       setUserData({ ...userData, activityLevel: e.target.value });
     }
 
-    if (e.target.name === 'Rate of Fat Loss/Muscle Gain') {
+    if (e.target.name === 'Rate') {
       setUserData({ ...userData, rateOfFatLossMuscleGain: e.target.value });
     }
   };
+ */
 
   return (
     <div>
-      <Box sx={{ margin: '2.5rem 25% 0 25%' }}>
+      <Box sx={{ margin: '2.5rem 22% 0 22%' }}>
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableBody>
@@ -166,10 +237,10 @@ const UserProfile = () => {
                   <strong> Sex</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <SelectDropdown
-                    selectData={selectSex}
-                    handleChange={handleChange}
-                    value={userData.sex}
+                  <SelectSex
+                    value={enteredSex}
+                    error={sexInputHasError}
+                    onChange={sexChangeHandler}
                   />
                 </TableCell>
               </TableRow>
@@ -180,7 +251,11 @@ const UserProfile = () => {
                   <strong>Age</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <NumberTextField name={'Age'} handleChange={handleChange} />
+                  <AgeTextField
+                    value={enteredAge}
+                    error={ageInputHasError}
+                    onChange={ageChangeHandler}
+                  />
                 </TableCell>
               </TableRow>
               <TableRow
@@ -190,11 +265,18 @@ const UserProfile = () => {
                   <strong>Height</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <HeightTextField
-                    name={'Height'}
-                    handleChange={handleChange}
-                    value={userData.height}
-                  />
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <FeetTextField
+                      value={enteredFeet}
+                      error={feetInputHasError}
+                      onChange={feetChangeHandler}
+                    />
+                    <InchesTextField
+                      value={enteredInches}
+                      error={inchesInputHasError}
+                      onChange={inchesChangeHandler}
+                    />
+                  </div>
                 </TableCell>
               </TableRow>
 
@@ -205,9 +287,10 @@ const UserProfile = () => {
                   <strong>Weight</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <NumberTextField
-                    name={'Weight'}
-                    handleChange={handleChange}
+                  <WeightTextField
+                    value={enteredWeight}
+                    error={weightInputHasError}
+                    onChange={weightChangeHandler}
                   />
                 </TableCell>
               </TableRow>
@@ -219,10 +302,10 @@ const UserProfile = () => {
                   <strong>Goal</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <SelectDropdown
-                    selectData={selectGoal}
-                    handleChange={handleChange}
-                    value={userData.goal}
+                  <SelectGoal
+                    value={enteredGoal}
+                    error={goalInputHasError}
+                    onChange={goalChangeHandler}
                   />
                 </TableCell>
               </TableRow>
@@ -234,10 +317,10 @@ const UserProfile = () => {
                   <strong>Activity Level</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <SelectDropdown
-                    selectData={selectActivityLevel}
-                    handleChange={handleChange}
-                    value={userData.activityLevel}
+                  <SelectActivityLevel
+                    value={enteredActivityLevel}
+                    error={activityLevelInputHasError}
+                    onChange={activityLevelChangeHandler}
                   />
                 </TableCell>
               </TableRow>
@@ -248,10 +331,10 @@ const UserProfile = () => {
                   <strong>Rate of Fat Loss/Muscle Gain</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
-                  <SelectDropdown
-                    selectData={selectRateOfFatLossMuscleGain}
-                    handleChange={handleChange}
-                    value={userData.rateOfFatLossMuscleGain}
+                  <SelectRate
+                    value={enteredRate}
+                    error={rateInputHasError}
+                    onChange={rateChangeHandler}
                   />
                 </TableCell>
               </TableRow>
@@ -261,7 +344,7 @@ const UserProfile = () => {
 
         <Box sx={{ textAlign: 'right', marginRight: '1.25rem' }}>
           <Button
-            type="submit"
+            onClick={handleSubmit}
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             style={{ marginLeft: 'auto', marginRight: 'auto' }}

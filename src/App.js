@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn';
 import Layout from './components/Layout';
 import MealPlanner from './pages/MealPlanner';
 import UserProfile from './pages/UserProfile';
+import Profile from './pages/Profile';
 import WeightLog from './pages/WeightLog';
 import AuthContext from './context/AuthContext';
 

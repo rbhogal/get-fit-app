@@ -34,20 +34,6 @@ const settings = ['Sign Out'];
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [userData, setUserData] = useState({
-    photoURL: '',
-  });
-
-  useEffect(() => {
-    // Get user's profile pic from firebase
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        setUserData({ ...userData, photoURL: user.photoURL });
-      } else {
-        // user is signed out....
-      }
-    });
-  }, []);
 
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
@@ -65,10 +51,9 @@ const ResponsiveAppBar = () => {
 
   const handleCloseUserMenu = e => {
     if (e.target.innerHTML === 'Sign Out') {
-      console.log(e); // Sign out from google and redirect page
-
       auth.signOut();
       authCtx.signOut();
+      localStorage.removeItem('profilePic');
       navigate('/');
     }
 
@@ -156,7 +141,7 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src={userData.photoURL} />
+              <Avatar alt="Avatar" src={localStorage.getItem('profilePic')} />
             </IconButton>
             <Menu
               sx={{ mt: '45px' }}

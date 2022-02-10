@@ -38,7 +38,7 @@ export default function SignIn() {
             if (snapshot.exists()) {
               // User exists
               authCtx.signIn(token);
-
+              localStorage.setItem('profilePic', `${result.user.photoURL}`);
               // alert
 
               // Navigate user to account
@@ -66,6 +66,7 @@ export default function SignIn() {
       .then(result => {
         const token = result.user.accessToken;
         authCtx.signIn(token);
+
         navigate('/');
       })
       .catch(err => {
