@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Paper, Typography } from '@mui/material';
+import { Paper } from '@mui/material';
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 import SelectSex from '../components/select/SelectSex';
 import SelectGoal from '../components/select/SelectGoal';
@@ -19,20 +21,35 @@ import useInput from '../hooks/useInput';
 import FeetTextField from '../components/text-fields/FeetTextField';
 import InchesTextField from '../components/text-fields/InchesTextField';
 
+const activityLevelMultipliers = {
+  Sedentary: 1.2,
+  'Lightly Active': 1.375,
+  'Moderately Active': 1.55,
+  'Very Active': 1.725,
+  'Extremely Active': 1.9,
+};
+
+const ratePercentages = {
+  Slow: 0.005,
+  Moderate: 0.007,
+  Fast: 0.01,
+};
+
 const UserProfile = () => {
   const [userData, setUserData] = useState({
     sex: '',
     age: '',
-    height: '',
-    weight: '',
+    heightFeet: '',
+    heightInches: '',
+    weightInLbs: '',
     goal: '',
     activityLevel: '',
     rateOfFatLossMuscleGain: '',
+    poundsToLoseGainPerWeek: '',
     bmr: '',
     tdee: '',
-    calories: '',
+    dailyCalories: '',
   });
-  const formIsValid = false;
 
   // console.log(userData);
 
@@ -159,12 +176,103 @@ const UserProfile = () => {
     setIsFormSubmittedToTrue: setIsFormSubmittedToTrueRate,
   } = useInput(value => value !== '');
 
-  const convertHeightUnits = (feet, inches) => {
+  const convertHeightToCm = (feet, inches) => {
     const heightInCm = feet * 30.48 + inches * 2.54;
     return heightInCm;
   };
 
-  const handleSubmit = () => {
+  const convertWeightToKg = weightInLbs => {
+    return weightInLbs / 2.20462;
+  };
+
+  const activityLevelSlice = enteredActivityLevel => {
+    let indexOfEmDash = enteredActivityLevel.indexOf('—') - 1;
+    let activityLevelSlice = enteredActivityLevel.substring(0, indexOfEmDash);
+    return activityLevelSlice;
+  };
+
+  const rateSlice = enteredRate => {
+    let indexOfEmDash = enteredRate.indexOf('—') - 1;
+    let rateSlice = enteredRate.substring(0, indexOfEmDash);
+    return rateSlice;
+  };
+
+  const calcResults = () => {
+    let user = {
+      sex: enteredSex,
+      age: +enteredAge,
+      heightInCm: convertHeightToCm(enteredFeet, enteredInches),
+      weightInLbs: enteredWeight,
+      weightInKg: convertWeightToKg(enteredWeight),
+      goal: enteredGoal,
+      activityLevel: activityLevelSlice(enteredActivityLevel),
+      rateOfFatLossMuscleGain: rateSlice(enteredRate),
+    };
+    const {
+      sex,
+      age,
+      heightInCm,
+      weightInLbs,
+      weightInKg,
+      goal,
+      activityLevel,
+      rateOfFatLossMuscleGain,
+    } = user;
+    let poundsToLoseGainPerWeek =
+      weightInLbs * ratePercentages[`${rateOfFatLossMuscleGain}`];
+    let bmr = '';
+    let dailyCalories = '';
+
+    console.log(poundsToLoseGainPerWeek);
+
+    // 1) BMR -- Mifflin & St. Jeor Equation (weightInKg, heightInCm)
+    if (sex === 'Male') {
+      bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
+    }
+
+    if (sex === 'Female') {
+      bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 161;
+    }
+
+    // 2) TDEE = (BMR x Activity Level)
+    let tdee = bmr * activityLevelMultipliers[`${activityLevel}`];
+
+    // 3) Daily Calories = lbs (to lose or gain) per week * 3500 kcal / 7 days
+    let caloricDeficitOrSurplus = (poundsToLoseGainPerWeek * 3500) / 7;
+    console.log(
+      `bmr: ${bmr}, tdee: ${tdee}, caloric deficit: ${caloricDeficitOrSurplus}`
+    );
+
+    if (goal === 'Fat Loss') {
+      dailyCalories = tdee - caloricDeficitOrSurplus;
+    }
+
+    if (goal === 'Muscle Gain') {
+      dailyCalories = tdee + caloricDeficitOrSurplus;
+    }
+
+    console.log(dailyCalories);
+    // bmr, tdee, dailyCalories
+
+    setUserData({
+      ...userData,
+      sex: enteredSex,
+      age: enteredAge,
+      heightFeet: enteredFeet,
+      heightInches: enteredInches,
+      weightInLbs: enteredWeight,
+      goal: enteredGoal,
+      activityLevel: activityLevelSlice(enteredActivityLevel),
+      rateOfFatLossMuscleGain: rateSlice(enteredRate),
+      poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
+      bmr: Math.round(bmr),
+      tdee: Math.round(tdee),
+      dailyCalories: Math.round(dailyCalories),
+    });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
     setIsFormSubmittedToTrueSex();
     setIsFormSubmittedToTrueAge();
     setIsFormSubmittedToTrueFeet();
@@ -184,51 +292,23 @@ const UserProfile = () => {
       enteredActivityLevelIsValid &&
       enteredRateIsValid
     ) {
-      // calc the suff yada yada...
-      console.log('submit data');
-      // console.log(enteredSex);
-      // console.log(enteredFeet);
+      calcResults();
     }
   };
-
-  /* 
-  const handleChange = e => {
-    if (e.target.name === 'Sex') {
-      setUserData({ ...userData, sex: e.target.value });
-    }
-    if (e.target.name === 'Age') {
-      setUserData({ ...userData, age: e.target.value });
-    }
-
-    if (e.target.name === 'feet' || e.target.name === 'inches') {
-      const heightInCm = convertHeightUnits();
-      setUserData({ ...userData, height: heightInCm });
-    }
-
-    if (e.target.name === 'Weight') {
-      const weightInKg = e.target.value * 2.20462;
-      setUserData({ ...userData, weight: weightInKg });
-    }
-
-    if (e.target.name === 'Goal') {
-      setUserData({ ...userData, goal: e.target.value });
-    }
-
-    if (e.target.name === 'Activity Level') {
-      setUserData({ ...userData, activityLevel: e.target.value });
-    }
-
-    if (e.target.name === 'Rate') {
-      setUserData({ ...userData, rateOfFatLossMuscleGain: e.target.value });
-    }
-  };
- */
 
   return (
-    <div>
-      <Box sx={{ margin: '2.5rem 22% 0 22%' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+      <Box sx={{ margin: '2.5rem 0% 0 0%' }}>
         <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+          <Table sx={{ minWidth: '52.286rem' }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontSize: '1.6rem' }}>
+                  <strong>Calculator</strong>
+                </TableCell>
+                <TableCell align="right">{''}</TableCell>
+              </TableRow>
+            </TableHead>
             <TableBody>
               <TableRow
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -284,7 +364,7 @@ const UserProfile = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <strong>Weight</strong>
+                  <strong>Weight (lbs)</strong>
                 </TableCell>
                 <TableCell size="small" align="right">
                   <WeightTextField
@@ -342,8 +422,9 @@ const UserProfile = () => {
           </Table>
         </TableContainer>
 
-        <Box sx={{ textAlign: 'right', marginRight: '1.25rem' }}>
+        <Box sx={{ textAlign: 'right' }}>
           <Button
+            fullWidth
             onClick={handleSubmit}
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
@@ -352,7 +433,20 @@ const UserProfile = () => {
             Calculate
           </Button>
         </Box>
-        <ResultsTable />
+      </Box>
+      <Box sx={{ marginTop: '2.5rem' }}>
+        <ResultsTable
+          sex={userData.sex}
+          age={userData.age}
+          heightFeet={userData.heightFeet}
+          heightInches={userData.heightInches}
+          weight={userData.weightInLbs}
+          goal={userData.goal}
+          poundsToLoseGainPerWeek={userData.poundsToLoseGainPerWeek}
+          bmr={userData.bmr}
+          tdee={userData.tdee}
+          dailyCalories={userData.dailyCalories}
+        />
       </Box>
     </div>
   );

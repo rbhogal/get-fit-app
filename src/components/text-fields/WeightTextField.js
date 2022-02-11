@@ -23,7 +23,7 @@ export default function WeightTextField({ value, error, onChange }) {
         size="small"
         margin="dense"
         id="standard-number"
-        label={'Weight'}
+        label={'Weight (lbs)'}
         type="number"
         inputProps={{
           min: 1,

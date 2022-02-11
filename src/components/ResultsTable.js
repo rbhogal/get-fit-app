@@ -11,20 +11,39 @@ function createData(name, calories) {
   return { name, calories };
 }
 
-const rows = [
-  createData('BMR', 159),
-  createData('TDEE (Maintenance)', 2500),
-  createData('Daily Calories', 1900),
-];
+export default function ResultsTable({
+  sex,
+  age,
+  heightFeet,
+  heightInches,
+  weight,
+  goal,
+  poundsToLoseGainPerWeek,
+  bmr,
+  tdee,
+  dailyCalories,
+}) {
+  const rows = [
+    createData('Sex', sex),
+    createData('Age', age),
+    createData('Height', `${heightFeet} ft ${heightInches} in`),
+    createData('Weight', `${weight} lbs`),
+    createData('Goal', goal),
+    createData(
+      `${goal === 'Gain' ? 'Gain' : 'Lose'}`,
+      `${Math.round(poundsToLoseGainPerWeek * 100) / 100} lbs / week`
+    ),
+    createData('BMR', bmr),
+    createData('TDEE (Maintenance)', tdee),
+  ];
 
-export default function ResultsTable() {
   return (
-    <TableContainer sx={{ marginTop: '.5rem' }} component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: '25rem' }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>
-              <strong>RESULTS</strong>
+            <TableCell sx={{ fontSize: '1.6rem' }}>
+              <strong>Results</strong>
             </TableCell>
             <TableCell align="right">{''}</TableCell>
           </TableRow>
@@ -38,9 +57,29 @@ export default function ResultsTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">
+                {row.calories === '' ? 'N/A' : row.calories}
+              </TableCell>
             </TableRow>
           ))}
+          <TableRow
+            key={'Daily Calories'}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+          >
+            <TableCell
+              sx={{ fontSize: '1.3rem', fontWeight: 'bolder' }}
+              component="th"
+              scope="row"
+            >
+              {'Daily Calories'}
+            </TableCell>
+            <TableCell
+              sx={{ fontSize: '1.3rem', fontWeight: 'bolder' }}
+              align="right"
+            >
+              {dailyCalories}
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
