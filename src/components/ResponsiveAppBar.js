@@ -45,7 +45,10 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = e => {
+    if (e.target.innerHTML === 'Profile') navigate('profile');
+    if (e.target.innerHTML === 'Meal Planner') navigate('/');
+    if (e.target.innerHTML === 'Weight Log') navigate('weightlog');
     setAnchorElNav(null);
   };
 
@@ -103,7 +106,11 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map(page => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page.title}
+                  onClick={handleCloseNavMenu}
+                  path={page.path}
+                >
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}

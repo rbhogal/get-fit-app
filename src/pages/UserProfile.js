@@ -8,7 +8,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
-import { useMediaQuery } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 import SelectSex from '../components/select/SelectSex';
 import SelectGoal from '../components/select/SelectGoal';
@@ -21,6 +22,7 @@ import useInput from '../hooks/useInput';
 import FeetTextField from '../components/text-fields/FeetTextField';
 import InchesTextField from '../components/text-fields/InchesTextField';
 
+// Katch-McArdle Multipliers
 const activityLevelMultipliers = {
   Sedentary: 1.2,
   'Lightly Active': 1.375,
@@ -50,8 +52,6 @@ const UserProfile = () => {
     tdee: '',
     dailyCalories: '',
   });
-
-  // console.log(userData);
 
   /* 
     Calculate Calories & Macros
@@ -84,8 +84,6 @@ const UserProfile = () => {
        Protein (g) = weight (lbs) 
        Fats (g) = 0.3g x weight (lbs)
        Carbs (g) = ( Daily Calories (kcal) - [fats (g) * 9 kcal/g] kcal  - [protein (g) * 4 kcal/g] kcal  ) / 4 grams of carbs
-
-    
 
 
     Variables
@@ -208,6 +206,7 @@ const UserProfile = () => {
       activityLevel: activityLevelSlice(enteredActivityLevel),
       rateOfFatLossMuscleGain: rateSlice(enteredRate),
     };
+
     const {
       sex,
       age,
@@ -239,9 +238,6 @@ const UserProfile = () => {
 
     // 3) Daily Calories = lbs (to lose or gain) per week * 3500 kcal / 7 days
     let caloricDeficitOrSurplus = (poundsToLoseGainPerWeek * 3500) / 7;
-    console.log(
-      `bmr: ${bmr}, tdee: ${tdee}, caloric deficit: ${caloricDeficitOrSurplus}`
-    );
 
     if (goal === 'Fat Loss') {
       dailyCalories = tdee - caloricDeficitOrSurplus;
@@ -250,9 +246,6 @@ const UserProfile = () => {
     if (goal === 'Muscle Gain') {
       dailyCalories = tdee + caloricDeficitOrSurplus;
     }
-
-    console.log(dailyCalories);
-    // bmr, tdee, dailyCalories
 
     setUserData({
       ...userData,
@@ -297,157 +290,184 @@ const UserProfile = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-      <Box sx={{ margin: '2.5rem 0% 0 0%' }}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: '52.286rem' }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ fontSize: '1.6rem' }}>
-                  <strong>Calculator</strong>
-                </TableCell>
-                <TableCell align="right">{''}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+    <div>
+      <Grid container spacing={4}>
+        <Grid item xs={12} xl={8}>
+          <Box sx={{ margin: '2.5rem 0% 0 0%' }}>
+            <TableContainer component={Paper}>
+              <Table
+                //  sx={{ minWidth: '52.286rem' }}
+                aria-label="simple table"
               >
-                <TableCell component="th" scope="row">
-                  <strong> Sex</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <SelectSex
-                    value={enteredSex}
-                    error={sexInputHasError}
-                    onChange={sexChangeHandler}
-                  />
-                </TableCell>
-              </TableRow>
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <strong>Age</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <AgeTextField
-                    value={enteredAge}
-                    error={ageInputHasError}
-                    onChange={ageChangeHandler}
-                  />
-                </TableCell>
-              </TableRow>
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <strong>Height</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <FeetTextField
-                      value={enteredFeet}
-                      error={feetInputHasError}
-                      onChange={feetChangeHandler}
-                    />
-                    <InchesTextField
-                      value={enteredInches}
-                      error={inchesInputHasError}
-                      onChange={inchesChangeHandler}
-                    />
-                  </div>
-                </TableCell>
-              </TableRow>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontSize: '1.6rem' }}>
+                      <strong>Calculator</strong>
+                    </TableCell>
+                    <TableCell align="right">{''}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong> Sex</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <SelectSex
+                        value={enteredSex}
+                        error={sexInputHasError}
+                        onChange={sexChangeHandler}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong>Age</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <AgeTextField
+                        value={enteredAge}
+                        error={ageInputHasError}
+                        onChange={ageChangeHandler}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong>Height</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <div
+                        style={{ display: 'flex', justifyContent: 'flex-end' }}
+                      >
+                        <FeetTextField
+                          value={enteredFeet}
+                          error={feetInputHasError}
+                          onChange={feetChangeHandler}
+                        />
+                        <InchesTextField
+                          value={enteredInches}
+                          error={inchesInputHasError}
+                          onChange={inchesChangeHandler}
+                        />
+                      </div>
+                    </TableCell>
+                  </TableRow>
 
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <strong>Weight (lbs)</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <WeightTextField
-                    value={enteredWeight}
-                    error={weightInputHasError}
-                    onChange={weightChangeHandler}
-                  />
-                </TableCell>
-              </TableRow>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong>Weight (lbs)</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <WeightTextField
+                        value={enteredWeight}
+                        error={weightInputHasError}
+                        onChange={weightChangeHandler}
+                      />
+                    </TableCell>
+                  </TableRow>
 
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <strong>Goal</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <SelectGoal
-                    value={enteredGoal}
-                    error={goalInputHasError}
-                    onChange={goalChangeHandler}
-                  />
-                </TableCell>
-              </TableRow>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong>Goal</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <SelectGoal
+                        value={enteredGoal}
+                        error={goalInputHasError}
+                        onChange={goalChangeHandler}
+                      />
+                    </TableCell>
+                  </TableRow>
 
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <strong>Activity Level</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <SelectActivityLevel
-                    value={enteredActivityLevel}
-                    error={activityLevelInputHasError}
-                    onChange={activityLevelChangeHandler}
-                  />
-                </TableCell>
-              </TableRow>
-              <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <strong>Rate of Fat Loss/Muscle Gain</strong>
-                </TableCell>
-                <TableCell size="small" align="right">
-                  <SelectRate
-                    value={enteredRate}
-                    error={rateInputHasError}
-                    onChange={rateChangeHandler}
-                  />
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong>Activity Level</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <SelectActivityLevel
+                        value={enteredActivityLevel}
+                        error={activityLevelInputHasError}
+                        onChange={activityLevelChangeHandler}
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <strong>Rate of Fat Loss/Muscle Gain</strong>
+                    </TableCell>
+                    <TableCell size="small" align="right">
+                      <SelectRate
+                        value={enteredRate}
+                        error={rateInputHasError}
+                        onChange={rateChangeHandler}
+                      />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-        <Box sx={{ textAlign: 'right' }}>
-          <Button
-            fullWidth
-            onClick={handleSubmit}
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            style={{ marginLeft: 'auto', marginRight: 'auto' }}
-          >
-            Calculate
-          </Button>
-        </Box>
-      </Box>
-      <Box sx={{ marginTop: '2.5rem' }}>
-        <ResultsTable
-          sex={userData.sex}
-          age={userData.age}
-          heightFeet={userData.heightFeet}
-          heightInches={userData.heightInches}
-          weight={userData.weightInLbs}
-          goal={userData.goal}
-          poundsToLoseGainPerWeek={userData.poundsToLoseGainPerWeek}
-          bmr={userData.bmr}
-          tdee={userData.tdee}
-          dailyCalories={userData.dailyCalories}
-        />
-      </Box>
+            <Box sx={{ textAlign: 'right' }}>
+              <Button
+                fullWidth
+                onClick={handleSubmit}
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style={{ marginLeft: 'auto', marginRight: 'auto' }}
+              >
+                Calculate
+              </Button>
+            </Box>
+
+            <Typography
+              sx={{ width: '24.786rem', paddingTop: '.5rem' }}
+              variant="body2"
+            >
+              *Calculator based on Mifflin St. Jeor Equation.{' '}
+              <a
+                style={{ color: 'inherit' }}
+                href="https://github.com/rbhogal/get-fit-app"
+                target="_blank"
+              >
+                Learn More
+              </a>
+              .
+            </Typography>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} xl={4}>
+          <Box sx={{ margin: '2.5rem 0' }}>
+            <ResultsTable
+              sex={userData.sex}
+              age={userData.age}
+              heightFeet={userData.heightFeet}
+              heightInches={userData.heightInches}
+              weight={userData.weightInLbs}
+              goal={userData.goal}
+              poundsToLoseGainPerWeek={userData.poundsToLoseGainPerWeek}
+              bmr={userData.bmr}
+              tdee={userData.tdee}
+              dailyCalories={userData.dailyCalories}
+            />
+          </Box>
+        </Grid>
+      </Grid>
     </div>
   );
 };

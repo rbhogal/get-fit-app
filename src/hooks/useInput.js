@@ -10,7 +10,6 @@ const useInput = validateValue => {
   // const hasError = !valueIsValid && isTouched;
 
   const valueChangeHandler = e => {
-    console.log(e.target.value);
     setEnteredValue(e.target.value);
     setIsFormSubmitted(false);
   };
@@ -19,19 +18,9 @@ const useInput = validateValue => {
   //   setIsTouched(true);
   // };
 
-  // const reset = () => {
-  //   setIsFormSubmitted(false);
-  // };
-
   const setIsFormSubmittedToTrue = () => {
     setIsFormSubmitted(true);
   };
-
-  // convertHeightUnits function
-
-  // convert Weight Function
-
-  // trim strings functions
 
   return {
     value: enteredValue,
