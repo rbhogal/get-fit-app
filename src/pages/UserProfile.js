@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Doughnut } from 'react-chartjs-2';
 
-import { Paper, Stack } from '@mui/material';
+import { Divider, Paper, Stack } from '@mui/material';
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -341,8 +341,20 @@ const UserProfile = () => {
   return (
     <div>
       <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Typography
+            sx={{ marginTop: '2.5rem', fontSize: '2rem' }}
+            gutterBottom
+            fontWeight={700}
+            variant="h3"
+          >
+            Profile
+          </Typography>
+          <Divider />
+        </Grid>
+
         <Grid item xs={12} xl={8}>
-          <Box sx={{ margin: '2.5rem 0% 0 0%' }}>
+          <Box>
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
                 <TableHead>
@@ -497,26 +509,22 @@ const UserProfile = () => {
             </Typography>
           </Box>
         </Grid>
-
         <Grid item xs={12} xl={4}>
           {_.isEmpty(userData) ? (
-            <Box sx={{ margin: '2.5rem 0' }}>
-              <Stack spacing={0.2}>
-                <Skeleton variant="rectangular" height={58} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={45} />
-                <Skeleton variant="rectangular" height={58} />
-              </Stack>
-            </Box>
+            <Stack spacing={0.2}>
+              <Skeleton variant="rectangular" height={58} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={52} />
+              <Skeleton variant="rectangular" height={58} />
+            </Stack>
           ) : (
-            <Box sx={{ margin: '2.5rem 0' }}>
+            <Box>
               <ResultsTable
                 sex={userData.sex}
                 age={userData.age}
