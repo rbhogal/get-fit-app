@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
+import { Doughnut } from 'react-chartjs-2';
 
 import { Paper, Stack } from '@mui/material';
 import { Box } from '@mui/material';
@@ -31,6 +32,11 @@ import {
   getUserDataFirebase,
 } from '../features/userSlice';
 import AuthContext from '../context/AuthContext';
+import MacrosTable from '../components/MacrosTable';
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Katch-McArdle Multipliers
 const activityLevelMultipliers = {
@@ -45,6 +51,22 @@ const ratePercentages = {
   Slow: 0.005,
   Moderate: 0.007,
   Fast: 0.01,
+};
+
+const doughnutChartData = {
+  labels: [`Protein (${40}%)`, `Carbs (${40}%)`, `Fats (${20}%)`],
+  datasets: [
+    {
+      label: 'Macros',
+      data: [40, 40, 20],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+      ],
+      hoverOffset: 4,
+    },
+  ],
 };
 
 const UserProfile = () => {
@@ -316,10 +338,6 @@ const UserProfile = () => {
     }
   };
 
-  // console.log(userData);
-  // console.log(_.isEmpty(userData));
-  console.log(_.isEmpty(userData));
-
   return (
     <div>
       <Grid container spacing={4}>
@@ -513,6 +531,14 @@ const UserProfile = () => {
               />
             </Box>
           )}
+
+          <Box sx={{ margin: '2.5rem 0' }}>
+            <MacrosTable />
+          </Box>
+
+          <Box sx={{ margin: '2.5rem 0' }}>
+            <Doughnut data={doughnutChartData} />
+          </Box>
         </Grid>
       </Grid>
     </div>
