@@ -46,6 +46,7 @@ const ResponsiveAppBar = () => {
   };
 
   const handleCloseNavMenu = e => {
+    console.log(e);
     if (e.target.innerHTML === 'Profile') navigate('profile');
     if (e.target.innerHTML === 'Meal Planner') navigate('/');
     if (e.target.innerHTML === 'Weight Log') navigate('weightlog');

@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getDatabase, ref } from 'firebase/database';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+import { child, get, getDatabase, ref, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -19,3 +19,13 @@ export const auth = getAuth(app);
 export const db = getDatabase();
 export const dbRef = ref(getDatabase());
 export const provider = new GoogleAuthProvider();
+
+/**
+ * Add's user's calculator results to the database
+ * @param {object} userData object containing user's results from calorie calculator
+ * @param {string} userId  current user's id
+ */
+
+export const writeUserDataFirebase = (userData, userId) => {
+  set(ref(db, 'userStats/' + userId), userData);
+};

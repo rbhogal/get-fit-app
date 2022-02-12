@@ -4,11 +4,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { AuthContextProvider } from './context/AuthContext';
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 ReactDOM.render(
   <AuthContextProvider>
     <Router>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </Router>
   </AuthContextProvider>,
   document.getElementById('root')

@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Paper } from '@mui/material';
+import React, { useContext, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
+
+import { Paper, Stack } from '@mui/material';
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -10,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Skeleton from '@mui/material/Skeleton';
 
 import SelectSex from '../components/select/SelectSex';
 import SelectGoal from '../components/select/SelectGoal';
@@ -21,6 +25,12 @@ import SelectRate from '../components/select/SelectRate';
 import useInput from '../hooks/useInput';
 import FeetTextField from '../components/text-fields/FeetTextField';
 import InchesTextField from '../components/text-fields/InchesTextField';
+import {
+  addUserData,
+  addUserDataFirebase,
+  getUserDataFirebase,
+} from '../features/userSlice';
+import AuthContext from '../context/AuthContext';
 
 // Katch-McArdle Multipliers
 const activityLevelMultipliers = {
@@ -38,20 +48,18 @@ const ratePercentages = {
 };
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState({
-    sex: '',
-    age: '',
-    heightFeet: '',
-    heightInches: '',
-    weightInLbs: '',
-    goal: '',
-    activityLevel: '',
-    rateOfFatLossMuscleGain: '',
-    poundsToLoseGainPerWeek: '',
-    bmr: '',
-    tdee: '',
-    dailyCalories: '',
-  });
+  const dispatch = useDispatch();
+  const authCtx = useContext(AuthContext);
+  const currentUserId = authCtx.currentUserId;
+  const { userData } = useSelector(state => state.user);
+
+  useEffect(() => {
+    /* 
+      This is to persist the data
+    */
+    if (!currentUserId) return;
+    dispatch(getUserDataFirebase(currentUserId));
+  }, [currentUserId]);
 
   /* 
     Calculate Calories & Macros
@@ -222,8 +230,6 @@ const UserProfile = () => {
     let bmr = '';
     let dailyCalories = '';
 
-    console.log(poundsToLoseGainPerWeek);
-
     // 1) BMR -- Mifflin & St. Jeor Equation (weightInKg, heightInCm)
     if (sex === 'Male') {
       bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
@@ -247,21 +253,42 @@ const UserProfile = () => {
       dailyCalories = tdee + caloricDeficitOrSurplus;
     }
 
-    setUserData({
-      ...userData,
-      sex: enteredSex,
-      age: enteredAge,
-      heightFeet: enteredFeet,
-      heightInches: enteredInches,
-      weightInLbs: enteredWeight,
-      goal: enteredGoal,
-      activityLevel: activityLevelSlice(enteredActivityLevel),
-      rateOfFatLossMuscleGain: rateSlice(enteredRate),
-      poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
-      bmr: Math.round(bmr),
-      tdee: Math.round(tdee),
-      dailyCalories: Math.round(dailyCalories),
-    });
+    dispatch(
+      addUserDataFirebase({
+        userData: {
+          sex: enteredSex,
+          age: enteredAge,
+          heightFeet: enteredFeet,
+          heightInches: enteredInches,
+          weightInLbs: enteredWeight,
+          goal: enteredGoal,
+          activityLevel: activityLevelSlice(enteredActivityLevel),
+          rateOfFatLossMuscleGain: rateSlice(enteredRate),
+          poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
+          bmr: Math.round(bmr),
+          tdee: Math.round(tdee),
+          dailyCalories: Math.round(dailyCalories),
+        },
+        currentUserId: currentUserId,
+      })
+    );
+
+    dispatch(
+      addUserData({
+        sex: enteredSex,
+        age: enteredAge,
+        heightFeet: enteredFeet,
+        heightInches: enteredInches,
+        weightInLbs: enteredWeight,
+        goal: enteredGoal,
+        activityLevel: activityLevelSlice(enteredActivityLevel),
+        rateOfFatLossMuscleGain: rateSlice(enteredRate),
+        poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
+        bmr: Math.round(bmr),
+        tdee: Math.round(tdee),
+        dailyCalories: Math.round(dailyCalories),
+      })
+    );
   };
 
   const handleSubmit = e => {
@@ -289,16 +316,17 @@ const UserProfile = () => {
     }
   };
 
+  // console.log(userData);
+  // console.log(_.isEmpty(userData));
+  console.log(_.isEmpty(userData));
+
   return (
     <div>
       <Grid container spacing={4}>
         <Grid item xs={12} xl={8}>
           <Box sx={{ margin: '2.5rem 0% 0 0%' }}>
             <TableContainer component={Paper}>
-              <Table
-                //  sx={{ minWidth: '52.286rem' }}
-                aria-label="simple table"
-              >
+              <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ fontSize: '1.6rem' }}>
@@ -443,6 +471,7 @@ const UserProfile = () => {
                 style={{ color: 'inherit' }}
                 href="https://github.com/rbhogal/get-fit-app"
                 target="_blank"
+                rel="noreferrer"
               >
                 Learn More
               </a>
@@ -452,20 +481,38 @@ const UserProfile = () => {
         </Grid>
 
         <Grid item xs={12} xl={4}>
-          <Box sx={{ margin: '2.5rem 0' }}>
-            <ResultsTable
-              sex={userData.sex}
-              age={userData.age}
-              heightFeet={userData.heightFeet}
-              heightInches={userData.heightInches}
-              weight={userData.weightInLbs}
-              goal={userData.goal}
-              poundsToLoseGainPerWeek={userData.poundsToLoseGainPerWeek}
-              bmr={userData.bmr}
-              tdee={userData.tdee}
-              dailyCalories={userData.dailyCalories}
-            />
-          </Box>
+          {_.isEmpty(userData) ? (
+            <Box sx={{ margin: '2.5rem 0' }}>
+              <Stack spacing={0.2}>
+                <Skeleton variant="rectangular" height={58} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={45} />
+                <Skeleton variant="rectangular" height={58} />
+              </Stack>
+            </Box>
+          ) : (
+            <Box sx={{ margin: '2.5rem 0' }}>
+              <ResultsTable
+                sex={userData.sex}
+                age={userData.age}
+                heightFeet={userData.heightFeet}
+                heightInches={userData.heightInches}
+                weight={userData.weightInLbs}
+                goal={userData.goal}
+                poundsToLoseGainPerWeek={userData.poundsToLoseGainPerWeek}
+                bmr={userData.bmr}
+                tdee={userData.tdee}
+                dailyCalories={userData.dailyCalories}
+              />
+            </Box>
+          )}
         </Grid>
       </Grid>
     </div>

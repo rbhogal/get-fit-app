@@ -9,7 +9,6 @@ import GoogleIcon from '@mui/icons-material/Google';
 import PersonIcon from '@mui/icons-material/Person';
 import { Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import Alert from '@mui/material/Alert';
 
 import { signInWithPopup, signInAnonymously } from 'firebase/auth';
 import { set, ref, get, child } from 'firebase/database';
