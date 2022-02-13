@@ -60,8 +60,8 @@
 * React
 * Redux
 * React-Router
-* [Firebase - Authentication and Realtime Database](https://firebase.google.com/)
-* Chart.js
+* [Firebase](https://firebase.google.com/) (Authentication and Realtime Database)
+* [Chart.js](https://www.chartjs.org/)
 
 ## Features
 
