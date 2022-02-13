@@ -62,10 +62,17 @@
 * React-Router
 * [Firebase - Authentication and Realtime Database](https://firebase.google.com/)
 * Chart.js
+
+## Features
+
+* Guest & User Accounts
+* Calories & Macro Calculator
+* Meal Planner
+
+
 <!--
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Features
 
 ### Sign in as a Guest or with Google. 
 * Sign in is required to save titles. 
