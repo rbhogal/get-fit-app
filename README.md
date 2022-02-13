@@ -61,6 +61,7 @@
 * Redux
 * React-Router
 * [Firebase - Authentication and Realtime Database](https://firebase.google.com/)
+* Chart.js
 <!--
 <p align="right">(<a href="#top">back to top</a>)</p>
 
