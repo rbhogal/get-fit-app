@@ -15,14 +15,19 @@ import { set, ref, get, child } from 'firebase/database';
 
 import { auth, provider, dbRef, db } from '../firebase';
 import signInImg from '../images/sign-in-img.jpg';
-import AuthContext from '../context/AuthContext';
+import authContext from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { resetUserData } from '../features/userSlice';
 
 export default function SignIn() {
-  const authCtx = useContext(AuthContext);
+  const authCtx = useContext(authContext);
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const signInWithGoogle = () => {
+    dispatch(resetUserData());
+
     signInWithPopup(auth, provider)
       .then(result => {
         const userId = result.user.uid;
@@ -38,16 +43,14 @@ export default function SignIn() {
               // User exists
               authCtx.signIn(token);
               localStorage.setItem('profilePic', `${result.user.photoURL}`);
-              // alert
-
-              // Navigate user to account
+              localStorage.setItem('isGuest', 'false');
               navigate('/');
             } else {
               // Create new user
               createNewUser(userId, name, email, profilePic);
-              // Sign in user
               authCtx.signIn(token);
-              // Navigate user to account
+              localStorage.setItem('profilePic', `${result.user.photoURL}`);
+              localStorage.setItem('isGuest', 'false');
               navigate('/');
             }
           })
@@ -61,11 +64,16 @@ export default function SignIn() {
   };
 
   const signInAsGuest = () => {
+    dispatch(resetUserData());
+
     signInAnonymously(auth)
       .then(result => {
+        const userId = result.user.uid;
         const token = result.user.accessToken;
-        authCtx.signIn(token);
 
+        createNewUser(userId, 'Guest', 'Anonymous', '');
+        authCtx.signIn(token);
+        localStorage.setItem('isGuest', 'true');
         navigate('/');
       })
       .catch(err => {
@@ -138,7 +146,8 @@ export default function SignIn() {
               Stay fit.
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
-              Meal planning made easy.
+              {/* Meal planning made easy. */}
+              Calorie tracking made easy.
             </Typography>
 
             <Box

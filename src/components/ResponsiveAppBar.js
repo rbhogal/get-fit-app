@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
@@ -11,12 +11,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-import { auth } from '../firebase';
-import AuthContext from '../context/AuthContext';
-import { onAuthStateChanged } from 'firebase/auth';
+import dumbbell from '../images/dumbbell.png';
+import { auth, db } from '../firebase';
+import authContext from '../context/authContext';
+import { ref, remove } from 'firebase/database';
 
 const pages = [
   { title: 'Profile', path: 'profile' },
@@ -34,8 +34,7 @@ const settings = ['Sign Out'];
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const authCtx = useContext(AuthContext);
+  const authCtx = useContext(authContext);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = event => {
@@ -46,21 +45,42 @@ const ResponsiveAppBar = () => {
   };
 
   const handleCloseNavMenu = e => {
-    console.log(e);
-    if (e.target.innerHTML === 'Profile') navigate('profile');
-    if (e.target.innerHTML === 'Meal Planner') navigate('/');
-    if (e.target.innerHTML === 'Weight Log') navigate('weightlog');
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = e => {
-    if (e.target.innerHTML === 'Sign Out') {
-      auth.signOut();
-      authCtx.signOut();
-      localStorage.removeItem('profilePic');
-      navigate('/');
-    }
+  const navToProfile = () => {
+    navigate('profile');
+    setAnchorElNav(null);
+  };
 
+  const navToMealPlanner = () => {
+    navigate('/');
+    setAnchorElNav(null);
+  };
+
+  const navToWeightLog = () => {
+    navigate('weightlog');
+    setAnchorElNav(null);
+  };
+
+  const handleSignOut = () => {
+    const isGuest = localStorage.getItem('isGuest');
+
+    auth.signOut();
+    authCtx.signOut();
+    if (isGuest === 'true') deleteUser();
+    localStorage.removeItem('isGuest');
+    localStorage.removeItem('profilePic');
+    navigate('/');
+  };
+
+  const deleteUser = () => {
+    const { currentUserId } = authCtx;
+    remove(ref(db, 'users/' + currentUserId));
+    remove(ref(db, 'userStats/' + currentUserId));
+  };
+
+  const handleCloseUserMenu = e => {
     setAnchorElUser(null);
   };
 
@@ -72,10 +92,17 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ mr: 1, display: { xs: 'none', md: 'flex' } }}
           >
             GetFIT
           </Typography>
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <img
+              src={dumbbell}
+              style={{ width: '2rem', marginRight: '1.5rem' }}
+            />
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -109,7 +136,15 @@ const ResponsiveAppBar = () => {
               {pages.map(page => (
                 <MenuItem
                   key={page.title}
-                  onClick={handleCloseNavMenu}
+                  onClick={
+                    page.title === 'Profile'
+                      ? navToProfile
+                      : page.title === 'Meal Planner'
+                      ? navToMealPlanner
+                      : page.title === 'Weight Log'
+                      ? navToWeightLog
+                      : handleCloseNavMenu
+                  }
                   path={page.path}
                 >
                   <Typography textAlign="center">{page.title}</Typography>
@@ -123,7 +158,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            GetFIT
           </Typography>
           <Box
             sx={{
@@ -168,7 +203,12 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={
+                    setting === 'Sign Out' ? handleSignOut : handleCloseUserMenu
+                  }
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

@@ -11,13 +11,21 @@ function createData(name, percent, grams) {
   return { name, percent, grams };
 }
 
-const rows = [
-  createData('Protein', `${40}%`, 159),
-  createData('Carbs', `${40}%`, 237),
-  createData('Fats', `${20}%`, 262),
-];
+export default function MacrosTable({
+  proteinGrams,
+  carbsGrams,
+  fatsGrams,
+  percentProtein,
+  percentCarbs,
+  percentFats,
+}) {
+  // console.log(proteinGrams, carbsGrams, fatsGrams);
+  const rows = [
+    createData('Protein', `${percentProtein}%`, `${proteinGrams} g`),
+    createData('Carbs', `${percentCarbs}%`, `${carbsGrams} g`),
+    createData('Fats', `${percentFats}%`, `${fatsGrams} g`),
+  ];
 
-export default function MacrosTable() {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -41,7 +49,9 @@ export default function MacrosTable() {
                 {row.name}
               </TableCell>
               <TableCell align="right">{row.percent}</TableCell>
-              <TableCell align="right">{row.grams}</TableCell>
+              <TableCell align="right">
+                <strong> {row.grams} </strong>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box, Container } from '@mui/material';
+import Footer from '../components/Footer';
 
 import ResponsiveAppBar from './ResponsiveAppBar';
 
@@ -13,6 +14,7 @@ const Layout = () => {
       > */}
       <Container>
         <Outlet />
+        <Footer />
       </Container>
 
       {/* </Box> */}

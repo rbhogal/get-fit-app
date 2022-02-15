@@ -6,10 +6,9 @@ import { CssBaseline } from '@mui/material';
 import SignIn from './pages/SignIn';
 import Layout from './components/Layout';
 import MealPlanner from './pages/MealPlanner';
-import UserProfile from './pages/UserProfile';
 import Profile from './pages/Profile';
 import WeightLog from './pages/WeightLog';
-import AuthContext from './context/AuthContext';
+import AuthContext from './context/authContext';
 
 const theme = createTheme({
   components: {
@@ -30,9 +29,7 @@ const theme = createTheme({
     fontWeightExtraBold: 800,
     fontWeightBlack: 900,
   },
-  palette: {
-    background: {},
-  },
+  palette: {},
 });
 
 function App() {
@@ -50,7 +47,7 @@ function App() {
             {isSignedIn && (
               <Route element={<Layout />}>
                 <Route path="/" element={<MealPlanner />} />
-                <Route path="profile" element={<UserProfile />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="weightlog" element={<WeightLog />} />
               </Route>
             )}

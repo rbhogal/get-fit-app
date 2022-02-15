@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
 
-const AuthContext = React.createContext({
+const AuthContext = createContext({
   token: '',
+  currentUserId: '',
   isSignedIn: false,
+  isNewUser: false,
   signIn: token => {},
   signOut: () => {},
 });
@@ -14,6 +16,7 @@ export const AuthContextProvider = props => {
   const [token, setToken] = useState(initialToken);
   const userIsSignedIn = !!token;
   const [currentUserId, setCurrentUserId] = useState();
+  const [isNewUser, setIsNewUser] = useState(false);
 
   const signInHandler = token => {
     setToken(token);
@@ -21,6 +24,7 @@ export const AuthContextProvider = props => {
   };
   const signOutHandler = () => {
     setToken(null);
+
     localStorage.removeItem('token');
   };
 
@@ -35,6 +39,7 @@ export const AuthContextProvider = props => {
 
   const contextValue = {
     token: token,
+    isNewUser,
     isSignedIn: userIsSignedIn,
     signIn: signInHandler,
     signOut: signOutHandler,

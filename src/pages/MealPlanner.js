@@ -6,8 +6,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
+import { Container } from '@mui/material';
 
 import MealPlan from '../components/MealPlan';
+import PageHeader from '../components/PageHeader';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,9 +23,9 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+        <Container>
+          <Box p={3}>{children}</Box>
+        </Container>
       )}
     </div>
   );
@@ -46,12 +48,14 @@ export default function MealPlanner() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setValue(newValue);
   };
 
   return (
     <Box>
+      <PageHeader title={'Meal Planner'} divider={false} />
+
       <Box
         sx={{
           borderBottom: 1,
@@ -76,6 +80,7 @@ export default function MealPlanner() {
       </Box>
 
       <TabPanel value={value} index={0}>
+        {/* Nesting anything other than a string is causing an error: This is an issue with MUI https://github.com/mui/material-ui/issues/21015*/}
         <MealPlan />
       </TabPanel>
 

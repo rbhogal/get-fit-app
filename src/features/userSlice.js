@@ -17,6 +17,29 @@ export const getUserDataFirebase = createAsyncThunk(
         if (snapshot.exists()) {
           const userData = snapshot.val();
           return userData;
+        } else {
+          // User stats don't exist in database
+          return {
+            sex: '',
+            age: '',
+            heightFeet: '',
+            heightInches: '',
+            weightInLbs: '',
+            goal: '',
+            activityLevel: '',
+            rateOfFatLossMuscleGain: '',
+            poundsToLoseGainPerWeek: '',
+            bmr: '',
+            tdee: '',
+            dailyCalories: '',
+            proteinGrams: '',
+            carbsGrams: '',
+            fatsGrams: '',
+            percentProtein: '',
+            percentCarbs: '',
+            percentFats: '',
+            userStatsExist: false,
+          };
         }
       })
       .catch(err => {
@@ -27,32 +50,40 @@ export const getUserDataFirebase = createAsyncThunk(
   }
 );
 
-/* 
-userData: {
-      sex: '',
-      age: '',
-      heightFeet: '',
-      heightInches: '',
-      weightInLbs: '',
-      goal: '',
-      activityLevel: '',
-      rateOfFatLossMuscleGain: '',
-      poundsToLoseGainPerWeek: '',
-      bmr: '',
-      tdee: '',
-      dailyCalories: '',
-    }
-*/
+const initUserData = {
+  sex: '',
+  age: '',
+  heightFeet: '',
+  heightInches: '',
+  weightInLbs: '',
+  goal: '',
+  activityLevel: '',
+  rateOfFatLossMuscleGain: '',
+  poundsToLoseGainPerWeek: '',
+  bmr: '',
+  tdee: '',
+  dailyCalories: '',
+  proteinGrams: '',
+  carbsGrams: '',
+  fatsGrams: '',
+  percentProtein: '',
+  percentCarbs: '',
+  percentFats: '',
+  userStatsExist: true,
+};
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    userData: {},
+    userData: initUserData,
     isLoadingResults: false,
   },
   reducers: {
     addUserData: (state, action) => {
       state.userData = { ...action.payload };
+    },
+    resetUserData: state => {
+      state.userData = { ...initUserData };
     },
   },
   extraReducers: {
@@ -64,19 +95,17 @@ export const userSlice = createSlice({
     },
     [addUserDataFirebase.rejected]: state => {
       state.isLoadingResults = false;
+      console.log('Unable to add user');
     },
-    // [getUserDataFirebase.pending]: state => {
-
-    // }
     [getUserDataFirebase.fulfilled]: (state, action) => {
       state.userData = { ...action.payload };
     },
-    // [getUserDataFirebase.rejected]: state => {
-
-    // }
+    [getUserDataFirebase.rejected]: () => {
+      console.log('Unable to retrieve userStats data from database');
+    },
   },
 });
 
-export const { addUserData } = userSlice.actions;
+export const { addUserData, resetUserData } = userSlice.actions;
 
 export default userSlice.reducer;
