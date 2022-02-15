@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, IconButton } from '@mui/material';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -100,19 +100,53 @@ const totalColumns = [
 //   // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
 // ];
 
-const MealPlan = () => {
-  const [rows, setRows] = useState([
+const MealPlan = ({ mealPlan }) => {
+  const [breakfastRows, setBreakfastRows] = useState([
     {
-      id: '',
-      calories: '',
-      protein: '',
-      carbs: '',
-      fats: '',
+      id: 'Oatmeal',
+      calories: '350',
+      protein: '22',
+      carbs: '50',
+      fats: '12',
+    },
+  ]);
+  const [lunchRows, setLunchRows] = useState([
+    {
+      id: 'Pita Wrap',
+      calories: '577',
+      protein: '32',
+      carbs: '54',
+      fats: '15',
+    },
+  ]);
+  const [dinnerRows, setDinnerRows] = useState([
+    {
+      id: 'Steak & Potatoes',
+      calories: '500',
+      protein: '44',
+      carbs: '55',
+      fats: '15',
+    },
+  ]);
+  const [snacksRows, setSnacksRows] = useState([
+    {
+      id: 'Protein Shake',
+      calories: '322',
+      protein: '43',
+      carbs: '25',
+      fats: '16',
     },
   ]);
 
+  useEffect(() => {
+    setBreakfastRows(mealPlan.breakfastRows);
+    setLunchRows(mealPlan.lunchRows);
+    setDinnerRows(mealPlan.dinnerRows);
+    setSnacksRows(mealPlan.snacksRows);
+  }, [mealPlan]);
+
   const addFood = () => {
-    setRows([...rows]);
+    // setRows([...rows]);
   };
 
   return (
@@ -125,7 +159,7 @@ const MealPlan = () => {
         }}
       >
         <DataGrid
-          rows={rows}
+          rows={breakfastRows}
           columns={breakfastColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -161,7 +195,7 @@ const MealPlan = () => {
         }}
       >
         <DataGrid
-          rows={rows}
+          rows={lunchRows}
           columns={lunchColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -198,7 +232,7 @@ const MealPlan = () => {
         }}
       >
         <DataGrid
-          rows={rows}
+          rows={dinnerRows}
           columns={dinnerColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -235,7 +269,7 @@ const MealPlan = () => {
         }}
       >
         <DataGrid
-          rows={rows}
+          rows={snacksRows}
           columns={snacksColumns}
           autoHeight
           rowsPerPageOptions={[5]}

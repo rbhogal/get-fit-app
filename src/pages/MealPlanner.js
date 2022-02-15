@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import { Container } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 import MealPlan from '../components/MealPlan';
 import PageHeader from '../components/PageHeader';
@@ -44,18 +44,64 @@ function a11yProps(index) {
   };
 }
 
+// const mealPlans = [{}, {}];
+
+const newMealPlan = {
+  breakfastRows: [
+    {
+      id: '',
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
+    },
+  ],
+  lunchRows: [
+    {
+      id: '',
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
+    },
+  ],
+  dinnerRows: [
+    {
+      id: '',
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
+    },
+  ],
+  snacksRows: [
+    {
+      id: '',
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
+    },
+  ],
+};
+
 export default function MealPlanner() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [mealPlans, setMealPlans] = useState([newMealPlan]);
 
   const handleChange = (event, newValue) => {
-    // console.log(event.target.value);
+    console.log(newValue);
     setValue(newValue);
+  };
+
+  const addNewMealPlan = () => {
+    setValue(mealPlans.length);
+    setMealPlans([...mealPlans, newMealPlan]);
   };
 
   return (
     <Box>
       <PageHeader title={'Meal Planner'} divider={false} />
-
       <Box
         sx={{
           borderBottom: 1,
@@ -63,7 +109,7 @@ export default function MealPlanner() {
           display: 'flex',
         }}
       >
-        <IconButton aria-label="add new meal plan">
+        <IconButton onClick={addNewMealPlan} aria-label="add new meal plan">
           <AddIcon />
         </IconButton>
         <Tabs
@@ -73,23 +119,21 @@ export default function MealPlanner() {
           variant="scrollable"
           scrollButtons="auto"
         >
-          <Tab label="Meal Plan 3" {...a11yProps(0)} />
-          <Tab label="Meal Plan 2" {...a11yProps(1)} />
-          <Tab label="Meal Plan 1" {...a11yProps(2)} />
+          {mealPlans.map((plan, index) => (
+            <Tab
+              key={index}
+              label={`Meal Plan ${index + 1}`}
+              {...a11yProps(0)}
+            />
+          ))}
         </Tabs>
       </Box>
 
-      <TabPanel value={value} index={0}>
-        {/* Nesting anything other than a string is causing an error: This is an issue with MUI https://github.com/mui/material-ui/issues/21015*/}
-        <MealPlan />
-      </TabPanel>
-
-      <TabPanel value={value} index={1}>
-        Meal Plan 2
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Meal Plan 1
-      </TabPanel>
+      {mealPlans.map((mealPlan, index) => (
+        <TabPanel key={index} value={value} index={index}>
+          <MealPlan mealPlan={mealPlan} />
+        </TabPanel>
+      ))}
     </Box>
   );
 }
