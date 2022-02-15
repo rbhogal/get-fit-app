@@ -61,8 +61,6 @@ const Profile = () => {
   const { userData } = useSelector(state => state.user);
   const { userStatsExist } = userData;
 
-  console.log(`Sex = ${userData.sex}, userStatsExist = ${userStatsExist}`);
-
   useEffect(() => {
     /* 
       This is to persist the data

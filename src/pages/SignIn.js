@@ -103,13 +103,14 @@ export default function SignIn() {
       <Card
         sx={{
           height: 600,
+          height: { xs: 400, md: 600 },
           boxShadow:
             '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
           borderRadius: 2,
         }}
       >
         <Box sx={{ display: 'flex' }}>
-          <Box sx={{ width: 400 }}>
+          <Box sx={{ width: 400, display: { xs: 'none', md: 'block' } }}>
             <CardMedia
               component="img"
               alt="Sign In Hero"
@@ -123,11 +124,14 @@ export default function SignIn() {
           <CardContent
             sx={{
               width: 368,
+              width: { xs: '100%', md: 368 },
               backgroundColor: '#f3f4f6',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
+
+              height: { xs: 400, md: 600 },
             }}
           >
             <Typography
