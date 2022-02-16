@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -6,10 +6,11 @@ import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import { Container } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import MealPlan from '../components/MealPlan';
 import PageHeader from '../components/PageHeader';
+import AlertDialog from '../components/AlertDialog';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,24 +84,117 @@ const newMealPlan = {
       fats: '',
     },
   ],
+  tabName: 'Meal Plan 1',
 };
+
+// const dummyMealPlan = {
+//   breakfastRows: [
+//     {
+//       id: 'Shake',
+//       calories: '',
+//       protein: '',
+//       carbs: '',
+//       fats: '',
+//     },
+//   ],
+//   lunchRows: [
+//     {
+//       id: '',
+//       calories: '',
+//       protein: '',
+//       carbs: '',
+//       fats: '',
+//     },
+//   ],
+//   dinnerRows: [
+//     {
+//       id: '',
+//       calories: '',
+//       protein: '',
+//       carbs: '',
+//       fats: '',
+//     },
+//   ],
+//   snacksRows: [
+//     {
+//       id: '',
+//       calories: '',
+//       protein: '',
+//       carbs: '',
+//       fats: '',
+//     },
+//   ],
+//   tabName: 'Meal Plan 2',
+// };
 
 export default function MealPlanner() {
   const [value, setValue] = useState(0);
   const [mealPlans, setMealPlans] = useState([newMealPlan]);
+  const [open, setOpen] = useState(false);
+
+  const handleOpenAlert = () => {
+    setOpen(true);
+  };
+
+  const handleCloseAlert = e => {
+    setOpen(false);
+  };
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
 
   const addNewMealPlan = () => {
+    // Handle naming the new tab if duplicate name(s) exist
+    let i = 0;
+    mealPlans.forEach(mealPlan => {
+      const strIndex = mealPlan.tabName.indexOf('(');
+
+      if (strIndex !== -1) {
+        const tabNameSlice = mealPlan.tabName.slice(0, strIndex - 1);
+        if (tabNameSlice === `Meal Plan ${mealPlans.length + 1}`) i++;
+      } else {
+        if (mealPlan.tabName === `Meal Plan ${mealPlans.length + 1}`) i++;
+      }
+    });
+
+    i > 0
+      ? setMealPlans([
+          ...mealPlans,
+          {
+            ...newMealPlan,
+            tabName: `Meal Plan ${mealPlans.length + 1} (${i})`,
+          },
+        ])
+      : setMealPlans([
+          ...mealPlans,
+          { ...newMealPlan, tabName: `Meal Plan ${mealPlans.length + 1}` },
+        ]);
+
     setValue(mealPlans.length);
-    setMealPlans([...mealPlans, newMealPlan]);
+  };
+
+  const deleteMealPlan = () => {
+    // Filters out currently selected meal plan
+    setMealPlans(
+      mealPlans.filter((mealPlan, index) => {
+        return index !== value;
+      })
+    );
+
+    // Sets the correct active tab if you delete a tab right to left
+    if (value === mealPlans.length - 1) setValue(mealPlans.length - 2);
+
+    setOpen(false);
   };
 
   return (
     <Box>
+      <AlertDialog
+        open={open}
+        deleteMealPlan={deleteMealPlan}
+        handleCloseAlert={handleCloseAlert}
+      />
       <PageHeader title={'Meal Planner'} divider={false} />
       <Box
         sx={{
@@ -119,14 +213,13 @@ export default function MealPlanner() {
           variant="scrollable"
           scrollButtons="auto"
         >
-          {mealPlans.map((plan, index) => (
-            <Tab
-              key={index}
-              label={`Meal Plan ${index + 1}`}
-              {...a11yProps(0)}
-            />
+          {mealPlans.map((mealPlan, index) => (
+            <Tab key={index} label={mealPlan.tabName} {...a11yProps(0)} />
           ))}
         </Tabs>
+        <IconButton onClick={deleteMealPlan} aria-label="delete meal plan">
+          <DeleteForeverIcon />
+        </IconButton>
       </Box>
 
       {mealPlans.map((mealPlan, index) => (

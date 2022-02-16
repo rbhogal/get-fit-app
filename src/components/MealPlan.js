@@ -14,7 +14,13 @@ const renderDeleteButton = params => {
 };
 
 const columns = [
-  { field: 'calories', headerName: 'Calories', type: 'number', width: 90 },
+  {
+    field: 'calories',
+    headerName: 'Calories',
+    type: 'number',
+    width: 90,
+    editable: true,
+  },
   { field: 'protein', headerName: 'Protein (g)', type: 'number', width: 110 },
   {
     field: 'carbs',
@@ -38,7 +44,13 @@ const columns = [
 ];
 
 const breakfastColumns = [
-  { field: 'id', headerName: 'BREAKFAST', flex: 1, sortable: false },
+  {
+    field: 'id',
+    headerName: 'BREAKFAST',
+    flex: 1,
+    sortable: false,
+    editable: true,
+  },
   ...columns,
 ];
 const lunchColumns = [
@@ -149,6 +161,7 @@ const MealPlan = ({ mealPlan }) => {
     // setRows([...rows]);
   };
 
+  // console.log(mealPlan.breakfastRows);
   return (
     <Box sx={{ padding: '0 15%' }}>
       <Paper
