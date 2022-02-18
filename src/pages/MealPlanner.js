@@ -50,11 +50,11 @@ function a11yProps(index) {
 const newMealPlan = {
   breakfastRows: [
     {
-      id: '',
-      calories: '',
-      protein: '',
-      carbs: '',
-      fats: '',
+      id: 'Chicken, salsa, burrito bowl w/egg',
+      calories: 533,
+      protein: 33,
+      carbs: 60,
+      fats: 9,
     },
   ],
   lunchRows: [
@@ -217,13 +217,14 @@ export default function MealPlanner() {
             <Tab key={index} label={mealPlan.tabName} {...a11yProps(0)} />
           ))}
         </Tabs>
-        <IconButton onClick={deleteMealPlan} aria-label="delete meal plan">
+        <IconButton onClick={handleOpenAlert} aria-label="delete meal plan">
           <DeleteForeverIcon />
         </IconButton>
       </Box>
 
       {mealPlans.map((mealPlan, index) => (
         <TabPanel key={index} value={value} index={index}>
+          {/* Meal Plan here .. .. . . . . . . .. . . . . */}
           <MealPlan mealPlan={mealPlan} />
         </TabPanel>
       ))}

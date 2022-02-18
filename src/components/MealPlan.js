@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+
+import { Grid } from '@mui/material';
 import { Button, IconButton } from '@mui/material';
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Delete } from '@mui/icons-material';
 import { Paper } from '@mui/material';
 
+import BreakfastTable from './tables/BreakfastTable';
+
+/*
 const renderDeleteButton = params => {
   return (
     <IconButton>
@@ -12,6 +17,7 @@ const renderDeleteButton = params => {
     </IconButton>
   );
 };
+
 
 const columns = [
   {
@@ -21,18 +27,26 @@ const columns = [
     width: 90,
     editable: true,
   },
-  { field: 'protein', headerName: 'Protein (g)', type: 'number', width: 110 },
+  {
+    field: 'protein',
+    headerName: 'Protein (g)',
+    type: 'number',
+    width: 110,
+    editable: true,
+  },
   {
     field: 'carbs',
     headerName: 'Carbs (g)',
     type: 'number',
     width: 100,
+    editable: true,
   },
   {
     field: 'fats',
     headerName: 'Fats (g)',
     type: 'number',
     width: 85,
+    editable: true,
   },
   {
     field: 'delete',
@@ -54,15 +68,33 @@ const breakfastColumns = [
   ...columns,
 ];
 const lunchColumns = [
-  { field: 'id', headerName: 'LUNCH', flex: 1, sortable: false },
+  {
+    field: 'id',
+    headerName: 'LUNCH',
+    flex: 1,
+    sortable: false,
+    editable: true,
+  },
   ...columns,
 ];
 const dinnerColumns = [
-  { field: 'id', headerName: 'DINNER', flex: 1, sortable: false },
+  {
+    field: 'id',
+    headerName: 'DINNER',
+    flex: 1,
+    sortable: false,
+    editable: true,
+  },
   ...columns,
 ];
 const snacksColumns = [
-  { field: 'id', headerName: 'SNACKS', flex: 1, sortable: false },
+  {
+    field: 'id',
+    headerName: 'SNACKS',
+    flex: 1,
+    sortable: false,
+    editable: true,
+  },
   ...columns,
 ];
 
@@ -104,64 +136,16 @@ const totalColumns = [
     sortable: false,
   },
 ];
-
-// const rows = [
-//   { id: 'Burrito', calories: 486, protein: 36, carbs: 35, fats: 15 },
-//   { id: 'Bulgogi Meal Prep', calories: 545, protein: 38, carbs: 27, fats: 14 },
-//   // { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-//   // { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-// ];
+*/
 
 const MealPlan = ({ mealPlan }) => {
-  const [breakfastRows, setBreakfastRows] = useState([
-    {
-      id: 'Oatmeal',
-      calories: '350',
-      protein: '22',
-      carbs: '50',
-      fats: '12',
-    },
-  ]);
-  const [lunchRows, setLunchRows] = useState([
-    {
-      id: 'Pita Wrap',
-      calories: '577',
-      protein: '32',
-      carbs: '54',
-      fats: '15',
-    },
-  ]);
-  const [dinnerRows, setDinnerRows] = useState([
-    {
-      id: 'Steak & Potatoes',
-      calories: '500',
-      protein: '44',
-      carbs: '55',
-      fats: '15',
-    },
-  ]);
-  const [snacksRows, setSnacksRows] = useState([
-    {
-      id: 'Protein Shake',
-      calories: '322',
-      protein: '43',
-      carbs: '25',
-      fats: '16',
-    },
-  ]);
-
-  useEffect(() => {
-    setBreakfastRows(mealPlan.breakfastRows);
-    setLunchRows(mealPlan.lunchRows);
-    setDinnerRows(mealPlan.dinnerRows);
-    setSnacksRows(mealPlan.snacksRows);
-  }, [mealPlan]);
-
   const addFood = () => {
     // setRows([...rows]);
   };
 
-  // console.log(mealPlan.breakfastRows);
+  return <BreakfastTable rows={mealPlan.breakfastRows} />;
+};
+/*
   return (
     <Box sx={{ padding: '0 15%' }}>
       <Paper
@@ -172,7 +156,7 @@ const MealPlan = ({ mealPlan }) => {
         }}
       >
         <DataGrid
-          rows={breakfastRows}
+          rows={mealPlan.breakfastRows}
           columns={breakfastColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -184,6 +168,7 @@ const MealPlan = ({ mealPlan }) => {
           sx={{ marginBottom: '2.8rem' }}
           rowHeight={35}
           headerHeight={40}
+          onRowEditCommit={handleRowEditCommit}
         />
         <Button
           size="small"
@@ -208,7 +193,7 @@ const MealPlan = ({ mealPlan }) => {
         }}
       >
         <DataGrid
-          rows={lunchRows}
+          rows={mealPlan.lunchRows}
           columns={lunchColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -245,7 +230,7 @@ const MealPlan = ({ mealPlan }) => {
         }}
       >
         <DataGrid
-          rows={dinnerRows}
+          rows={mealPlan.dinnerRows}
           columns={dinnerColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -282,7 +267,7 @@ const MealPlan = ({ mealPlan }) => {
         }}
       >
         <DataGrid
-          rows={snacksRows}
+          rows={mealPlan.snacksRows}
           columns={snacksColumns}
           autoHeight
           rowsPerPageOptions={[5]}
@@ -338,4 +323,6 @@ const MealPlan = ({ mealPlan }) => {
   );
 };
 
+
+*/
 export default MealPlan;

@@ -94,7 +94,7 @@ export default function ResultsTable({
           sx={{ width: '24.786rem', padding: '1rem', color: 'error.main' }}
           variant="body2"
         >
-          Eating below <strong>1200 calories </strong> is highly discouraged.
+          Eating below <strong>1200 calories</strong> is highly discouraged.
           Please try again.
         </Typography>
       )}

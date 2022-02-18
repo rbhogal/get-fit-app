@@ -22,12 +22,10 @@ export default function AlertDialog({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {'Delete the currently selected meal plan? '}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{'Delete'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {/*  Deleting meal plan is permanent. */}
+            Are you sure you want to delete the currently selected meal plan?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
