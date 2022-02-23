@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
@@ -31,7 +31,10 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     carbs: '',
     fats: '',
   });
-  console.log(editFormMealData);
+  const breakfastFormRef = useRef();
+  const lunchFormRef = useRef();
+  const dinnerFormRef = useRef();
+  const snacksFormRef = useRef();
 
   const handleAddFormMealChange = e => {
     e.preventDefault();
@@ -58,7 +61,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     setEditFormMealData(newFormData);
   };
 
-  const handleAddFormMealDataSubmit = (e, rows) => {
+  const handleAddFormMealDataSubmit = (e, rows, formRef) => {
     e.preventDefault();
 
     const newMeal = {
@@ -78,6 +81,8 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     };
 
     setMealPlan(newMealPlan);
+    formRef.current.reset();
+    //dispatch
   };
 
   const handleEditFormSubmit = (e, rows) => {
@@ -102,6 +107,8 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
 
     setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
     setEditMealId(null);
+
+    // dispatch
   };
 
   const handleEditClick = (e, meal) => {
@@ -129,6 +136,8 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     newRows.splice(index, 1);
 
     setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
+
+    //dispatch
   };
 
   return (
@@ -146,6 +155,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         handleEditFormMealChange={handleEditFormMealChange}
         handleEditFormSubmit={handleEditFormSubmit}
         handleDeleteClick={handleDeleteClick}
+        formRef={breakfastFormRef}
       />
       <MealTable
         title={'Lunch'}
@@ -160,6 +170,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         handleEditFormMealChange={handleEditFormMealChange}
         handleEditFormSubmit={handleEditFormSubmit}
         handleDeleteClick={handleDeleteClick}
+        formRef={lunchFormRef}
       />
       <MealTable
         title={'Dinner'}
@@ -174,10 +185,11 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         handleEditFormMealChange={handleEditFormMealChange}
         handleEditFormSubmit={handleEditFormSubmit}
         handleDeleteClick={handleDeleteClick}
+        formRef={dinnerFormRef}
       />
       <MealTable
         title={'Snacks'}
-        mealType={'snack'}
+        mealType={'snacks'}
         rowsStringName="snacksRows"
         rows={mealPlan.snacksRows}
         handleAddFormMealChange={handleAddFormMealChange}
@@ -188,6 +200,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         handleEditFormMealChange={handleEditFormMealChange}
         handleEditFormSubmit={handleEditFormSubmit}
         handleDeleteClick={handleDeleteClick}
+        formRef={snacksFormRef}
       />
     </>
   );

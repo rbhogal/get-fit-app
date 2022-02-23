@@ -37,6 +37,7 @@ const MealTable = ({
   handleEditFormMealChange,
   handleEditFormSubmit,
   handleDeleteClick,
+  formRef,
 }) => {
   return (
     <>
@@ -103,7 +104,12 @@ const MealTable = ({
             </table>
           </form>
         </Paper>
-        <form onSubmit={e => handleAddFormMealDataSubmit(e, rowsStringName)}>
+        <form
+          ref={formRef}
+          onSubmit={e =>
+            handleAddFormMealDataSubmit(e, rowsStringName, formRef)
+          }
+        >
           <Paper>
             <Grid container style={{ position: 'relative' }}>
               <Grid item xs={4.43}>

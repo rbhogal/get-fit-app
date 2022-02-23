@@ -25,7 +25,7 @@ export default function AlertDialog({
         <DialogTitle id="alert-dialog-title">{'Delete'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete the currently selected meal plan?
+            Delete the currently selected meal plan?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
