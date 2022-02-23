@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -45,21 +46,40 @@ function a11yProps(index) {
   };
 }
 
-// const mealPlans = [{}, {}];
+// const mealPlans = [{breakfastRows: [{meal}, lunchRows: [{meal}]]}, {}];
 
 const newMealPlan = {
   breakfastRows: [
     {
-      id: 'Chicken, salsa, burrito bowl w/egg',
+      id: 1,
+      mealName: 'Protein Pancakes',
       calories: 533,
       protein: 33,
       carbs: 60,
       fats: 9,
     },
+    {
+      id: 2,
+
+      mealName: 'Eggs',
+      calories: 200,
+      protein: 12,
+      carbs: 0,
+      fats: 10,
+    },
+    {
+      id: 3,
+
+      mealName: 'Shake',
+      calories: 321,
+      protein: 20,
+      carbs: 40,
+      fats: 4,
+    },
   ],
   lunchRows: [
     {
-      id: '',
+      mealName: '',
       calories: '',
       protein: '',
       carbs: '',
@@ -68,7 +88,7 @@ const newMealPlan = {
   ],
   dinnerRows: [
     {
-      id: '',
+      mealName: '',
       calories: '',
       protein: '',
       carbs: '',
@@ -77,7 +97,7 @@ const newMealPlan = {
   ],
   snacksRows: [
     {
-      id: '',
+      mealName: '',
       calories: '',
       protein: '',
       carbs: '',
@@ -86,46 +106,6 @@ const newMealPlan = {
   ],
   tabName: 'Meal Plan 1',
 };
-
-// const dummyMealPlan = {
-//   breakfastRows: [
-//     {
-//       id: 'Shake',
-//       calories: '',
-//       protein: '',
-//       carbs: '',
-//       fats: '',
-//     },
-//   ],
-//   lunchRows: [
-//     {
-//       id: '',
-//       calories: '',
-//       protein: '',
-//       carbs: '',
-//       fats: '',
-//     },
-//   ],
-//   dinnerRows: [
-//     {
-//       id: '',
-//       calories: '',
-//       protein: '',
-//       carbs: '',
-//       fats: '',
-//     },
-//   ],
-//   snacksRows: [
-//     {
-//       id: '',
-//       calories: '',
-//       protein: '',
-//       carbs: '',
-//       fats: '',
-//     },
-//   ],
-//   tabName: 'Meal Plan 2',
-// };
 
 export default function MealPlanner() {
   const [value, setValue] = useState(0);
@@ -224,8 +204,12 @@ export default function MealPlanner() {
 
       {mealPlans.map((mealPlan, index) => (
         <TabPanel key={index} value={value} index={index}>
-          {/* Meal Plan here .. .. . . . . . . .. . . . . */}
-          <MealPlan mealPlan={mealPlan} />
+          <MealPlan
+            tabName={mealPlans[index].tabName}
+            mealPlanIndex={index}
+            mealPlans={mealPlans}
+            setMealPlans={setMealPlans}
+          />
         </TabPanel>
       ))}
     </Box>
