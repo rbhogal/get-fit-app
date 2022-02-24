@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
 import MealTable from './meal-table/MealTable';
+import Totals from './Totals';
 
 const newMealPlan = {
   breakfastRows: [],
@@ -202,6 +203,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         handleDeleteClick={handleDeleteClick}
         formRef={snacksFormRef}
       />
+      <Totals />
     </>
   );
 };
