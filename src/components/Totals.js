@@ -9,25 +9,10 @@ const styleHeading = {
   fontWeight: 'bold',
 };
 
-const styleNumbers = {
+const styleTotals = {
   backgroundColor: '#e7e5e4',
   textAlign: 'right',
   padding: '8px',
-};
-
-const styleNumbersDelta = {
-  color: 'rgb(211, 47, 47)',
-  backgroundColor: '#e7e5e4',
-  textAlign: 'right',
-  padding: '8px',
-  fontWeight: 'bold',
-};
-
-const styleInput = {
-  fontFamily: 'Inter',
-  padding: '0.6rem',
-  width: '100%',
-  border: '1px solid #DDDDDD',
 };
 
 /**
@@ -103,11 +88,33 @@ const calcTotalsAll = (
 const Totals = ({ mealPlan }) => {
   const { breakfastRows, lunchRows, dinnerRows, snacksRows } = mealPlan;
   const [total, setTotal] = useState({
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0,
+  });
+  const [totalDelta, setTotalDelta] = useState({
     calories: '',
     protein: '',
     carbs: '',
     fats: '',
   });
+  const [colorTotalsDelta, setColorTotalsDelta] = useState({
+    calories: 'rgb(46, 125, 50)',
+    protein: 'rgb(46, 125, 50)',
+    carbs: 'rgb(46, 125, 50)',
+    fats: 'rgb(46, 125, 50)',
+  });
+
+  // green - rgb(46, 125, 50)
+  // red - rgb(211, 47, 47)
+
+  const styleTotalsDelta = {
+    backgroundColor: '#e7e5e4',
+    textAlign: 'right',
+    padding: '8px',
+    fontWeight: 'bold',
+  };
 
   useEffect(() => {
     // Calculate the totals row
@@ -134,18 +141,75 @@ const Totals = ({ mealPlan }) => {
   }, [mealPlan]);
 
   useEffect(() => {
-    // Get the total calories, etc...
+    // Calculates the change in total calories, protein, carbs, fats
+
+    let newTotalDelta = {
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
+    };
+
+    let {
+      calories: caloriesDelta,
+      protein: proteinDelta,
+      carbs: carbsDelta,
+      fats: fatsDelta,
+    } = newTotalDelta;
+
+    caloriesDelta = 2000 - total.calories;
+    proteinDelta = 170 - total.protein;
+    carbsDelta = 200 - total.carbs;
+    fatsDelta = 60 - total.fats;
+
+    setTotalDelta({
+      ...totalDelta,
+      calories: caloriesDelta,
+      protein: proteinDelta,
+      carbs: carbsDelta,
+      fats: fatsDelta,
+    });
+
     /* 
-      
-      
+
     */
+
+    setColorTotalsDelta({
+      calories:
+        caloriesDelta === 0
+          ? ''
+          : caloriesDelta > 0
+          ? 'rgb(46, 125, 50)'
+          : 'rgb(211, 47, 47)',
+      protein:
+        proteinDelta === 0
+          ? ''
+          : proteinDelta > 0
+          ? 'rgb(46, 125, 50)'
+          : 'rgb(211, 47, 47)',
+      carbs:
+        carbsDelta === 0
+          ? ''
+          : carbsDelta > 0
+          ? 'rgb(46, 125, 50)'
+          : 'rgb(211, 47, 47)',
+      fats:
+        fatsDelta === 0
+          ? ''
+          : fatsDelta > 0
+          ? 'rgb(46, 125, 50)'
+          : 'rgb(211, 47, 47)',
+    });
   }, [total]);
+
+  console.log(totalDelta.calories);
 
   return (
     <table
       style={{
         borderCollapse: 'collapse',
         width: '100%',
+        marginBottom: '8rem',
       }}
     >
       <thead>
@@ -159,21 +223,29 @@ const Totals = ({ mealPlan }) => {
           >
             TOTALS
           </th>
-          <th style={{ ...styleNumbers, width: '8.1rem' }}>{total.calories}</th>
-          <th style={{ ...styleNumbers, width: '10.1rem' }}>{total.protein}</th>
-          <th style={{ ...styleNumbers, width: '9rem' }}>{total.carbs}</th>
-          <th style={{ ...styleNumbers, width: '7.8rem' }}>{total.fats}</th>
-          <th style={{ ...styleNumbers, width: '6.4rem' }}></th>
+          <th style={{ ...styleTotals, width: '8.1rem' }}>{total.calories}</th>
+          <th style={{ ...styleTotals, width: '10.1rem' }}>{total.protein}</th>
+          <th style={{ ...styleTotals, width: '9rem' }}>{total.carbs}</th>
+          <th style={{ ...styleTotals, width: '7.8rem' }}>{total.fats}</th>
+          <th style={{ ...styleTotals, width: '6.4rem' }}></th>
         </tr>
       </thead>
       <tbody>
         <tr style={{}}>
           <td style={styleHeading}>+/-</td>
-          <td style={styleNumbersDelta}>-2</td>
-          <td style={styleNumbersDelta}>-2</td>
-          <td style={styleNumbersDelta}>-2</td>
-          <td style={styleNumbersDelta}>-2</td>
-          <td style={styleNumbersDelta}></td>
+          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.calories }}>
+            {totalDelta.calories}
+          </td>
+          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.protein }}>
+            {totalDelta.protein}
+          </td>
+          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.carbs }}>
+            {totalDelta.carbs}
+          </td>
+          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.fats }}>
+            {totalDelta.fats}
+          </td>
+          <td style={styleTotalsDelta}></td>
         </tr>
       </tbody>
     </table>
