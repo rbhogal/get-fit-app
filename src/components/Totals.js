@@ -1,6 +1,11 @@
 import _ from 'lodash';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import authContext from '../context/authContext';
+import { getUserDataFirebase } from '../features/userSlice';
 
 const styleHeading = {
   // border: '1px solid #DDDDDD',
@@ -13,6 +18,13 @@ const styleTotals = {
   backgroundColor: '#e7e5e4',
   textAlign: 'right',
   padding: '8px',
+};
+
+const styleTotalsDelta = {
+  backgroundColor: '#e7e5e4',
+  textAlign: 'right',
+  padding: '8px',
+  // fontWeight: 'bold',
 };
 
 /**
@@ -90,6 +102,17 @@ const Totals = ({ mealPlan }) => {
   const colorGreen = 'rgb(46, 125, 50)';
   const colorRed = 'rgb(211, 47, 47)';
   const colorGreyedOut = '#a8a29e';
+  const authCtx = useContext(authContext);
+  const currentUserId = authCtx.currentUserId;
+  const dispatch = useDispatch();
+  const { userData } = useSelector(state => state.user);
+
+  useEffect(() => {
+    // This is to persist the data
+    if (!currentUserId) return;
+    dispatch(getUserDataFirebase(currentUserId));
+  }, [currentUserId]);
+
   const [total, setTotal] = useState({
     calories: 0,
     protein: 0,
@@ -109,18 +132,8 @@ const Totals = ({ mealPlan }) => {
     fats: '',
   });
 
-  // green - rgb(46, 125, 50)
-  // red - rgb(211, 47, 47)
-
-  const styleTotalsDelta = {
-    backgroundColor: '#e7e5e4',
-    textAlign: 'right',
-    padding: '8px',
-    fontWeight: 'bold',
-  };
-
   useEffect(() => {
-    // Calculate the totals row
+    // Calculates the totals row
 
     let totalBreakfast = calcTotals(breakfastRows);
     let totalLunch = calcTotals(lunchRows);
@@ -144,7 +157,7 @@ const Totals = ({ mealPlan }) => {
   }, [mealPlan]);
 
   useEffect(() => {
-    // Calculates the change in total calories, protein, carbs, fats
+    // Calculates the +/- total calories, protein, carbs, fats needed to reach calorie goals and macros
 
     let newTotalDelta = {
       calories: '',
@@ -160,10 +173,10 @@ const Totals = ({ mealPlan }) => {
       fats: fatsDelta,
     } = newTotalDelta;
 
-    caloriesDelta = 2000 - total.calories;
-    proteinDelta = 170 - total.protein;
-    carbsDelta = 200 - total.carbs;
-    fatsDelta = 60 - total.fats;
+    caloriesDelta = userData.dailyCalories - total.calories;
+    proteinDelta = userData.proteinGrams - total.protein;
+    carbsDelta = userData.carbsGrams - total.carbs;
+    fatsDelta = userData.fatsGrams - total.fats;
 
     setTotalDelta({
       ...totalDelta,
@@ -199,9 +212,7 @@ const Totals = ({ mealPlan }) => {
           ? colorGreen
           : colorRed,
     });
-  }, [total]);
-
-  console.log(totalDelta.calories);
+  }, [total, userData]);
 
   return (
     <table

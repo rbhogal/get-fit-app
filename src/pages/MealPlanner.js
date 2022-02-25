@@ -12,6 +12,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MealPlan from '../components/MealPlan';
 import PageHeader from '../components/PageHeader';
 import AlertDialog from '../components/AlertDialog';
+import { nanoid } from '@reduxjs/toolkit';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,30 +52,12 @@ function a11yProps(index) {
 const newMealPlan = {
   breakfastRows: [
     {
-      id: 1,
-      mealName: 'Protein Pancakes',
-      calories: 533,
-      protein: 33,
-      carbs: 60,
-      fats: 9,
-    },
-    {
-      id: 2,
-
-      mealName: 'Eggs',
-      calories: 200,
-      protein: 12,
-      carbs: 0,
-      fats: 10,
-    },
-    {
-      id: 3,
-
-      mealName: 'Shake',
-      calories: 321,
-      protein: 20,
-      carbs: 40,
-      fats: 4,
+      id: nanoid(),
+      mealName: '',
+      calories: '',
+      protein: '',
+      carbs: '',
+      fats: '',
     },
   ],
   lunchRows: [

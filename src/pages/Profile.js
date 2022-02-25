@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _, { isEmpty } from 'lodash';
 import { Doughnut } from 'react-chartjs-2';
@@ -62,9 +62,7 @@ const Profile = () => {
   const { userStatsExist } = userData;
 
   useEffect(() => {
-    /* 
-      This is to persist the data
-    */
+    // This is to persist the data
     if (!currentUserId) return;
     dispatch(getUserDataFirebase(currentUserId));
   }, [currentUserId]);
@@ -335,56 +333,36 @@ const Profile = () => {
       percentFats,
     } = macros;
 
+    let newUserData = {
+      sex: enteredSex,
+      age: enteredAge,
+      heightFeet: enteredFeet,
+      heightInches: enteredInches,
+      weightInLbs: enteredWeight,
+      goal: enteredGoal,
+      activityLevel: activityLevelSlice(enteredActivityLevel),
+      rateOfFatLossMuscleGain: rateSlice(enteredRate),
+      poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
+      bmr: Math.round(bmr),
+      tdee: Math.round(tdee),
+      dailyCalories: Math.round(dailyCalories),
+      proteinGrams: proteinGrams,
+      carbsGrams: carbsGrams,
+      fatsGrams: fatsGrams,
+      percentProtein,
+      percentCarbs,
+      percentFats,
+      userStatsExist: true,
+    };
+
     dispatch(
       addUserDataFirebase({
-        userData: {
-          sex: enteredSex,
-          age: enteredAge,
-          heightFeet: enteredFeet,
-          heightInches: enteredInches,
-          weightInLbs: enteredWeight,
-          goal: enteredGoal,
-          activityLevel: activityLevelSlice(enteredActivityLevel),
-          rateOfFatLossMuscleGain: rateSlice(enteredRate),
-          poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
-          bmr: Math.round(bmr),
-          tdee: Math.round(tdee),
-          dailyCalories: Math.round(dailyCalories),
-          proteinGrams: proteinGrams,
-          carbsGrams: carbsGrams,
-          fatsGrams: fatsGrams,
-          percentProtein,
-          percentCarbs,
-          percentFats,
-          userStatsExist: true,
-        },
+        userData: newUserData,
         currentUserId: currentUserId,
       })
     );
 
-    dispatch(
-      addUserData({
-        sex: enteredSex,
-        age: enteredAge,
-        heightFeet: enteredFeet,
-        heightInches: enteredInches,
-        weightInLbs: enteredWeight,
-        goal: enteredGoal,
-        activityLevel: activityLevelSlice(enteredActivityLevel),
-        rateOfFatLossMuscleGain: rateSlice(enteredRate),
-        poundsToLoseGainPerWeek: poundsToLoseGainPerWeek,
-        bmr: Math.round(bmr),
-        tdee: Math.round(tdee),
-        dailyCalories: Math.round(dailyCalories),
-        proteinGrams: proteinGrams,
-        carbsGrams: carbsGrams,
-        fatsGrams: fatsGrams,
-        percentProtein,
-        percentCarbs,
-        percentFats,
-        userStatsExist: true,
-      })
-    );
+    dispatch(addUserData(newUserData));
   };
 
   const handleSubmit = e => {

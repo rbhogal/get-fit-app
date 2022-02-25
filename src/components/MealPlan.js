@@ -86,6 +86,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     //dispatch
   };
 
+  console.log(mealPlan);
   const handleEditFormSubmit = (e, rows) => {
     e.preventDefault();
 
