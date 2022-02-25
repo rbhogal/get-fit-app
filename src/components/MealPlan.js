@@ -203,7 +203,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         handleDeleteClick={handleDeleteClick}
         formRef={snacksFormRef}
       />
-      <Totals />
+      <Totals mealPlan={mealPlan} />
     </>
   );
 };
