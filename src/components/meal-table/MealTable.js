@@ -54,6 +54,7 @@ const MealTable = ({
       >
         <Paper>
           <form onSubmit={e => handleEditFormSubmit(e, rowsStringName)}>
+            {/* <Grid container> */}
             <table
               style={{
                 borderCollapse: 'collapse',
@@ -102,6 +103,7 @@ const MealTable = ({
                 ))}
               </tbody>
             </table>
+            {/* </Grid> */}
           </form>
         </Paper>
         <form

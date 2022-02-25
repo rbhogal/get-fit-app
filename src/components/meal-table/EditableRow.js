@@ -3,18 +3,26 @@ import React from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 import { IconButton } from '@mui/material';
 
+const styleInput = {
+  fontFamily: 'Inter',
+  padding: '0.6rem',
+  width: '100%',
+  border: '1px solid #DDDDDD',
+  textAlign: 'right',
+};
+
 const EditableRow = ({
   styleTh,
   styleNumbers,
-  styleInput,
+
   editFormMealData,
   handleEditFormMealChange,
 }) => {
   return (
     <tr style={{ backgroundColor: '#f5f5f4' }}>
-      <td style={{ ...styleTh }}>
+      <td style={{ ...styleTh, width: '23.9rem' }}>
         <input
-          style={styleInput}
+          style={{ ...styleInput, textAlign: 'left' }}
           type={'text'}
           required="required"
           name="mealName"

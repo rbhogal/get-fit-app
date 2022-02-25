@@ -30,6 +30,76 @@ const styleInput = {
   border: '1px solid #DDDDDD',
 };
 
+/**
+ *  Calculates the total calories, protein, carbs, and fats for the inputted row of meals (breakfast, lunch, dinner, or snacks)
+ * @param { Array<object>} rows - breakfastRows, lunchRows, dinnerRows, or snacksRows
+ * @returns An object containing total (integers) calories, protein, carbs, and fats
+ */
+
+const calcTotals = rows => {
+  const newTotal = {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0,
+  };
+
+  rows.forEach(meal => {
+    newTotal.calories = newTotal.calories + +meal.calories;
+    newTotal.protein = newTotal.protein + +meal.protein;
+    newTotal.carbs = newTotal.carbs + +meal.carbs;
+    newTotal.fats = newTotal.fats + +meal.fats;
+  });
+
+  return newTotal;
+};
+
+/**
+ * Calculate the total (number) of calories, protein, carbs, and fats consumed in the whole day
+ * @param {Object} totalBreakfast -Object containing the total (number) of calories, protein, carbs, and fats for breakfast meals
+ * @param {Object} totalLunch  - Object containing the total (number) of calories, protein, carbs, and fats for lunch meals
+ * @param {Object} totalDinner - Object containing the total (number) of calories, protein, carbs, and fats for dinner meals
+ * @param {Object} totalSnacks - Object containing the total (number) of calories, protein, carbs, and fats for snacks meals
+ * @returns An object containing the total (number) of calories, protein, carbs and fats for the whole day
+ */
+
+const calcTotalsAll = (
+  totalBreakfast,
+  totalLunch,
+  totalDinner,
+  totalSnacks
+) => {
+  let newTotalsAll = {
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0,
+  };
+
+  newTotalsAll.calories =
+    totalBreakfast.calories +
+    totalLunch.calories +
+    totalDinner.calories +
+    totalSnacks.calories;
+
+  newTotalsAll.protein =
+    totalBreakfast.protein +
+    totalLunch.protein +
+    totalDinner.protein +
+    totalSnacks.protein;
+
+  newTotalsAll.carbs =
+    totalBreakfast.carbs +
+    totalLunch.carbs +
+    totalDinner.carbs +
+    totalSnacks.carbs;
+
+  newTotalsAll.fats =
+    totalBreakfast.fats + totalLunch.fats + totalDinner.fats + totalSnacks.fats;
+
+  return newTotalsAll;
+};
+
 const Totals = ({ mealPlan }) => {
   const { breakfastRows, lunchRows, dinnerRows, snacksRows } = mealPlan;
   const [total, setTotal] = useState({
@@ -39,82 +109,8 @@ const Totals = ({ mealPlan }) => {
     fats: '',
   });
 
-  /**
-   *  Calculates the total calories, protein, carbs, and fats for the inputted row of meals (breakfast, lunch, dinner, or snacks)
-   * @param { Array<object>} rows - breakfastRows, lunchRows, dinnerRows, or snacksRows
-   * @returns An object containing total (integers) calories, protein, carbs, and fats
-   */
-
-  const calcTotals = rows => {
-    const newTotal = {
-      calories: 0,
-      protein: 0,
-      carbs: 0,
-      fats: 0,
-    };
-
-    rows.forEach(meal => {
-      newTotal.calories = newTotal.calories + +meal.calories;
-      newTotal.protein = newTotal.protein + +meal.protein;
-      newTotal.carbs = newTotal.carbs + +meal.carbs;
-      newTotal.fats = newTotal.fats + +meal.fats;
-    });
-
-    return newTotal;
-  };
-
-  /**
-   * Calculate the total (number) of calories, protein, carbs, and fats consumed in the whole day
-   * @param {Object} totalBreakfast -Object containing the total (number) of calories, protein, carbs, and fats for breakfast meals
-   * @param {Object} totalLunch  - Object containing the total (number) of calories, protein, carbs, and fats for lunch meals
-   * @param {Object} totalDinner - Object containing the total (number) of calories, protein, carbs, and fats for dinner meals
-   * @param {Object} totalSnacks - Object containing the total (number) of calories, protein, carbs, and fats for snacks meals
-   * @returns An object containing the total (number) of calories, protein, carbs and fats for the whole day
-   */
-
-  const calcTotalsAll = (
-    totalBreakfast,
-    totalLunch,
-    totalDinner,
-    totalSnacks
-  ) => {
-    let newTotalsAll = {
-      calories: 0,
-      protein: 0,
-      carbs: 0,
-      fats: 0,
-    };
-
-    newTotalsAll.calories =
-      totalBreakfast.calories +
-      totalLunch.calories +
-      totalDinner.calories +
-      totalSnacks.calories;
-
-    newTotalsAll.protein =
-      totalBreakfast.protein +
-      totalLunch.protein +
-      totalDinner.protein +
-      totalSnacks.protein;
-
-    newTotalsAll.carbs =
-      totalBreakfast.carbs +
-      totalLunch.carbs +
-      totalDinner.carbs +
-      totalSnacks.carbs;
-
-    newTotalsAll.fats =
-      totalBreakfast.fats +
-      totalLunch.fats +
-      totalDinner.fats +
-      totalSnacks.fats;
-
-    return newTotalsAll;
-  };
-
   useEffect(() => {
-    // Calculate the total number of
-    if (_.isEmpty(breakfastRows)) return;
+    // Calculate the totals row
 
     let totalBreakfast = calcTotals(breakfastRows);
     let totalLunch = calcTotals(lunchRows);
@@ -137,7 +133,13 @@ const Totals = ({ mealPlan }) => {
     });
   }, [mealPlan]);
 
-  console.log(total);
+  useEffect(() => {
+    // Get the total calories, etc...
+    /* 
+      
+      
+    */
+  }, [total]);
 
   return (
     <table

@@ -141,6 +141,8 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     //dispatch
   };
 
+  console.log(mealPlan);
+
   return (
     <>
       <MealTable
