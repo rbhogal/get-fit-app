@@ -87,6 +87,9 @@ const calcTotalsAll = (
 
 const Totals = ({ mealPlan }) => {
   const { breakfastRows, lunchRows, dinnerRows, snacksRows } = mealPlan;
+  const colorGreen = 'rgb(46, 125, 50)';
+  const colorRed = 'rgb(211, 47, 47)';
+  const colorGreyedOut = '#a8a29e';
   const [total, setTotal] = useState({
     calories: 0,
     protein: 0,
@@ -100,10 +103,10 @@ const Totals = ({ mealPlan }) => {
     fats: '',
   });
   const [colorTotalsDelta, setColorTotalsDelta] = useState({
-    calories: 'rgb(46, 125, 50)',
-    protein: 'rgb(46, 125, 50)',
-    carbs: 'rgb(46, 125, 50)',
-    fats: 'rgb(46, 125, 50)',
+    calories: '',
+    protein: '',
+    carbs: '',
+    fats: '',
   });
 
   // green - rgb(46, 125, 50)
@@ -170,35 +173,31 @@ const Totals = ({ mealPlan }) => {
       fats: fatsDelta,
     });
 
-    /* 
-
-    */
-
     setColorTotalsDelta({
       calories:
         caloriesDelta === 0
-          ? ''
+          ? colorGreyedOut
           : caloriesDelta > 0
-          ? 'rgb(46, 125, 50)'
-          : 'rgb(211, 47, 47)',
+          ? colorGreen
+          : colorRed,
       protein:
         proteinDelta === 0
-          ? ''
+          ? colorGreyedOut
           : proteinDelta > 0
-          ? 'rgb(46, 125, 50)'
-          : 'rgb(211, 47, 47)',
+          ? colorGreen
+          : colorRed,
       carbs:
         carbsDelta === 0
-          ? ''
+          ? colorGreyedOut
           : carbsDelta > 0
-          ? 'rgb(46, 125, 50)'
-          : 'rgb(211, 47, 47)',
+          ? colorGreen
+          : colorRed,
       fats:
         fatsDelta === 0
-          ? ''
+          ? colorGreyedOut
           : fatsDelta > 0
-          ? 'rgb(46, 125, 50)'
-          : 'rgb(211, 47, 47)',
+          ? colorGreen
+          : colorRed,
     });
   }, [total]);
 
