@@ -62,7 +62,7 @@
 * React-Router
 * [Firebase](https://firebase.google.com/) (Authentication and Realtime Database)
 * [Chart.js](https://www.chartjs.org/)
-* [Material UI v5](https://mui.com/)
+* [Material-UI v5](https://mui.com/)
 
 ## Features
 
