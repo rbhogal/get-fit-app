@@ -14,7 +14,10 @@ import MealPlan from '../components/MealPlan';
 import PageHeader from '../components/PageHeader';
 import AlertDialog from '../components/AlertDialog';
 
-import { getMealPlansFirebase } from '../features/mealSlice';
+import {
+  addMealPlansFirebase,
+  getMealPlansFirebase,
+} from '../features/mealSlice';
 import { useContext } from 'react';
 import authContext from '../context/authContext';
 
@@ -125,17 +128,29 @@ export default function MealPlanner() {
 
   const deleteMealPlan = () => {
     // Filters out currently selected meal plan
-    setMealPlans(
-      mealPlans.filter((mealPlan, index) => {
-        return index !== value;
-      })
-    );
+
+    const newMealPlans = mealPlans.filter((mealPlan, index) => {
+      return index !== value;
+    });
+
+    setMealPlans(newMealPlans);
 
     // Sets the correct active tab if you delete a tab right to left
     if (value === mealPlans.length - 1) setValue(mealPlans.length - 2);
 
     setOpen(false);
+
+    console.log(newMealPlans);
+    // Add to firebase
+    dispatch(
+      addMealPlansFirebase({
+        mealPlans: newMealPlans,
+        currentUserId: currentUserId,
+      })
+    );
   };
+
+  console.log(mealPlans);
 
   return (
     <Box>
