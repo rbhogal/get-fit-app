@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
 import MealTable from './meal-table/MealTable';
 import Totals from './Totals';
+import { addMealPlansFirebase } from '../features/mealSlice';
+import authContext from '../context/authContext';
 
 const newMealPlan = {
   breakfastRows: [],
@@ -12,7 +14,13 @@ const newMealPlan = {
   snacksRows: [],
 };
 
-const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
+const MealPlan = ({
+  mealPlanIndex,
+  mealPlans,
+  setMealPlans,
+  tabName,
+  mealPlan,
+}) => {
   const [addFormMealData, setAddFormMealData] = useState({
     mealName: '',
     calories: '',
@@ -20,10 +28,10 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
     carbs: '',
     fats: '',
   });
-  const [mealPlan, setMealPlan] = useState({
-    ...newMealPlan,
-    tabName: tabName,
-  });
+  // const [mealPlan, setMealPlan] = useState({
+  //   ...newMealPlan,
+  //   tabName: tabName,
+  // });
   const [editMealId, setEditMealId] = useState(null);
   const [editFormMealData, setEditFormMealData] = useState({
     mealName: '',
@@ -36,6 +44,10 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
   const lunchFormRef = useRef();
   const dinnerFormRef = useRef();
   const snacksFormRef = useRef();
+  const authCtx = useContext(authContext);
+  const currentUserId = authCtx.currentUserId;
+
+  const dispatch = useDispatch();
 
   const handleAddFormMealChange = e => {
     e.preventDefault();
@@ -63,6 +75,8 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
   };
 
   const handleAddFormMealDataSubmit = (e, rows, formRef) => {
+    console.log(mealPlan[rows]);
+
     e.preventDefault();
 
     const newMeal = {
@@ -74,19 +88,35 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
       fats: addFormMealData.fats,
     };
 
-    const newRows = [...mealPlan[`${rows}`], newMeal];
+    const newRows = !mealPlan[rows]
+      ? [newMeal]
+      : [...mealPlan[`${rows}`], newMeal];
+
+    // const newRows = [...mealPlan[`${rows}`], newMeal];
 
     const newMealPlan = {
       ...mealPlan,
       [`${rows}`]: newRows,
     };
 
-    setMealPlan(newMealPlan);
+    // setMealPlan(newMealPlan);
     formRef.current.reset();
-    //dispatch
+
+    const newMealPlans = [...mealPlans];
+    newMealPlans[mealPlanIndex] = newMealPlan;
+
+    console.log(newMealPlans);
+    setMealPlans(newMealPlans);
+
+    // Add to firebase
+    dispatch(
+      addMealPlansFirebase({
+        mealPlans: newMealPlans,
+        currentUserId: currentUserId,
+      })
+    );
   };
 
-  console.log(mealPlan);
   const handleEditFormSubmit = (e, rows) => {
     e.preventDefault();
 
@@ -107,10 +137,26 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
 
     newRows[index] = editedMeal;
 
-    setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
+    // setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
+
+    //------------------------
+
+    const newMealPlan = { ...mealPlan, [`${rows}`]: newRows };
+
+    const newMealPlans = [...mealPlans];
+
+    newMealPlans[mealPlanIndex] = newMealPlan;
+
+    setMealPlans(newMealPlans);
     setEditMealId(null);
 
-    // dispatch
+    // Add to firebase
+    dispatch(
+      addMealPlansFirebase({
+        mealPlans: newMealPlans,
+        currentUserId: currentUserId,
+      })
+    );
   };
 
   const handleEditClick = (e, meal) => {
@@ -137,9 +183,23 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
 
     newRows.splice(index, 1);
 
-    setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
+    // setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
 
-    //dispatch
+    const newMealPlan = { ...mealPlan, [`${rows}`]: newRows };
+
+    const newMealPlans = [...mealPlans];
+
+    newMealPlans[mealPlanIndex] = newMealPlan;
+
+    setMealPlans(newMealPlans);
+
+    // Add to firebase
+    dispatch(
+      addMealPlansFirebase({
+        mealPlans: newMealPlans,
+        currentUserId: currentUserId,
+      })
+    );
   };
 
   return (
@@ -147,7 +207,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
       <MealTable
         title={'Breakfast'}
         mealType={'breakfast'}
-        rows={mealPlan.breakfastRows}
+        rows={!mealPlan.breakfastRows ? [] : mealPlan.breakfastRows}
         rowsStringName="breakfastRows"
         handleAddFormMealChange={handleAddFormMealChange}
         handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
@@ -162,7 +222,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
       <MealTable
         title={'Lunch'}
         mealType={'lunch'}
-        rows={mealPlan.lunchRows}
+        rows={!mealPlan.lunchRows ? [] : mealPlan.lunchRows}
         rowsStringName="lunchRows"
         handleAddFormMealChange={handleAddFormMealChange}
         handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
@@ -177,7 +237,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
       <MealTable
         title={'Dinner'}
         mealType={'dinner'}
-        rows={mealPlan.dinnerRows}
+        rows={!mealPlan.dinnerRows ? [] : mealPlan.dinnerRows}
         rowsStringName="dinnerRows"
         handleAddFormMealChange={handleAddFormMealChange}
         handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
@@ -193,7 +253,7 @@ const MealPlan = ({ mealPlanIndex, mealPlans, setMealPlans, tabName }) => {
         title={'Snacks'}
         mealType={'snacks'}
         rowsStringName="snacksRows"
-        rows={mealPlan.snacksRows}
+        rows={!mealPlan.snacksRows ? [] : mealPlan.snacksRows}
         handleAddFormMealChange={handleAddFormMealChange}
         handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
         editMealId={editMealId}

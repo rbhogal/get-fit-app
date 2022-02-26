@@ -29,3 +29,7 @@ export const provider = new GoogleAuthProvider();
 export const writeUserDataFirebase = (userData, userId) => {
   set(ref(db, 'userStats/' + userId), userData);
 };
+
+export const writeMealPlansFirebase = (mealPlans, userId) => {
+  set(ref(db, 'mealPlans/' + userId), mealPlans);
+};

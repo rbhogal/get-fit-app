@@ -98,7 +98,12 @@ const calcTotalsAll = (
 };
 
 const Totals = ({ mealPlan }) => {
-  const { breakfastRows, lunchRows, dinnerRows, snacksRows } = mealPlan;
+  const {
+    breakfastRows = [],
+    lunchRows = [],
+    dinnerRows = [],
+    snacksRows = [],
+  } = mealPlan;
   const colorGreen = 'rgb(46, 125, 50)';
   const colorRed = 'rgb(211, 47, 47)';
   const colorGreyedOut = '#a8a29e';

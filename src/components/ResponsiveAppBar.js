@@ -78,6 +78,7 @@ const ResponsiveAppBar = () => {
     const { currentUserId } = authCtx;
     remove(ref(db, 'users/' + currentUserId));
     remove(ref(db, 'userStats/' + currentUserId));
+    remove(ref(db, 'mealPlans/' + currentUserId));
   };
 
   const handleCloseUserMenu = e => {

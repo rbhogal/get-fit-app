@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -12,7 +13,10 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MealPlan from '../components/MealPlan';
 import PageHeader from '../components/PageHeader';
 import AlertDialog from '../components/AlertDialog';
-import { nanoid } from '@reduxjs/toolkit';
+
+import { getMealPlansFirebase } from '../features/mealSlice';
+import { useContext } from 'react';
+import authContext from '../context/authContext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,52 +52,34 @@ function a11yProps(index) {
 }
 
 // const mealPlans = [{breakfastRows: [{meal}, lunchRows: [{meal}]]}, {}];
+// const mealPlans = [{meal plan 1}, {meal plan 2}, ... ]
 
 const newMealPlan = {
-  breakfastRows: [
-    {
-      id: nanoid(),
-      mealName: '',
-      calories: '',
-      protein: '',
-      carbs: '',
-      fats: '',
-    },
-  ],
-  lunchRows: [
-    {
-      mealName: '',
-      calories: '',
-      protein: '',
-      carbs: '',
-      fats: '',
-    },
-  ],
-  dinnerRows: [
-    {
-      mealName: '',
-      calories: '',
-      protein: '',
-      carbs: '',
-      fats: '',
-    },
-  ],
-  snacksRows: [
-    {
-      mealName: '',
-      calories: '',
-      protein: '',
-      carbs: '',
-      fats: '',
-    },
-  ],
+  breakfastRows: [],
+  lunchRows: [],
+  dinnerRows: [],
+  snacksRows: [],
   tabName: 'Meal Plan 1',
 };
 
 export default function MealPlanner() {
   const [value, setValue] = useState(0);
-  const [mealPlans, setMealPlans] = useState([newMealPlan]);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const authCtx = useContext(authContext);
+  const currentUserId = authCtx.currentUserId;
+  const { mealPlans: mealPlansFirebase } = useSelector(state => state.meal);
+  const [mealPlans, setMealPlans] = useState(mealPlansFirebase);
+
+  useEffect(() => {
+    // To persist the data
+    if (!currentUserId) return;
+    dispatch(getMealPlansFirebase(currentUserId));
+  }, [currentUserId]);
+
+  useEffect(() => {
+    setMealPlans(mealPlansFirebase);
+  }, [mealPlansFirebase]);
 
   const handleOpenAlert = () => {
     setOpen(true);
@@ -188,6 +174,7 @@ export default function MealPlanner() {
       {mealPlans.map((mealPlan, index) => (
         <TabPanel key={index} value={value} index={index}>
           <MealPlan
+            mealPlan={mealPlan}
             tabName={mealPlans[index].tabName}
             mealPlanIndex={index}
             mealPlans={mealPlans}
