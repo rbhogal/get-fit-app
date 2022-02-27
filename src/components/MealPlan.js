@@ -145,8 +145,6 @@ const MealPlan = ({
 
     // setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
 
-    //------------------------
-
     const newMealPlan = { ...mealPlan, [`${rows}`]: newRows };
 
     const newMealPlans = [...mealPlans];

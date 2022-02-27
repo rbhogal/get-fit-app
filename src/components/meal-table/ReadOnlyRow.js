@@ -21,10 +21,7 @@ const ReadOnlyRow = ({
       <td style={styleNumbers}>{meal.fats}</td>
       <td
         style={{
-          width: '100%',
-          display: 'flex',
           border: '1px solid #DDDDDD',
-          justifyContent: 'space-around',
         }}
       >
         <IconButton aria-label="Edit" onClick={e => handleEditClick(e, meal)}>

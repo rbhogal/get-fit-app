@@ -75,7 +75,7 @@ const MealTable = ({
                   <th style={styleTh}>Protein (g)</th>
                   <th style={styleTh}>Carbs (g)</th>
                   <th style={styleTh}>Fats (g)</th>
-                  <th style={{ ...styleTh, width: '6rem' }}></th>
+                  <th style={{ ...styleTh, width: '5.2rem' }}></th>
                 </tr>
               </thead>
               <tbody>

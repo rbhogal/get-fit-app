@@ -72,15 +72,11 @@ const EditableRow = ({
       </td>
       <td
         style={{
-          width: '100%',
-          display: 'flex',
           border: '1px solid #DDDDDD',
-          justifyContent: 'space-around',
-          height: '100%',
           padding: '8px',
         }}
       >
-        <IconButton type="submit">
+        <IconButton sx={{ marginLeft: '.7rem' }} type="submit">
           <SaveIcon />
         </IconButton>
       </td>

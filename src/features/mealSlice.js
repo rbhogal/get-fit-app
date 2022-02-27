@@ -39,13 +39,6 @@ export const getMealPlansFirebase = createAsyncThunk(
   }
 );
 
-const initMealPlan = {
-  breakfastRows: [],
-  lunchRows: [],
-  dinnerRows: [],
-  snacksRows: [],
-};
-
 const initMealPlans = [
   {
     breakfastRows: [],
@@ -61,11 +54,7 @@ export const mealSlice = createSlice({
   initialState: {
     mealPlans: initMealPlans,
   },
-  reducers: {
-    addMealPlan: (state, action) => {
-      state.mealPlan = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [getMealPlansFirebase.fulfilled]: (state, action) => {
       state.mealPlans = [...action.payload];
@@ -75,7 +64,5 @@ export const mealSlice = createSlice({
     },
   },
 });
-
-export const { addMealPlan } = mealSlice.actions;
 
 export default mealSlice.reducer;
