@@ -164,6 +164,8 @@ const Totals = ({ mealPlan }) => {
   useEffect(() => {
     // Calculates the +/- total calories, protein, carbs, fats needed to reach calorie goals and macros
 
+    if (!userData.dailyCalories) return;
+
     let newTotalDelta = {
       calories: '',
       protein: '',

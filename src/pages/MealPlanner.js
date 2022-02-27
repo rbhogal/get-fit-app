@@ -112,7 +112,6 @@ export default function MealPlanner() {
   const handleChangeTab = (event, newValue) => {
     setValue(newValue);
 
-    console.log(newValue);
     dispatch(
       saveActiveMealPlanValue({
         activeMealPlanValue: newValue,
