@@ -26,6 +26,7 @@ import SelectRate from '../components/select/SelectRate';
 import useInput from '../hooks/useInput';
 import FeetTextField from '../components/text-fields/FeetTextField';
 import InchesTextField from '../components/text-fields/InchesTextField';
+
 import {
   addUserData,
   addUserDataFirebase,
@@ -211,6 +212,14 @@ const Profile = () => {
     valueChangeHandler: rateChangeHandler,
     setIsFormSubmittedToTrue: setIsFormSubmittedToTrueRate,
   } = useInput(value => value !== '');
+
+  const setCustomMacros = (x, y, z) => {
+    x = 1 - y - z;
+    y = 1 - x - z;
+    z = 1 - x - y;
+
+    console.log(x, y, z);
+  };
 
   const convertHeightToCm = (feet, inches) => {
     const heightInCm = feet * 30.48 + inches * 2.54;
