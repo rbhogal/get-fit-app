@@ -30,7 +30,6 @@ export const getActiveMealPlanValue = createAsyncThunk(
       .then(snapshot => {
         if (snapshot.exists()) {
           const { activeMealPlan } = snapshot.val();
-          console.log(activeMealPlan);
           return activeMealPlan;
         }
       })

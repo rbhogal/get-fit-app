@@ -232,6 +232,7 @@ export default function MealPlanner() {
             mealPlanIndex={index}
             mealPlans={mealPlans}
             setMealPlans={setMealPlans}
+            value={value}
           />
         </TabPanel>
       ))}

@@ -6,6 +6,7 @@ import MealTable from './meal-table/MealTable';
 import Totals from './Totals';
 import { addMealPlansFirebase } from '../features/mealSlice';
 import authContext from '../context/authContext';
+import { saveActiveMealPlanValue } from '../features/userSlice';
 
 const newMealPlan = {
   breakfastRows: [],
@@ -20,6 +21,7 @@ const MealPlan = ({
   setMealPlans,
   tabName,
   mealPlan,
+  value,
 }) => {
   const [addFormMealData, setAddFormMealData] = useState({
     mealName: '',
@@ -46,7 +48,6 @@ const MealPlan = ({
   const snacksFormRef = useRef();
   const authCtx = useContext(authContext);
   const currentUserId = authCtx.currentUserId;
-
   const dispatch = useDispatch();
 
   const handleAddFormMealChange = e => {
@@ -75,9 +76,14 @@ const MealPlan = ({
   };
 
   const handleAddFormMealDataSubmit = (e, rows, formRef) => {
-    console.log(mealPlan[rows]);
-
     e.preventDefault();
+
+    dispatch(
+      saveActiveMealPlanValue({
+        activeMealPlanValue: value,
+        currentUserId: currentUserId,
+      })
+    );
 
     const newMeal = {
       id: nanoid(),
