@@ -107,6 +107,7 @@ const Totals = ({ mealPlan }) => {
   const colorGreen = 'rgb(46, 125, 50)';
   const colorRed = 'rgb(211, 47, 47)';
   const colorGreyedOut = '#a8a29e';
+  // const colorGreyedOut = 'rgb(231, 229, 228)';
   const authCtx = useContext(authContext);
   const currentUserId = authCtx.currentUserId;
   const dispatch = useDispatch();
@@ -125,16 +126,16 @@ const Totals = ({ mealPlan }) => {
     fats: 0,
   });
   const [totalDelta, setTotalDelta] = useState({
-    calories: '',
-    protein: '',
-    carbs: '',
-    fats: '',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fats: 0,
   });
   const [colorTotalsDelta, setColorTotalsDelta] = useState({
-    calories: '',
-    protein: '',
-    carbs: '',
-    fats: '',
+    calories: colorGreyedOut,
+    protein: colorGreyedOut,
+    carbs: colorGreyedOut,
+    fats: colorGreyedOut,
   });
 
   useEffect(() => {
