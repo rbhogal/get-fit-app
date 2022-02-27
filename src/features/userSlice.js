@@ -1,11 +1,44 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { writeUserDataFirebase, dbRef } from '../firebase';
+import {
+  writeUserDataFirebase,
+  dbRef,
+  writeActiveMealPlanValue,
+} from '../firebase';
 import { get, child } from 'firebase/database';
 
 export const addUserDataFirebase = createAsyncThunk(
   'user/addUserDataFirebase',
   async payload => {
     writeUserDataFirebase(payload.userData, payload.currentUserId);
+  }
+);
+
+export const saveActiveMealPlanValue = createAsyncThunk(
+  'user/saveActiveMealPlanValue',
+  async payload => {
+    writeActiveMealPlanValue(
+      payload.activeMealPlanValue,
+      payload.currentUserId
+    );
+  }
+);
+
+export const getActiveMealPlanValue = createAsyncThunk(
+  'user/getActiveMealPlanValue',
+  async payload => {
+    const resp = await get(child(dbRef, `users/${payload}`))
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          const { activeMealPlan } = snapshot.val();
+          console.log(activeMealPlan);
+          return activeMealPlan;
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    return resp;
   }
 );
 
@@ -102,6 +135,15 @@ export const userSlice = createSlice({
     },
     [getUserDataFirebase.rejected]: () => {
       console.log('Unable to retrieve userStats data from database');
+    },
+    [getActiveMealPlanValue.fulfilled]: (state, action) => {
+      state.userData = {
+        ...state.userData,
+        activeMealPlanValue: action.payload,
+      };
+    },
+    [getActiveMealPlanValue.rejected]: () => {
+      console.log('Unable to retrieve active meal tab value from database');
     },
   },
 });

@@ -20,6 +20,10 @@ import {
 } from '../features/mealSlice';
 import { useContext } from 'react';
 import authContext from '../context/authContext';
+import {
+  getActiveMealPlanValue,
+  saveActiveMealPlanValue,
+} from '../features/userSlice';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,6 +76,8 @@ export default function MealPlanner() {
   const authCtx = useContext(authContext);
   const currentUserId = authCtx.currentUserId;
   const { mealPlans: mealPlansFirebase } = useSelector(state => state.meal);
+  const { userData } = useSelector(state => state.user);
+
   const [mealPlans, setMealPlans] = useState(mealPlansFirebase);
 
   useEffect(() => {
@@ -84,6 +90,17 @@ export default function MealPlanner() {
     setMealPlans(mealPlansFirebase);
   }, [mealPlansFirebase]);
 
+  useEffect(() => {
+    if (!currentUserId) return;
+    dispatch(getActiveMealPlanValue(currentUserId));
+  }, [currentUserId]);
+
+  useEffect(() => {
+    if (!userData.activeMealPlanValue) return;
+    const newValue = userData.activeMealPlanValue;
+    setValue(newValue);
+  });
+
   const handleOpenAlert = () => {
     setOpen(true);
   };
@@ -92,8 +109,16 @@ export default function MealPlanner() {
     setOpen(false);
   };
 
-  const handleChange = (event, newValue) => {
+  const handleChangeTab = (event, newValue) => {
     setValue(newValue);
+
+    console.log(newValue);
+    dispatch(
+      saveActiveMealPlanValue({
+        activeMealPlanValue: newValue,
+        currentUserId: currentUserId,
+      })
+    );
   };
 
   const addNewMealPlan = () => {
@@ -124,6 +149,13 @@ export default function MealPlanner() {
         ]);
 
     setValue(mealPlans.length);
+
+    // dispatch(
+    //   saveActiveMealPlanValue({
+    //     activeMealPlanValue: mealPlans.length,
+    //     currentUserId: currentUserId,
+    //   })
+    // );
   };
 
   const deleteMealPlan = () => {
@@ -136,7 +168,15 @@ export default function MealPlanner() {
     setMealPlans(newMealPlans);
 
     // Sets the correct active tab if you delete a tab right to left
-    if (value === mealPlans.length - 1) setValue(mealPlans.length - 2);
+    if (value === mealPlans.length - 1) {
+      setValue(mealPlans.length - 2);
+      dispatch(
+        saveActiveMealPlanValue({
+          activeMealPlanValue: mealPlans.length - 2,
+          currentUserId: currentUserId,
+        })
+      );
+    }
 
     setOpen(false);
 
@@ -149,8 +189,6 @@ export default function MealPlanner() {
       })
     );
   };
-
-  console.log(mealPlans);
 
   return (
     <Box>
@@ -172,8 +210,8 @@ export default function MealPlanner() {
         </IconButton>
         <Tabs
           value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
+          onChange={handleChangeTab}
+          aria-label="meal plan tabs"
           variant="scrollable"
           scrollButtons="auto"
         >

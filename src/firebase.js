@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
+import { update } from 'lodash';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -32,4 +33,8 @@ export const writeUserDataFirebase = (userData, userId) => {
 
 export const writeMealPlansFirebase = (mealPlans, userId) => {
   set(ref(db, 'mealPlans/' + userId), mealPlans);
+};
+
+export const writeActiveMealPlanValue = (value, userId) => {
+  set(ref(db, 'users/' + userId + '/activeMealPlan'), value);
 };
