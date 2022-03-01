@@ -53,14 +53,20 @@ export const mealSlice = createSlice({
   name: 'meal',
   initialState: {
     mealPlans: initMealPlans,
+    isLoading: true,
   },
   reducers: {},
   extraReducers: {
     [getMealPlansFirebase.fulfilled]: (state, action) => {
       state.mealPlans = [...action.payload];
+      state.isLoading = false;
     },
-    [getMealPlansFirebase.rejected]: () => {
+    [getMealPlansFirebase.pending]: state => {
+      state.isLoading = true;
+    },
+    [getMealPlansFirebase.rejected]: state => {
       console.log('Unable to retrieve meal plans from database');
+      state.isLoading = false;
     },
   },
 });

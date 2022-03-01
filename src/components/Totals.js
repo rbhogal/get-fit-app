@@ -227,7 +227,7 @@ const Totals = ({ mealPlan }) => {
   }, [total, userData]);
 
   return (
-    <Box style={{ padding: '0.5rem', overflowX: 'auto', marginBottom: '8rem' }}>
+    <Box style={{ padding: '0.5rem', overflowX: 'auto' }}>
       <table
         style={{
           borderCollapse: 'collapse',

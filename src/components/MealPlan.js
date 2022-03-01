@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
+
+import { CircularProgress } from '@mui/material';
 
 import MealTable from './meal-table/MealTable';
 import Totals from './Totals';
 import { addMealPlansFirebase } from '../features/mealSlice';
 import authContext from '../context/authContext';
 import { saveActiveMealPlanValue } from '../features/userSlice';
+import { Box } from '@mui/system';
 
 const newMealPlan = {
   breakfastRows: [],
@@ -49,6 +52,7 @@ const MealPlan = ({
   const authCtx = useContext(authContext);
   const currentUserId = authCtx.currentUserId;
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(state => state.meal);
 
   const handleAddFormMealChange = e => {
     e.preventDefault();
@@ -208,67 +212,83 @@ const MealPlan = ({
 
   return (
     <>
-      <MealTable
-        title={'Breakfast'}
-        mealType={'breakfast'}
-        rows={!mealPlan.breakfastRows ? [] : mealPlan.breakfastRows}
-        rowsStringName="breakfastRows"
-        handleAddFormMealChange={handleAddFormMealChange}
-        handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
-        editMealId={editMealId}
-        handleEditClick={handleEditClick}
-        editFormMealData={editFormMealData}
-        handleEditFormMealChange={handleEditFormMealChange}
-        handleEditFormSubmit={handleEditFormSubmit}
-        handleDeleteClick={handleDeleteClick}
-        formRef={breakfastFormRef}
-      />
-      <MealTable
-        title={'Lunch'}
-        mealType={'lunch'}
-        rows={!mealPlan.lunchRows ? [] : mealPlan.lunchRows}
-        rowsStringName="lunchRows"
-        handleAddFormMealChange={handleAddFormMealChange}
-        handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
-        editMealId={editMealId}
-        handleEditClick={handleEditClick}
-        editFormMealData={editFormMealData}
-        handleEditFormMealChange={handleEditFormMealChange}
-        handleEditFormSubmit={handleEditFormSubmit}
-        handleDeleteClick={handleDeleteClick}
-        formRef={lunchFormRef}
-      />
-      <MealTable
-        title={'Dinner'}
-        mealType={'dinner'}
-        rows={!mealPlan.dinnerRows ? [] : mealPlan.dinnerRows}
-        rowsStringName="dinnerRows"
-        handleAddFormMealChange={handleAddFormMealChange}
-        handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
-        editMealId={editMealId}
-        handleEditClick={handleEditClick}
-        editFormMealData={editFormMealData}
-        handleEditFormMealChange={handleEditFormMealChange}
-        handleEditFormSubmit={handleEditFormSubmit}
-        handleDeleteClick={handleDeleteClick}
-        formRef={dinnerFormRef}
-      />
-      <MealTable
-        title={'Snacks'}
-        mealType={'snacks'}
-        rowsStringName="snacksRows"
-        rows={!mealPlan.snacksRows ? [] : mealPlan.snacksRows}
-        handleAddFormMealChange={handleAddFormMealChange}
-        handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
-        editMealId={editMealId}
-        handleEditClick={handleEditClick}
-        editFormMealData={editFormMealData}
-        handleEditFormMealChange={handleEditFormMealChange}
-        handleEditFormSubmit={handleEditFormSubmit}
-        handleDeleteClick={handleDeleteClick}
-        formRef={snacksFormRef}
-      />
-      <Totals mealPlan={mealPlan} />
+      {isLoading ? (
+        <Box
+          sx={{
+            width: '100%',
+            height: '60vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <div>
+          <MealTable
+            title={'Breakfast'}
+            mealType={'breakfast'}
+            rows={!mealPlan.breakfastRows ? [] : mealPlan.breakfastRows}
+            rowsStringName="breakfastRows"
+            handleAddFormMealChange={handleAddFormMealChange}
+            handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
+            editMealId={editMealId}
+            handleEditClick={handleEditClick}
+            editFormMealData={editFormMealData}
+            handleEditFormMealChange={handleEditFormMealChange}
+            handleEditFormSubmit={handleEditFormSubmit}
+            handleDeleteClick={handleDeleteClick}
+            formRef={breakfastFormRef}
+          />
+          <MealTable
+            title={'Lunch'}
+            mealType={'lunch'}
+            rows={!mealPlan.lunchRows ? [] : mealPlan.lunchRows}
+            rowsStringName="lunchRows"
+            handleAddFormMealChange={handleAddFormMealChange}
+            handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
+            editMealId={editMealId}
+            handleEditClick={handleEditClick}
+            editFormMealData={editFormMealData}
+            handleEditFormMealChange={handleEditFormMealChange}
+            handleEditFormSubmit={handleEditFormSubmit}
+            handleDeleteClick={handleDeleteClick}
+            formRef={lunchFormRef}
+          />
+          <MealTable
+            title={'Dinner'}
+            mealType={'dinner'}
+            rows={!mealPlan.dinnerRows ? [] : mealPlan.dinnerRows}
+            rowsStringName="dinnerRows"
+            handleAddFormMealChange={handleAddFormMealChange}
+            handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
+            editMealId={editMealId}
+            handleEditClick={handleEditClick}
+            editFormMealData={editFormMealData}
+            handleEditFormMealChange={handleEditFormMealChange}
+            handleEditFormSubmit={handleEditFormSubmit}
+            handleDeleteClick={handleDeleteClick}
+            formRef={dinnerFormRef}
+          />
+          <MealTable
+            title={'Snacks'}
+            mealType={'snacks'}
+            rowsStringName="snacksRows"
+            rows={!mealPlan.snacksRows ? [] : mealPlan.snacksRows}
+            handleAddFormMealChange={handleAddFormMealChange}
+            handleAddFormMealDataSubmit={handleAddFormMealDataSubmit}
+            editMealId={editMealId}
+            handleEditClick={handleEditClick}
+            editFormMealData={editFormMealData}
+            handleEditFormMealChange={handleEditFormMealChange}
+            handleEditFormSubmit={handleEditFormSubmit}
+            handleDeleteClick={handleDeleteClick}
+            formRef={snacksFormRef}
+          />
+          <Totals mealPlan={mealPlan} />
+        </div>
+      )}
     </>
   );
 };

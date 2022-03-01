@@ -190,7 +190,7 @@ export default function MealPlanner() {
   };
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: '20rem' }}>
       <AlertDialog
         open={open}
         deleteMealPlan={deleteMealPlan}
