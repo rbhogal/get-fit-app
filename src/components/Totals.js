@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
+import { Box } from '@mui/material';
+
 import authContext from '../context/authContext';
 import { getUserDataFirebase } from '../features/userSlice';
 
@@ -15,12 +17,14 @@ const styleHeading = {
 };
 
 const styleTotals = {
+  // border: '1px solid #DDDDDD',
   backgroundColor: '#e7e5e4',
   textAlign: 'right',
   padding: '8px',
 };
 
 const styleTotalsDelta = {
+  // border: '1px solid #DDDDDD',
   backgroundColor: '#e7e5e4',
   textAlign: 'right',
   padding: '8px',
@@ -223,50 +227,59 @@ const Totals = ({ mealPlan }) => {
   }, [total, userData]);
 
   return (
-    <table
-      style={{
-        borderCollapse: 'collapse',
-        width: '100%',
-        marginBottom: '8rem',
-      }}
-    >
-      <thead>
-        <tr>
-          <th
-            style={{
-              ...styleHeading,
-              width: '24.5rem',
-              textAlign: 'right',
-            }}
-          >
-            TOTALS
-          </th>
-          <th style={{ ...styleTotals, width: '8.1rem' }}>{total.calories}</th>
-          <th style={{ ...styleTotals, width: '10.1rem' }}>{total.protein}</th>
-          <th style={{ ...styleTotals, width: '9rem' }}>{total.carbs}</th>
-          <th style={{ ...styleTotals, width: '7.8rem' }}>{total.fats}</th>
-          <th style={{ ...styleTotals, width: '6.4rem' }}></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style={{}}>
-          <td style={styleHeading}>+/-</td>
-          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.calories }}>
-            {totalDelta.calories}
-          </td>
-          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.protein }}>
-            {totalDelta.protein}
-          </td>
-          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.carbs }}>
-            {totalDelta.carbs}
-          </td>
-          <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.fats }}>
-            {totalDelta.fats}
-          </td>
-          <td style={styleTotalsDelta}></td>
-        </tr>
-      </tbody>
-    </table>
+    <Box style={{ padding: '0.5rem', overflowX: 'auto', marginBottom: '8rem' }}>
+      <table
+        style={{
+          borderCollapse: 'collapse',
+          width: '100%',
+        }}
+      >
+        <thead>
+          <tr>
+            <th
+              style={{
+                ...styleHeading,
+                width: '100%',
+                textAlign: 'right',
+              }}
+            >
+              TOTALS
+            </th>
+            <th style={{ ...styleTotals, minWidth: '8rem' }}>
+              {total.calories}
+            </th>
+            <th style={{ ...styleTotals, minWidth: '8rem' }}>
+              {total.protein}
+            </th>
+            <th style={{ ...styleTotals, minWidth: '8rem' }}>{total.carbs}</th>
+            <th style={{ ...styleTotals, minWidth: '8rem' }}>{total.fats}</th>
+            <th style={{ ...styleTotals, minWidth: '5.2rem' }}></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{}}>
+            <td style={styleHeading}>+/-</td>
+            <td
+              style={{ ...styleTotalsDelta, color: colorTotalsDelta.calories }}
+            >
+              {totalDelta.calories}
+            </td>
+            <td
+              style={{ ...styleTotalsDelta, color: colorTotalsDelta.protein }}
+            >
+              {totalDelta.protein}
+            </td>
+            <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.carbs }}>
+              {totalDelta.carbs}
+            </td>
+            <td style={{ ...styleTotalsDelta, color: colorTotalsDelta.fats }}>
+              {totalDelta.fats}
+            </td>
+            <td style={styleTotalsDelta}></td>
+          </tr>
+        </tbody>
+      </table>
+    </Box>
   );
 };
 

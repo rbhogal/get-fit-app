@@ -9,6 +9,7 @@ const styleTh = {
   border: '1px solid #DDDDDD',
   textAlign: 'left',
   padding: '8px',
+  width: '100%',
 };
 
 const styleNumbers = {
@@ -54,56 +55,58 @@ const MealTable = ({
       >
         <Paper>
           <form onSubmit={e => handleEditFormSubmit(e, rowsStringName)}>
-            {/* <Grid container> */}
-            <table
-              style={{
-                borderCollapse: 'collapse',
-                width: '100%',
-              }}
-            >
-              <thead>
-                <tr>
-                  <th
-                    style={{
-                      ...styleTh,
-                      minWidth: '15rem',
-                    }}
-                  >
-                    {title}
-                  </th>
-                  <th style={styleTh}>Calories</th>
-                  <th style={styleTh}>Protein (g)</th>
-                  <th style={styleTh}>Carbs (g)</th>
-                  <th style={styleTh}>Fats (g)</th>
-                  <th style={{ ...styleTh, width: '5.2rem' }}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((meal, index) => (
-                  <Fragment key={index}>
-                    {editMealId === meal.id ? (
-                      <EditableRow
-                        styleTh={styleTh}
-                        styleNumbers={styleNumbers}
-                        styleInput={styleInput}
-                        editFormMealData={editFormMealData}
-                        handleEditFormMealChange={handleEditFormMealChange}
-                      />
-                    ) : (
-                      <ReadOnlyRow
-                        meal={meal}
-                        styleTh={styleTh}
-                        styleNumbers={styleNumbers}
-                        handleEditClick={handleEditClick}
-                        handleDeleteClick={handleDeleteClick}
-                        rowsStringName={rowsStringName}
-                      />
-                    )}
-                  </Fragment>
-                ))}
-              </tbody>
-            </table>
-            {/* </Grid> */}
+            <div style={{ overflowX: 'auto' }}>
+              <table
+                style={{
+                  borderCollapse: 'collapse',
+                  width: '100%',
+                }}
+              >
+                <thead>
+                  <tr>
+                    <th
+                      style={{
+                        ...styleTh,
+                        width: '100%',
+                      }}
+                    >
+                      {title}
+                    </th>
+                    <th style={{ ...styleTh, minWidth: '8rem' }}>Calories</th>
+                    <th style={{ ...styleTh, minWidth: '8rem' }}>
+                      Protein (g)
+                    </th>
+                    <th style={{ ...styleTh, minWidth: '8rem' }}>Carbs (g)</th>
+                    <th style={{ ...styleTh, minWidth: '8rem' }}>Fats (g)</th>
+                    <th style={{ ...styleTh, minWidth: '5.2rem' }}></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((meal, index) => (
+                    <Fragment key={index}>
+                      {editMealId === meal.id ? (
+                        <EditableRow
+                          styleTh={styleTh}
+                          styleNumbers={styleNumbers}
+                          styleInput={styleInput}
+                          editFormMealData={editFormMealData}
+                          handleEditFormMealChange={handleEditFormMealChange}
+                        />
+                      ) : (
+                        <ReadOnlyRow
+                          meal={meal}
+                          styleTh={styleTh}
+                          styleNumbers={styleNumbers}
+                          handleEditClick={handleEditClick}
+                          handleDeleteClick={handleDeleteClick}
+                          rowsStringName={rowsStringName}
+                        />
+                      )}
+                    </Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </form>
         </Paper>
         <form
@@ -114,57 +117,56 @@ const MealTable = ({
         >
           <Paper>
             <Grid container style={{ position: 'relative' }}>
-              <Grid item xs={4.43}>
+              <Grid item xs={5.13}>
                 <input
                   type="text"
                   name="mealName"
                   required="required"
                   // placeholder={`Enter ${mealType} name...`}
-                  style={styleInput}
+                  style={{ ...styleInput }}
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-              <Grid item xs={1.51}>
+              <Grid item xs={1.48}>
                 <input
                   type="number"
                   name="calories"
                   required="required"
                   // placeholder="Calories..."
-                  style={styleInput}
+                  style={{ ...styleInput }}
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-              <Grid item xs={1.85}>
+              <Grid item xs={1.46}>
                 <input
                   type="number"
                   name="protein"
                   required="required"
                   // placeholder="Protein (g)..."
-                  style={styleInput}
+                  style={{ ...styleInput }}
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-              <Grid item xs={1.67}>
+              <Grid item xs={1.49}>
                 <input
                   type="number"
                   name="carbs"
                   required="required"
                   // placeholder="Carbs (g)..."
-                  style={styleInput}
+                  style={{ ...styleInput }}
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-              <Grid item xs={2.54}>
+              <Grid item xs={2.44}>
                 <input
                   type="number"
                   name="fats"
                   required="required"
                   // placeholder="Fats (g)..."
-                  style={styleInput}
+                  style={{ ...styleInput }}
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-
               <Button
                 sx={{
                   position: 'absolute',

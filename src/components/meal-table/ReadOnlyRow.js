@@ -22,6 +22,7 @@ const ReadOnlyRow = ({
       <td
         style={{
           border: '1px solid #DDDDDD',
+          minWidth: '5.2rem',
         }}
       >
         <IconButton aria-label="Edit" onClick={e => handleEditClick(e, meal)}>

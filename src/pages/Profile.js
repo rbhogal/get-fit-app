@@ -593,7 +593,14 @@ const Profile = () => {
             </Box>
           )}
 
-          <Box sx={{ margin: '2.5rem 0' }}>
+          <Box
+            sx={{
+              margin: '2.5rem 0',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
             {_.isEmpty(userData.sex) && userStatsExist ? (
               <Stack spacing={0.2}>
                 <Skeleton variant="rectangular" height={58} />
@@ -610,6 +617,15 @@ const Profile = () => {
                 percentCarbs={userData.percentCarbs}
                 percentFats={userData.percentFats}
               />
+            )}
+            {!_.isEmpty(userData.sex) && (
+              <Button
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style={{ marginBottom: 0 }}
+              >
+                Adjust Macros?
+              </Button>
             )}
           </Box>
 
