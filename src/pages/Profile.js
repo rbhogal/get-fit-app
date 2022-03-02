@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import _, { isEmpty } from 'lodash';
+import _ from 'lodash';
 import { Doughnut } from 'react-chartjs-2';
 
 import { Paper, Stack } from '@mui/material';
@@ -37,6 +37,7 @@ import MacrosTable from '../components/MacrosTable';
 import PageHeader from '../components/PageHeader';
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import MacrosModal from '../components/MacrosModal';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -61,6 +62,19 @@ const Profile = () => {
   const currentUserId = authCtx.currentUserId;
   const { userData } = useSelector(state => state.user);
   const { userStatsExist } = userData;
+  const [openMacrosModal, setOpenMacrosModal] = React.useState(false);
+
+  const handleClickOpenMacrosModal = () => {
+    setOpenMacrosModal(true);
+  };
+
+  const handleCloseMacrosModal = () => {
+    setOpenMacrosModal(false);
+  };
+
+  const cancelAdjustMacros = () => {
+    setOpenMacrosModal(false);
+  };
 
   useEffect(() => {
     // This is to persist the data
@@ -212,14 +226,6 @@ const Profile = () => {
     valueChangeHandler: rateChangeHandler,
     setIsFormSubmittedToTrue: setIsFormSubmittedToTrueRate,
   } = useInput(value => value !== '');
-
-  const setCustomMacros = (x, y, z) => {
-    x = 1 - y - z;
-    y = 1 - x - z;
-    z = 1 - x - y;
-
-    console.log(x, y, z);
-  };
 
   const convertHeightToCm = (feet, inches) => {
     const heightInCm = feet * 30.48 + inches * 2.54;
@@ -405,6 +411,11 @@ const Profile = () => {
         <Grid item xs={12}>
           <PageHeader title={'Profile'} divider={true} />
         </Grid>
+
+        {/* <MacrosModal
+          open={openMacrosModal}
+          handleCLose={handleCloseMacrosModal}
+        /> */}
 
         <Grid item xs={12} xl={8}>
           <Box>
@@ -618,14 +629,22 @@ const Profile = () => {
                 percentFats={userData.percentFats}
               />
             )}
+
             {!_.isEmpty(userData.sex) && (
-              <Button
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                style={{ marginBottom: 0 }}
-              >
-                Adjust Macros?
-              </Button>
+              <>
+                <MacrosModal
+                  open={openMacrosModal}
+                  handleClose={handleCloseMacrosModal}
+                />
+                <Button
+                  onClick={handleClickOpenMacrosModal}
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  style={{ marginBottom: 0 }}
+                >
+                  Adjust Macros?
+                </Button>
+              </>
             )}
           </Box>
 
