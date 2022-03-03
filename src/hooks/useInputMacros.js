@@ -53,12 +53,14 @@ const useInputMacros = (
       ((newPercentFats / 100) * dailyCalories) / calPerGramFats
     );
 
-    console.log(newFatsGrams, lowestFatsGrams, highestFatsGrams);
-
     newFatsGrams < lowestFatsGrams
-      ? setErrorFats({ error: true, helperText: 'Too low!' })
+      ? setErrorFats({
+          error: true,
+          helperText:
+            'Are you sure? Going this low may be dangerous to health.',
+        })
       : newFatsGrams > highestFatsGrams
-      ? setErrorFats({ error: false, helperText: 'High Fats' })
+      ? setErrorFats({ error: true, helperText: 'HIGH FATS' })
       : setErrorFats({ error: false, helperText: '' });
   };
 

@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader';
 
 const WeightLog = () => {
   return (
-    <div>
+    <>
       <PageHeader title={'Weight Log'} divider={true} />
 
       <Typography
@@ -13,7 +13,7 @@ const WeightLog = () => {
       >
         Future update
       </Typography>
-    </div>
+    </>
   );
 };
 

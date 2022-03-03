@@ -9,13 +9,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 export default function AlertDialog({
   open,
   handleCloseAlert,
-  deleteMealPlan,
+  handleClickYes,
+  dialogContentText,
 }) {
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleCloseAlert}
@@ -25,12 +23,12 @@ export default function AlertDialog({
         <DialogTitle id="alert-dialog-title">{'Delete'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Delete the currently selected meal plan?
+            {dialogContentText}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAlert}>No</Button>
-          <Button onClick={deleteMealPlan} autoFocus>
+          <Button onClick={handleClickYes} autoFocus>
             Yes
           </Button>
         </DialogActions>

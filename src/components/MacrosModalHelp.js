@@ -31,15 +31,24 @@ export default function MacrosModalHelp() {
         <DialogTitle id="alert-dialog-title">{'Recommendations'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <strong> Default:</strong> <br /> Protein = 1 g / per lb bodyweight
+            {/* <strong> Default Macros:</strong> <br /> Protein = 1 g / per lb
+            bodyweight
             <br /> Fats = 0.3 g per lb of bodyweight <br /> Carbs = Whatever is
             left over
             <br />
+            <br /> */}
+            <strong>Recommendations (Default):</strong> <br />
+            Protein: Roughly 1 g / lb of bodyweight <br />
+            Fats: *Between 0.3 g (Default) - 0.5 g per lb of bodyweight <br />
+            Carbs: Whatever is left over <br />
             <br />
-            <strong>Recommended Fats:</strong> 0.3 - 0.5 g per lb of bodyweight.
+            <strong>Recommendations (Losing 50+ lbs):</strong> <br />
+            Protein: 10-35% <br />
+            Fats: *20-35% <br />
+            Carbs: 45-65% <br />
             <br />
-            Do NOT go below 0.3 g
-            <br />
+            *Going below 0.3 g can be dangerous to your health. <br />
+            (Ignore error if losing 50+ lbs)
           </DialogContentText>
         </DialogContent>
         <DialogActions>

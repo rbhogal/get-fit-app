@@ -85,6 +85,11 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const navToSettings = () => {
+    navigate('settings');
+    setAnchorElUser(null);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -207,7 +212,7 @@ const ResponsiveAppBar = () => {
                 <MenuItem
                   key={setting}
                   onClick={
-                    setting === 'Sign Out' ? handleSignOut : handleCloseUserMenu
+                    setting === 'Sign Out' ? handleSignOut : navToSettings
                   }
                 >
                   <Typography textAlign="center">{setting}</Typography>

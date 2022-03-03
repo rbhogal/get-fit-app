@@ -179,7 +179,6 @@ export default function MealPlanner() {
 
     setOpen(false);
 
-    console.log(newMealPlans);
     // Add to firebase
     dispatch(
       addMealPlansFirebase({
@@ -193,8 +192,9 @@ export default function MealPlanner() {
     <Box sx={{ marginBottom: '20rem' }}>
       <AlertDialog
         open={open}
-        deleteMealPlan={deleteMealPlan}
+        handleClickYes={deleteMealPlan}
         handleCloseAlert={handleCloseAlert}
+        dialogContentText={'Delete the currently selected meal plan?'}
       />
       <PageHeader title={'Meal Planner'} divider={false} />
       <Box

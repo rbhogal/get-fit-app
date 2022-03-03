@@ -408,11 +408,6 @@ const Profile = () => {
           <PageHeader title={'Profile'} divider={true} />
         </Grid>
 
-        {/* <MacrosModal
-          open={openMacrosModal}
-          handleCLose={handleCloseMacrosModal}
-        /> */}
-
         <Grid item xs={12} xl={8}>
           <Box>
             <TableContainer component={Paper}>
@@ -552,10 +547,7 @@ const Profile = () => {
               </Button>
             </Box>
 
-            <Typography
-              sx={{ width: '24.786rem', paddingTop: '.5rem' }}
-              variant="body2"
-            >
+            <Typography sx={{ paddingTop: '.5rem' }} variant="body2">
               *Calculator based on Mifflin St. Jeor Equation.{' '}
               <a
                 style={{ color: 'inherit' }}
@@ -566,6 +558,11 @@ const Profile = () => {
                 Learn More
               </a>
               .
+            </Typography>
+
+            <Typography sx={{ paddingTop: '.5rem' }} variant="body2">
+              {`**Calculated suggested macros are accurate for those losing <50 lbs. If
+            losing 50+ lbs, adjust your macros and see recommendations.`}
             </Typography>
           </Box>
         </Grid>
@@ -657,8 +654,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-/* 
-  
-
-*/

@@ -115,7 +115,6 @@ const MealPlan = ({
     const newMealPlans = [...mealPlans];
     newMealPlans[mealPlanIndex] = newMealPlan;
 
-    console.log(newMealPlans);
     setMealPlans(newMealPlans);
 
     // Add to firebase

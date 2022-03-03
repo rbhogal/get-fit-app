@@ -5,7 +5,6 @@ import { get, child } from 'firebase/database';
 export const addMealPlansFirebase = createAsyncThunk(
   'meal/addMealPlansFirebase',
   async payload => {
-    console.log(payload.mealPlans);
     writeMealPlansFirebase(payload.mealPlans, payload.currentUserId);
   }
 );

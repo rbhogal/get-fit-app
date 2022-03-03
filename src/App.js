@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import MealPlanner from './pages/MealPlanner';
 import Profile from './pages/Profile';
 import WeightLog from './pages/WeightLog';
+import Settings from './pages/Settings';
 import AuthContext from './context/authContext';
 
 const theme = createTheme({
@@ -49,6 +50,7 @@ function App() {
                 <Route path="/" element={<MealPlanner />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="weightlog" element={<WeightLog />} />
+                {/* <Route path="settings" element={<Settings />} /> */}
               </Route>
             )}
           </Routes>

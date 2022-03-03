@@ -19,7 +19,6 @@ export default function MacrosTable({
   percentCarbs,
   percentFats,
 }) {
-  // console.log(proteinGrams, carbsGrams, fatsGrams);
   const rows = [
     createData('Protein', `${percentProtein}%`, `${proteinGrams} g`),
     createData('Carbs', `${percentCarbs}%`, `${carbsGrams} g`),

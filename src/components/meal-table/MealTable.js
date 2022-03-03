@@ -49,7 +49,7 @@ const MealTable = ({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.625rem',
+          // gap: '0.625rem',
           padding: '.5rem',
         }}
       >

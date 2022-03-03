@@ -1,8 +1,12 @@
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  deleteUser,
+} from 'firebase/auth';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
-import { update } from 'lodash';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -37,4 +41,16 @@ export const writeMealPlansFirebase = (mealPlans, userId) => {
 
 export const writeActiveMealPlanValue = (value, userId) => {
   set(ref(db, 'users/' + userId + '/activeMealPlan'), value);
+};
+
+export const deleteUserFirebase = user => {
+  deleteUser(user)
+    .then(() => {
+      // User deleted.
+    })
+    .catch(err => {
+      // An error ocurred
+      // ...
+      console.log(err);
+    });
 };
