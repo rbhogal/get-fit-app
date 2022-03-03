@@ -1,23 +1,22 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ref, remove } from 'firebase/database';
-import { reauthenticateWithCredential } from 'firebase/auth';
+// import { ref, remove } from 'firebase/database';
+// import { reauthenticateWithCredential } from 'firebase/auth';
 
 import { Box } from '@mui/material';
 import { Button } from '@mui/material';
-import { Container } from '@mui/material';
 
 import PageHeader from '../components/PageHeader';
-import { auth, db } from '../firebase';
+// import { auth, db } from '../firebase';
 import authContext from '../context/authContext';
 import AlertDialog from '../components/AlertDialog';
-import { deleteUserFirebase } from '../firebase';
+// import { deleteUserFirebase } from '../firebase';
 
 const Settings = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const authCtx = useContext(authContext);
-  const { currentUserId } = authCtx;
-  const navigate = useNavigate();
+  // const { currentUserId } = authCtx;
+  // const navigate = useNavigate();
 
   const handleCloseDeleteModal = () => {
     setOpenDeleteModal(false);

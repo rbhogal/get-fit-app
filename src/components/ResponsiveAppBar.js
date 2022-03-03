@@ -106,6 +106,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <img
               src={dumbbell}
+              alt={'Dumbbell Logo'}
               style={{ width: '2rem', marginRight: '1.5rem' }}
             />
           </Box>

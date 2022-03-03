@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 
@@ -11,18 +11,10 @@ import authContext from '../context/authContext';
 import { saveActiveMealPlanValue } from '../features/userSlice';
 import { Box } from '@mui/system';
 
-const newMealPlan = {
-  breakfastRows: [],
-  lunchRows: [],
-  dinnerRows: [],
-  snacksRows: [],
-};
-
 const MealPlan = ({
   mealPlanIndex,
   mealPlans,
   setMealPlans,
-  tabName,
   mealPlan,
   value,
 }) => {
@@ -33,10 +25,6 @@ const MealPlan = ({
     carbs: '',
     fats: '',
   });
-  // const [mealPlan, setMealPlan] = useState({
-  //   ...newMealPlan,
-  //   tabName: tabName,
-  // });
   const [editMealId, setEditMealId] = useState(null);
   const [editFormMealData, setEditFormMealData] = useState({
     mealName: '',
@@ -102,14 +90,11 @@ const MealPlan = ({
       ? [newMeal]
       : [...mealPlan[`${rows}`], newMeal];
 
-    // const newRows = [...mealPlan[`${rows}`], newMeal];
-
     const newMealPlan = {
       ...mealPlan,
       [`${rows}`]: newRows,
     };
 
-    // setMealPlan(newMealPlan);
     formRef.current.reset();
 
     const newMealPlans = [...mealPlans];
@@ -145,8 +130,6 @@ const MealPlan = ({
     });
 
     newRows[index] = editedMeal;
-
-    // setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
 
     const newMealPlan = { ...mealPlan, [`${rows}`]: newRows };
 
@@ -189,8 +172,6 @@ const MealPlan = ({
     });
 
     newRows.splice(index, 1);
-
-    // setMealPlan({ ...mealPlan, [`${rows}`]: newRows });
 
     const newMealPlan = { ...mealPlan, [`${rows}`]: newRows };
 

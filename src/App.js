@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
@@ -8,7 +8,7 @@ import Layout from './components/Layout';
 import MealPlanner from './pages/MealPlanner';
 import Profile from './pages/Profile';
 import WeightLog from './pages/WeightLog';
-import Settings from './pages/Settings';
+// import Settings from './pages/Settings';
 import AuthContext from './context/authContext';
 
 const theme = createTheme({

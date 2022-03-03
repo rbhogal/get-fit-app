@@ -1,12 +1,7 @@
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  deleteUser,
-} from 'firebase/auth';
-import { child, get, getDatabase, ref, set } from 'firebase/database';
+import { getAuth, GoogleAuthProvider, deleteUser } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

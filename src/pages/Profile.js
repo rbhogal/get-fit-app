@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Doughnut } from 'react-chartjs-2';
@@ -76,7 +76,7 @@ const Profile = () => {
     // This is to persist the data
     if (!currentUserId) return;
     dispatch(getUserDataFirebase(currentUserId));
-  }, [currentUserId]);
+  }, [currentUserId, dispatch]);
 
   const doughnutChartData = {
     labels: [

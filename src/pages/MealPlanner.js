@@ -84,7 +84,7 @@ export default function MealPlanner() {
     // To persist the data
     if (!currentUserId) return;
     dispatch(getMealPlansFirebase(currentUserId));
-  }, [currentUserId]);
+  }, [currentUserId, dispatch]);
 
   useEffect(() => {
     setMealPlans(mealPlansFirebase);
@@ -93,13 +93,13 @@ export default function MealPlanner() {
   useEffect(() => {
     if (!currentUserId) return;
     dispatch(getActiveMealPlanValue(currentUserId));
-  }, [currentUserId]);
+  }, [currentUserId, dispatch]);
 
   useEffect(() => {
     if (!userData.activeMealPlanValue) return;
     const newValue = userData.activeMealPlanValue;
     setValue(newValue);
-  });
+  }, [userData.activeMealPlanValue]);
 
   const handleOpenAlert = () => {
     setOpen(true);

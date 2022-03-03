@@ -16,7 +16,6 @@ export const AuthContextProvider = props => {
   const [token, setToken] = useState(initialToken);
   const userIsSignedIn = !!token;
   const [currentUserId, setCurrentUserId] = useState();
-  const [isNewUser, setIsNewUser] = useState(false);
 
   const signInHandler = token => {
     setToken(token);
@@ -39,7 +38,6 @@ export const AuthContextProvider = props => {
 
   const contextValue = {
     token: token,
-    isNewUser,
     isSignedIn: userIsSignedIn,
     signIn: signInHandler,
     signOut: signOutHandler,

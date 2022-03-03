@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { useEffect, useContext } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -121,7 +120,7 @@ const Totals = ({ mealPlan }) => {
     // This is to persist the data
     if (!currentUserId) return;
     dispatch(getUserDataFirebase(currentUserId));
-  }, [currentUserId]);
+  }, [currentUserId, dispatch]);
 
   const [total, setTotal] = useState({
     calories: 0,
@@ -157,13 +156,13 @@ const Totals = ({ mealPlan }) => {
       totalSnacks
     );
 
-    setTotal({
+    setTotal(total => ({
       ...total,
       calories: newTotalsAll.calories,
       protein: newTotalsAll.protein,
       carbs: newTotalsAll.carbs,
       fats: newTotalsAll.fats,
-    });
+    }));
   }, [mealPlan]);
 
   useEffect(() => {
@@ -190,13 +189,13 @@ const Totals = ({ mealPlan }) => {
     carbsDelta = userData.carbsGrams - total.carbs;
     fatsDelta = userData.fatsGrams - total.fats;
 
-    setTotalDelta({
+    setTotalDelta(totalDelta => ({
       ...totalDelta,
       calories: caloriesDelta,
       protein: proteinDelta,
       carbs: carbsDelta,
       fats: fatsDelta,
-    });
+    }));
 
     setColorTotalsDelta({
       calories:
