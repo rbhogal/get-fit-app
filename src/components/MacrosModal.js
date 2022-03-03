@@ -7,7 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Divider, Typography } from '@mui/material';
+import { DialogContentText, Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 import useInputMacros from '../hooks/useInputMacros';
@@ -211,6 +211,7 @@ export default function MacrosModal({ open, handleClose, currentUserId }) {
         <DialogActions>
           <Button onClick={cancelAdjustMacros}>Cancel</Button>
           <Button
+            variant="contained"
             disabled={calcTotalPercent() === 100 ? false : true}
             onClick={addMacros}
           >

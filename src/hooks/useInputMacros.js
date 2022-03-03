@@ -65,6 +65,10 @@ const useInputMacros = (
   const resetDefaultMacros = () => {
     setEnteredValuePercentMacro(percentMacro);
     setNewMacroGrams(macroGrams);
+    setErrorFats({
+      error: false,
+      helperText: '',
+    });
   };
 
   return {
