@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 import useInputMacros from '../hooks/useInputMacros';
 import MacrosModalHelp from './MacrosModalHelp';
+import { addUserData, addUserDataFirebase } from '../features/userSlice';
 
-export default function MacrosModal({ open, handleClose }) {
+export default function MacrosModal({ open, handleClose, currentUserId }) {
   const { userData } = useSelector(state => state.user);
   const {
     dailyCalories,
@@ -24,7 +24,9 @@ export default function MacrosModal({ open, handleClose }) {
     proteinGrams,
     carbsGrams,
     fatsGrams,
+    weightInLbs,
   } = userData;
+  const dispatch = useDispatch();
 
   const {
     value: valuePercentProtein,
@@ -45,39 +47,42 @@ export default function MacrosModal({ open, handleClose }) {
     handleChangePercentMacro: handleChangePercentFats,
     macroGrams: newFatsGrams,
     resetDefaultMacros: resetDefaultPercentFats,
-  } = useInputMacros(percentFats, fatsGrams, dailyCalories);
+    errorFats,
+  } = useInputMacros(percentFats, fatsGrams, dailyCalories, weightInLbs);
 
   const calcTotalPercent = () => {
     let total = +valuePercentProtein + +valuePercentCarbs + +valuePercentFats;
     return total;
   };
 
-  // const calcMacroGrams = () => {
-  //   const calPerGramProtein = 4;
-  //   const calPerGramCarbs = 4;
-  //   const calPerGramFats = 9;
-
-  //   let newProteinGrams =
-  //     ((valuePercentProtein / 100) * dailyCalories) / calPerGramProtein;
-  //   let newCarbsGrams =
-  //     ((valuePercentCarbs / 100) * dailyCalories) / calPerGramCarbs;
-  //   let newFatsGrams =
-  //     ((valuePercentFats / 100) * dailyCalories) / calPerGramFats;
-
-  //   let macros = {
-  //     proteinGrams: newProteinGrams,
-  //     carbsGrams: newCarbsGrams,
-  //     fatsGrams: newFatsGrams,
-  //   };
-
-  //   setMacrosGrams(macros);
-  // };
-
   const cancelAdjustMacros = () => {
     handleClose();
     resetDefaultPercentProtein();
     resetDefaultPercentCarbs();
     resetDefaultPercentFats();
+  };
+
+  const addMacros = () => {
+    handleClose();
+
+    let newUserData = {
+      ...userData,
+      percentProtein: valuePercentProtein,
+      percentCarbs: valuePercentCarbs,
+      percentFats: valuePercentFats,
+      proteinGrams: newProteinGrams,
+      carbsGrams: newCarbsGrams,
+      fatsGrams: newFatsGrams,
+    };
+
+    dispatch(
+      addUserDataFirebase({
+        userData: newUserData,
+        currentUserId: currentUserId,
+      })
+    );
+
+    dispatch(addUserData(newUserData));
   };
 
   return (
@@ -181,6 +186,8 @@ export default function MacrosModal({ open, handleClose }) {
                 max: 100,
               }}
               autoComplete="off"
+              error={errorFats.error}
+              helperText={errorFats.helperText}
             />
             <Typography
               fontWeight={600}
@@ -205,7 +212,7 @@ export default function MacrosModal({ open, handleClose }) {
           <Button onClick={cancelAdjustMacros}>Cancel</Button>
           <Button
             disabled={calcTotalPercent() === 100 ? false : true}
-            onClick={handleClose}
+            onClick={addMacros}
           >
             Set
           </Button>

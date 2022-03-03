@@ -72,10 +72,6 @@ const Profile = () => {
     setOpenMacrosModal(false);
   };
 
-  const cancelAdjustMacros = () => {
-    setOpenMacrosModal(false);
-  };
-
   useEffect(() => {
     // This is to persist the data
     if (!currentUserId) return;
@@ -635,6 +631,7 @@ const Profile = () => {
                 <MacrosModal
                   open={openMacrosModal}
                   handleClose={handleCloseMacrosModal}
+                  currentUserId={currentUserId}
                 />
                 <Button
                   onClick={handleClickOpenMacrosModal}

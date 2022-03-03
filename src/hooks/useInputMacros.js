@@ -1,9 +1,18 @@
 import { useState } from 'react';
 
-const useInputMacros = (percentMacro, macroGrams, dailyCalories) => {
+const useInputMacros = (
+  percentMacro,
+  macroGrams,
+  dailyCalories,
+  weightInLbs
+) => {
   const [enteredValuePercentMacro, setEnteredValuePercentMacro] =
     useState(percentMacro);
   const [newMacroGrams, setNewMacroGrams] = useState(macroGrams);
+  const [errorFats, setErrorFats] = useState({
+    error: false,
+    helperText: '',
+  });
 
   const handleChangePercentMacro = e => {
     const calPerGramProtein = 4;
@@ -29,7 +38,28 @@ const useInputMacros = (percentMacro, macroGrams, dailyCalories) => {
       let newFatsGrams =
         ((newPercentFats / 100) * dailyCalories) / calPerGramFats;
       setNewMacroGrams(Math.round(newFatsGrams));
+
+      calcErrorFats(e.target.value);
     }
+  };
+
+  const calcErrorFats = newPercentFats => {
+    const calPerGramFats = 9;
+
+    let lowestFatsGrams = Math.round(0.3 * weightInLbs);
+    let highestFatsGrams = Math.round(0.5 * weightInLbs);
+
+    let newFatsGrams = Math.round(
+      ((newPercentFats / 100) * dailyCalories) / calPerGramFats
+    );
+
+    console.log(newFatsGrams, lowestFatsGrams, highestFatsGrams);
+
+    newFatsGrams < lowestFatsGrams
+      ? setErrorFats({ error: true, helperText: 'Too low!' })
+      : newFatsGrams > highestFatsGrams
+      ? setErrorFats({ error: false, helperText: 'High Fats' })
+      : setErrorFats({ error: false, helperText: '' });
   };
 
   const resetDefaultMacros = () => {
@@ -42,6 +72,8 @@ const useInputMacros = (percentMacro, macroGrams, dailyCalories) => {
     handleChangePercentMacro,
     macroGrams: newMacroGrams,
     resetDefaultMacros,
+    calcErrorFats,
+    errorFats,
   };
 };
 
