@@ -7,14 +7,18 @@ const AuthContext = createContext({
   currentUserId: '',
   isSignedIn: false,
   isNewUser: false,
+  openWelcome: '',
   signIn: token => {},
   signOut: () => {},
+  openWelcomeHandler: booleanString => {},
 });
 
 export const AuthContextProvider = props => {
   const initialToken = localStorage.getItem('token');
   const [token, setToken] = useState(initialToken);
   const userIsSignedIn = !!token;
+  const initialOpenWelcome = localStorage.getItem('openWelcome');
+  const [openWelcome, setOpenWelcome] = useState(initialOpenWelcome);
   const [currentUserId, setCurrentUserId] = useState();
 
   const signInHandler = token => {
@@ -23,8 +27,12 @@ export const AuthContextProvider = props => {
   };
   const signOutHandler = () => {
     setToken(null);
-
     localStorage.removeItem('token');
+  };
+
+  const openWelcomeHandler = booleanString => {
+    setOpenWelcome(booleanString);
+    localStorage.setItem('openWelcome', booleanString);
   };
 
   useEffect(() => {
@@ -38,9 +46,11 @@ export const AuthContextProvider = props => {
 
   const contextValue = {
     token: token,
+    openWelcome: openWelcome,
     isSignedIn: userIsSignedIn,
     signIn: signInHandler,
     signOut: signOutHandler,
+    openWelcomeHandler,
     currentUserId,
   };
 

@@ -7,13 +7,13 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
-import { Container } from '@mui/material';
+import { Container, Divider } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import MealPlan from '../components/MealPlan';
 import PageHeader from '../components/PageHeader';
-import AlertDialog from '../components/AlertDialog';
-
+import DeleteMealDialog from '../components/DeleteMealDialog';
+import WelcomeDialog from '../components/WelcomeDialog';
 import {
   addMealPlansFirebase,
   getMealPlansFirebase,
@@ -21,6 +21,7 @@ import {
 import { useContext } from 'react';
 import authContext from '../context/authContext';
 import {
+  addUserDataFirebase,
   getActiveMealPlanValue,
   saveActiveMealPlanValue,
 } from '../features/userSlice';
@@ -58,9 +59,6 @@ function a11yProps(index) {
   };
 }
 
-// const mealPlans = [{breakfastRows: [{meal}, lunchRows: [{meal}]]}, {}];
-// const mealPlans = [{meal plan 1}, {meal plan 2}, ... ]
-
 const newMealPlan = {
   breakfastRows: [],
   lunchRows: [],
@@ -71,14 +69,20 @@ const newMealPlan = {
 
 export default function MealPlanner() {
   const [value, setValue] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [openDeletePlanDialog, setOpenDeletePlanDialog] = useState(false);
+  // const [openWelcome, setOpenWelcome] = useState(
+  //   localStorage.getItem('welcomePage')
+  // );
   const dispatch = useDispatch();
   const authCtx = useContext(authContext);
   const currentUserId = authCtx.currentUserId;
   const { mealPlans: mealPlansFirebase } = useSelector(state => state.meal);
   const { userData } = useSelector(state => state.user);
-
+  const openWelcome = authCtx.openWelcome;
+  const openWelcomeHandler = authCtx.openWelcomeHandler;
   const [mealPlans, setMealPlans] = useState(mealPlansFirebase);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const isGuest = localStorage.getItem('isGuest');
 
   useEffect(() => {
     // To persist the data
@@ -101,12 +105,20 @@ export default function MealPlanner() {
     setValue(newValue);
   }, [userData.activeMealPlanValue]);
 
-  const handleOpenAlert = () => {
-    setOpen(true);
+  const handleOpenDeletePlanDialog = () => {
+    setOpenDeletePlanDialog(true);
   };
 
-  const handleCloseAlert = e => {
-    setOpen(false);
+  const handleCloseDeletePlanDialog = e => {
+    setOpenDeletePlanDialog(false);
+  };
+
+  const handleCloseWelcome = () => {
+    openWelcomeHandler('false');
+  };
+
+  const handleCheckbox = (e, value) => {
+    setShowWelcome(!value);
   };
 
   const handleChangeTab = (event, newValue) => {
@@ -148,13 +160,6 @@ export default function MealPlanner() {
         ]);
 
     setValue(mealPlans.length);
-
-    // dispatch(
-    //   saveActiveMealPlanValue({
-    //     activeMealPlanValue: mealPlans.length,
-    //     currentUserId: currentUserId,
-    //   })
-    // );
   };
 
   const deleteMealPlan = () => {
@@ -177,7 +182,7 @@ export default function MealPlanner() {
       );
     }
 
-    setOpen(false);
+    setOpenDeletePlanDialog(false);
 
     // Add to firebase
     dispatch(
@@ -190,11 +195,17 @@ export default function MealPlanner() {
 
   return (
     <Box sx={{ marginBottom: '20rem' }}>
-      <AlertDialog
-        open={open}
+      {isGuest === 'true' && (
+        <WelcomeDialog
+          open={openWelcome === 'true' ? true : false}
+          handleClickYes={handleCloseWelcome}
+          handleCheckbox={handleCheckbox}
+        />
+      )}
+      <DeleteMealDialog
+        open={openDeletePlanDialog}
         handleClickYes={deleteMealPlan}
-        handleCloseAlert={handleCloseAlert}
-        dialogContentText={'Delete the currently selected meal plan?'}
+        handleCloseAlert={handleCloseDeletePlanDialog}
       />
       <PageHeader title={'Meal Planner'} divider={false} />
       <Box
@@ -218,7 +229,10 @@ export default function MealPlanner() {
             <Tab key={index} label={mealPlan.tabName} {...a11yProps(0)} />
           ))}
         </Tabs>
-        <IconButton onClick={handleOpenAlert} aria-label="delete meal plan">
+        <IconButton
+          onClick={handleOpenDeletePlanDialog}
+          aria-label="delete meal plan"
+        >
           <DeleteForeverIcon />
         </IconButton>
       </Box>

@@ -44,6 +44,7 @@ export default function SignIn() {
               authCtx.signIn(token);
               localStorage.setItem('profilePic', `${result.user.photoURL}`);
               localStorage.setItem('isGuest', 'false');
+              authCtx.openWelcomeHandler('true');
               navigate('/');
             } else {
               // Create new user
@@ -51,6 +52,7 @@ export default function SignIn() {
               authCtx.signIn(token);
               localStorage.setItem('profilePic', `${result.user.photoURL}`);
               localStorage.setItem('isGuest', 'false');
+              authCtx.openWelcomeHandler('true');
               navigate('/');
             }
           })
@@ -74,6 +76,7 @@ export default function SignIn() {
         createNewUser(userId, 'Guest', 'Anonymous', '');
         authCtx.signIn(token);
         localStorage.setItem('isGuest', 'true');
+        authCtx.openWelcomeHandler('true');
         navigate('/');
       })
       .catch(err => {

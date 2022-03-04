@@ -24,10 +24,6 @@ const pages = [
     title: 'Meal Planner',
     path: '/',
   },
-  {
-    title: 'Weight Log',
-    path: 'weightlog',
-  },
 ];
 const settings = ['Sign Out'];
 
@@ -71,6 +67,7 @@ const ResponsiveAppBar = () => {
     if (isGuest === 'true') deleteUser();
     localStorage.removeItem('isGuest');
     localStorage.removeItem('profilePic');
+    localStorage.removeItem('openWelcome');
     navigate('/');
   };
 
