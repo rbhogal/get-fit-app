@@ -121,9 +121,8 @@ Calculating BMR, TDEE (Maintenance), Daily Calories and Suggested Macros
 Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
 * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17)
 
-#### Creating New Meal Plans (Tabs)
-
-#### 
+#### Handling Adding, Editing, and Deleting Meals
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/components/MealPlan.js)
 
 #### Custom Hooks
 Custom hook to get input and input validation values when calculating calories and macros 
@@ -131,6 +130,16 @@ Custom hook to get input and input validation values when calculating calories a
 
 Custom hook to get input data when adjusting macros
  * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31)
+
+#### Redux 
+User 
+ * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js)
+Meals
+ * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js)
+
+#### Auth Context
+To persist if user is logged in and current user id
+ * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js)
 
 
 
