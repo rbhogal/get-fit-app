@@ -70,9 +70,6 @@ const newMealPlan = {
 export default function MealPlanner() {
   const [value, setValue] = useState(0);
   const [openDeletePlanDialog, setOpenDeletePlanDialog] = useState(false);
-  // const [openWelcome, setOpenWelcome] = useState(
-  //   localStorage.getItem('welcomePage')
-  // );
   const dispatch = useDispatch();
   const authCtx = useContext(authContext);
   const currentUserId = authCtx.currentUserId;
@@ -81,7 +78,7 @@ export default function MealPlanner() {
   const openWelcome = authCtx.openWelcome;
   const openWelcomeHandler = authCtx.openWelcomeHandler;
   const [mealPlans, setMealPlans] = useState(mealPlansFirebase);
-  const [showWelcome, setShowWelcome] = useState(true);
+  // const [showWelcome, setShowWelcome] = useState(true);
   const isGuest = localStorage.getItem('isGuest');
 
   useEffect(() => {
@@ -117,9 +114,9 @@ export default function MealPlanner() {
     openWelcomeHandler('false');
   };
 
-  const handleCheckbox = (e, value) => {
-    setShowWelcome(!value);
-  };
+  // const handleCheckbox = (e, value) => {
+  //   setShowWelcome(!value);
+  // };
 
   const handleChangeTab = (event, newValue) => {
     setValue(newValue);
@@ -199,7 +196,7 @@ export default function MealPlanner() {
         <WelcomeDialog
           open={openWelcome === 'true' ? true : false}
           handleClickYes={handleCloseWelcome}
-          handleCheckbox={handleCheckbox}
+          // handleCheckbox={handleCheckbox}
         />
       )}
       <DeleteMealDialog
