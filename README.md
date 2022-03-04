@@ -110,37 +110,31 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 ## How To Navigate This Project
 
 #### Sign In/Authentication
-Handling Guest and Google Sign
- * [Code](src/pages/SignIn.js)
+* [Code](src/pages/SignIn.js): Handling Guest and Google Sign
 
 #### Calorie and Macro Calculations
-Calculating BMR, TDEE (Maintenance), Daily Calories and Suggested Macros 
-* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L281)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L281): Calculating BMR, TDEE (Maintenance), and Daily Calories 
+
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247): Calculating Suggested Macros 
 
 #### Calculating Custom Set Macros
-Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
-* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17): Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
 
 #### Handling Adding, Editing, and Deleting Meals
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/components/MealPlan.js)
 
 #### Custom Hooks
-Custom hook to get input and input validation values when calculating calories and macros 
- * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L162)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L162): Custom hook to get input and input validation values when calculating calories and macros 
 
-Custom hook to get input data when adjusting macros
- * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31): Custom hook to get input data when adjusting macros
 
 #### Redux 
-User
- * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js): User
 
-Meals
- * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js): Meals
 
 #### Auth Context
-To persist if user is logged in and thier user id
- * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): To persist if user is logged in and thier user id
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -149,3 +143,60 @@ To persist if user is logged in and thier user id
 Favorite/Save meals to quick add later
 ### Weight Log
 A weight log to track your daily weight with graph and calculations to see trends
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Q & A 
+
+### How Did You Calculate Calories and Macros?
+
+#### 1. Find Basal Metabolic Rate (BMR) using the The Mifflin St. Jeor Equation
+
+    Men:
+      BMR = (10 x weight in kg) + (6.25 heigh in cm) - (5 x age in years) + 5
+    
+    Women: 
+      BMR = (10 x weight in kg) + (6.25 height in cm) - (5 x age in years) - 161
+    
+#### 2. Find the Total Daily Energy Expenditure (TDEE) to find maintainence calories using Katch-McArdle activity multipliers 
+
+    TDEE = (BMR x Activity Level)
+
+    Katch-McArdle Activity Multipliers 
+      Sedentary: 1.2
+      Lightly Active: 1.375
+      Moderately Active: 1.55
+      Very Active: 1.725
+      Extremely Active: 1.9
+    
+#### 3. Find How Many Lbs to Loss/Gain Per Week
+
+    Rates
+      Slow = 0.5% per lb of bodyweight
+      Moderate = 0.7% per lb of bodyweight
+      Fast = 1% of per lb of bodyweight
+
+    Lbs to Lose/Gain = Weight (lbs) x Rate of Fat Loss/Muscle Gain
+      
+#### 4. Find Caloric Deficit/Surplus (Daily Calories)
+
+    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain per Week x 3500 kcal) / 7 days  
+
+    
+#### 5. Suggested Macros
+
+    Protein (g) = 1 g per lb of bodyweight
+    Fats (g) = 0.3 g per lb of bodyweight
+    Carbs (g) = Whatever is left over = Daily Calories - (Protein (kcal) + fats (kcal)) / 4 grams of carbs/kcal
+    
+#### [Code: Calculating Calories](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L281)
+
+#### [Code: Calculating Macros](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247)
+
+## What Was The Greatest Challenge? 
+
+Updating (nested) state using hooks without mutating data. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
