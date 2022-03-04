@@ -143,3 +143,7 @@ To persist if user is logged in and thier user id
  * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+## If I Had More Time I Would Add This
+* Favorite/Save meals to quick add later
+* A weight log to track your daily weight with graph and calculations to see trends
