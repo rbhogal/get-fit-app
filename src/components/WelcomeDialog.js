@@ -34,9 +34,9 @@ export default function WelcomeDialog({
             <br />
             <br />
             <strong>2. Create Meals</strong> <br />
-            Now you can enter your meals in the meal planner. The totals will
+            Enter your meals in the meal planner. The totals at the bottom will
             let you know how many calories and grams you need to add or remove
-            to hit your daily caloric intake to meet your goals.
+            to meet your goals.
             <br />
             {/* <FormControlLabel
               sx={{ mt: 1 }}
