@@ -145,5 +145,7 @@ To persist if user is logged in and thier user id
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## If I Had More Time I Would Add This
-* Favorite/Save meals to quick add later
-* A weight log to track your daily weight with graph and calculations to see trends
+### Quick Add Meals
+Favorite/Save meals to quick add later
+### Weight Log
+A weight log to track your daily weight with graph and calculations to see trends
