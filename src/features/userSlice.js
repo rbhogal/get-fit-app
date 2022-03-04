@@ -3,7 +3,6 @@ import {
   writeUserDataFirebase,
   dbRef,
   writeActiveMealPlanValue,
-  setShowWelcomePageFirebase,
 } from '../firebase';
 import { get, child } from 'firebase/database';
 
@@ -128,10 +127,11 @@ export const userSlice = createSlice({
     },
     [addUserDataFirebase.rejected]: state => {
       state.isLoadingResults = false;
-      console.log('Unable to add user');
+      console.log('Unable to add user data to database');
+      alert('Something went wrong');
     },
     [getUserDataFirebase.fulfilled]: (state, action) => {
-      state.userData = { ...state.userData, ...action.payload };
+      state.userData = { ...action.payload };
     },
     [getUserDataFirebase.rejected]: () => {
       console.log('Unable to retrieve userStats data from database');

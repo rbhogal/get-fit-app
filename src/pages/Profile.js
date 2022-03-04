@@ -366,6 +366,8 @@ const Profile = () => {
       userStatsExist: true,
     };
 
+    console.log(newUserData, currentUserId);
+
     dispatch(
       addUserDataFirebase({
         userData: newUserData,

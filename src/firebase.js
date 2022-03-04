@@ -38,10 +38,6 @@ export const writeActiveMealPlanValue = (value, userId) => {
   set(ref(db, 'users/' + userId + '/activeMealPlan'), value);
 };
 
-export const setShowWelcomePageFirebase = (value, userId) => {
-  set(ref(db, 'users/' + userId + '/showWelcomePage'), value);
-};
-
 export const deleteUserFirebase = user => {
   deleteUser(user)
     .then(() => {

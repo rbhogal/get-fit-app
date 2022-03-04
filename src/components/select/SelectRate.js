@@ -6,7 +6,7 @@ import Select from '@mui/material/Select';
 
 const selectItems = [
   'Slow — 0.5% per lb of bodyweight',
-  'Moderate (Recommended) — 0.7% per lb of bodyweight',
+  'Moderate — 0.7% per lb of bodyweight',
   'Fast — 1% per lb of bodyweight',
 ];
 
