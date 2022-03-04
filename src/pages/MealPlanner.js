@@ -7,7 +7,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
-import { Container, Divider } from '@mui/material';
+import { Container } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import MealPlan from '../components/MealPlan';
@@ -21,7 +21,6 @@ import {
 import { useContext } from 'react';
 import authContext from '../context/authContext';
 import {
-  addUserDataFirebase,
   getActiveMealPlanValue,
   saveActiveMealPlanValue,
 } from '../features/userSlice';
