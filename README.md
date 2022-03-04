@@ -110,37 +110,31 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 ## How To Navigate This Project
 
 #### Sign In/Authentication
-Handling Guest and Google Sign
- * [Code](src/pages/SignIn.js)
+* [Code](src/pages/SignIn.js): Handling Guest and Google Sign
 
 #### Calorie and Macro Calculations
-Calculating BMR, TDEE (Maintenance), Daily Calories and Suggested Macros 
-* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L281)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L281): Calculating BMR, TDEE (Maintenance), and Daily Calories 
+
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247): Calculating Suggested Macros 
 
 #### Calculating Custom Set Macros
-Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
-* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17): Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
 
 #### Handling Adding, Editing, and Deleting Meals
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/components/MealPlan.js)
 
 #### Custom Hooks
-Custom hook to get input and input validation values when calculating calories and macros 
- * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L162)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L162): Custom hook to get input and input validation values when calculating calories and macros 
 
-Custom hook to get input data when adjusting macros
- * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31): Custom hook to get input data when adjusting macros
 
 #### Redux 
-User
- * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js): User
 
-Meals
- * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js): Meals
 
 #### Auth Context
-To persist if user is logged in and thier user id
- * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js)
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): To persist if user is logged in and thier user id
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
