@@ -8,11 +8,12 @@
 
 <h3 align="center">GetFIT</h3>
 
+  
   <p align="center">
     A simple meal tracking app
     <br />
     <br />
-    <!--<a href="https://game-save.web.app">View Site</a> -->
+    <a href="https://getfit-ee526.web.app/">View Site</a>
   </p>
 </div>
 <!-- TABLE OF CONTENTS -->
@@ -64,56 +65,70 @@
 * [Chart.js](https://www.chartjs.org/)
 * [Material-UI v5](https://mui.com/)
 
-## Features
-
-* Guest & User Accounts
-* Calories & Macro Calculator
-* Meal Planner
-
-
-<!--
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Features
 
-### Sign in as a Guest or with Google. 
-* Sign in is required to save titles. 
+### Sign In
+* As a Guest or with Google
 
-### Search Video Game Titles
-* Scroll through popular titles on the home page, use the search bar, or use the dropdown to search games by genre
+### Calories & Macro Calculator
+* Set your calories for fat loss or muscle gain
+* Adjust your macros to fit your needs
 
-### View Quick Summaries
-* Hover over titles to view and scroll through summary
-* Quick save button to save titles
+### Meal Planner
+* Create a meal plan including breakfast, lunch, dinner, and snacks
+* Save, edit, and delete meal entries
+* Meal plans saved to your user account 
 
-### Full Game Information Page
-Click on video game title to view:
-* Summary and storyline, links, and more game information
-* Videos
-* Screenshots
-* Artworks gallery
-* Click on images to zoom in and scroll through gallery (no loading spinner currently, may have to wait for next image to load)
-* Add button to add to your list
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Save Games to List
-* View (or delete) your saved games by clicking "Saved Games" via the profile button dropdown
+## The Idea Behind This Project
+
+#### What's Wrong With Other Trackers?
+My main issue is that meal plans are saved on a calender. With the intent being to record your meals everyday. When you log back in the next day you to reinput your meals for the day. However I prefer to eat the same meals for a couple weeks, so I find this doesn't work for me. I like to have a record of it to remember what I'm supposed to be cooking and eating without having to search back through the calender. 
+
+#### What's Different About This Tracker?
+This tracker allows you create meal plans and store them. When you log back in you'll see your latest meal plan. You can create as many new plans as you like. Features are simple, no clutter of the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
+
+#### Passion for Fitness
+Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off as first calculating my calories and macros using a calculator and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## How I Worked On This Project
 
-### Designing
-
-* I'm not a designer but I wanted to closely follow a professional workflow but Adobe XD was giving me too much trouble loading fonts. Instead I roughly drew it out on a sketchpad: [Sketchpad](https://raw.githubusercontent.com/rbhogal/game-save-app/main/screenshots/sketch-home-page.jpg)
-* For the app's design I took inpsiration from varous gaming-related websites such as [GOG.com](https://www.gog.com/) and [IGDB.com](https://www.igdb.com/games/the-legend-of-zelda-breath-of-the-wild) to name a few
-
 ### Planning: User Stories & Features
-* I wrote out user stories and features: [Screenshot](https://raw.githubusercontent.com/rbhogal/game-save-app/main/screenshots/game-save-user-stories-features.png)
+* I wrote out user stories and features using Notion: [Link to Notion: User Stories & Features](https://hypnotic-saver-f39.notion.site/User-Stories-Features-e3e26a77bbf946be916239d738fc2701)
 
 ### Organizing: Task & Bug Tracking
 * I organized my work using Notion
-* I worked on tasks on a Kanban board using Notion: [Link to Task & Bug Tracker](https://hypnotic-saver-f39.notion.site/3fbacc81006c470e8338bda191f6a7d0?v=48360e6b61a245df8627d0df2eef8e31)
+* I created a Kanban board using Notion to track tasks and bugs: [Link to Notion: Task & Bug Tracker](https://hypnotic-saver-f39.notion.site/23fcdefb3c024f4f9b767662e899dff4?v=e38bbd8d8a254b16b42fedca9aef405a)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+## How To Navigate This Project
+
+#### Sign In/Authentication
+Handling Guest and Google Sign
+ * [Code](src/pages/SignIn.js)
+
+#### Custom Hooks
+Custom hook to get input and input validation values when calculating calories and macros 
+ * [Code]
+ 
+Custom hook to get input data when adjusting macros
+ * [Code]
+
+
+#### HTTP Requests from API + Use of Hooks
+Home Page
+  * [Code](src/components/Home.js)
+ 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!--
+
 
 ## How To Navigate This Project
 
@@ -189,19 +204,7 @@ For the same reason I also used
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## The Idea Behind This Project
 
-#### To Practice My Skills
-After finishing my react and redux course I wanted to create an app to practice all that I learned such as:
-* React & Redux
-* Authentication (Firebase Google)
-* HTTP Reqeusts/Consuming an API (IGDB API)
-* CRUD operations and a database (Firebase Realtime Database) 
-
-#### Solve a Problem I Had
-I like video games but I don't have a lot of time to play. So sometimes a new one comes out (or I am reminded of an old one I never got a chance to play) and I want to remember to purchase it in the future. But I forget what games they were. So I made an app, and no matter what system the game is on, I can search it, and save it for later. Now I have a wish list of games I can come back to when I'm looking to game.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Q and A
 
