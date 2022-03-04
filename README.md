@@ -139,10 +139,7 @@ Meals
  * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js)
 
 #### Auth Context
-To persist if user is logged in and current user id
+To persist if user is logged in and thier user id
  * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js)
 
-
-
-
-
+<p align="right">(<a href="#top">back to top</a>)</p>
