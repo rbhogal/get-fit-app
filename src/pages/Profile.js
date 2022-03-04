@@ -550,10 +550,10 @@ const Profile = () => {
             </Box>
 
             <Typography sx={{ paddingTop: '.5rem' }} variant="body2">
-              *Calculator based on Mifflin St. Jeor Equation.{' '}
+              *Calculator based on Mifflin St. Jeor Equation.
               <a
                 style={{ color: 'inherit' }}
-                href="https://github.com/rbhogal/get-fit-app/edit/main/README.md#how-did-you-calculate-calories-and-macros"
+                href="https://github.com/rbhogal/get-fit-app/blob/main/README.md#how-did-you-calculate-calories-and-macros"
                 target="_blank"
                 rel="noreferrer"
               >
