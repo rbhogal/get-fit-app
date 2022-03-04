@@ -193,7 +193,7 @@ A weight log to track your daily weight with graph and calculations to see trend
 
 #### [Code: Calculating Macros](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247)
 
-## What Was The Greatest Challenge? 
+### What Was The Greatest Challenge? 
 
 Updating (nested) state using hooks without mutating data. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
 
