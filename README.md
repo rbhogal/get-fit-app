@@ -73,7 +73,7 @@
 * As a Guest or with Google
 
 ### Calories & Macro Calculator
-* Set your calories for fat loss or muscle gain
+* Calculate your daily calories for fat loss or muscle gain
 * Adjust your macros to fit your needs
 
 ### Meal Planner
