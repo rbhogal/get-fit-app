@@ -553,7 +553,7 @@ const Profile = () => {
               *Calculator based on Mifflin St. Jeor Equation.{' '}
               <a
                 style={{ color: 'inherit' }}
-                href="https://github.com/rbhogal/get-fit-app"
+                href="https://github.com/rbhogal/get-fit-app/edit/main/README.md#how-did-you-calculate-calories-and-macros"
                 target="_blank"
                 rel="noreferrer"
               >
