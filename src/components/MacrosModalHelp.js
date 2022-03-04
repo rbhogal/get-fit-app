@@ -43,12 +43,17 @@ export default function MacrosModalHelp() {
             Carbs: Whatever is left over <br />
             <br />
             <strong>Recommendations (Losing 50+ lbs):</strong> <br />
-            Protein: 10-35% <br />
+            Protein: **10-35% <br />
             Fats: *20-35% <br />
             Carbs: 45-65% <br />
             <br />
             *Going below 0.3 g can be dangerous to your health. <br />
             (Ignore error if losing 50+ lbs)
+            <br />
+            <br />
+            **Calories are protein sparing. The higher calories you have the
+            lower the amount of protein is needed. The leaner you get the higher
+            amount of protein is needed.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
