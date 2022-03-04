@@ -132,8 +132,9 @@ Custom hook to get input data when adjusting macros
  * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31)
 
 #### Redux 
-User 
+User
  * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js)
+
 Meals
  * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js)
 
