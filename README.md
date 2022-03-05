@@ -43,7 +43,7 @@
       <a href="#if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
   </li>
   <li>
-    <a href="#q-&-a">Q & A</a>
+    <a href="#q--a">Q & A</a>
   </li>
   </ol>
 </details>
@@ -131,6 +131,10 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 #### Calculating Custom Set Macros
 * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17): Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
 
+* Alerts User If Fats are Too Low or Too High
+![Too Low Fats](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/adjust-macros-low-fats.png)
+![Too High Fats](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/adjust-macros-high-fats.png)
+
 #### Calculating Total Calories and Macros for Meal Plan
 * [Code](https://github.com/rbhogal/get-fit-app/blob/43de1167a62fd4018b80e0794c125056f9dcd5a5/src/components/Totals.js)
 
@@ -209,7 +213,7 @@ A weight log to track your daily weight with graph and calculations to see trend
 
 #### [Code: Calculating Macros](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247)
 
-### What Was The Greatest Challenge? 
+### What Was The Biggest Challenge? 
 
 Updating (nested) state using hooks without mutating data. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
 
