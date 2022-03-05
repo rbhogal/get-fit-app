@@ -131,7 +131,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 #### Calculating Custom Set Macros
 * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17): Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
 
-* Alerts If Fats Too Low or High
+* Alerts User If Fats are Too Low or Too High
 ![Too Low Fats](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/adjust-macros-low-fats.png)
 ![Too High Fats](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/adjust-macros-high-fats.png)
 
