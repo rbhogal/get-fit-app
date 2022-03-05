@@ -174,7 +174,7 @@ A weight log to track your daily weight with graph and calculations to see trend
     Women: 
       BMR = (10 x weight in kg) + (6.25 height in cm) - (5 x age in years) - 161
     
-#### 2. Find the Total Daily Energy Expenditure (TDEE) to find maintainence calories using Katch-McArdle activity multipliers 
+#### 2. Find the Total Daily Energy Expenditure (TDEE) to Find Maintainence Calories Using Katch-McArdle Activity Multipliers 
 
     TDEE = (BMR x Activity Level)
 
