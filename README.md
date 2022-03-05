@@ -40,10 +40,10 @@
       <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
   </li>
   <li>
-      <a href="if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
+      <a href="#if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
   </li>
   <li>
-    <a href="Q-&-A">Q & A</a>
+    <a href="#Q-&-A">Q & A</a>
   </li>
   </ol>
 </details>
