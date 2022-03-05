@@ -156,7 +156,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 ## If I Had More Time I Would Add This
 ### Quick Add Meals
-Favorite/Save meals to quick add later
+Favorite/Save meals to quickly add later
 ### Weight Log
 A weight log to track your daily weight with graph and calculations to see trends
 
