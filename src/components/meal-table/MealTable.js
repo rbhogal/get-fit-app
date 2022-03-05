@@ -45,16 +45,13 @@ const MealTable = ({
   const matches = useMediaQuery('(max-width: 900px)');
   return (
     <>
-      {/* <Typography variant="h6" sx={{ marginLeft: '.5rem' }}>
-        <strong>{title}</strong>
-      </Typography> */}
       <div
         style={
           `${matches}`
             ? {
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '2rem',
+                padding: '2rem 0',
               }
             : {
                 display: 'flex',
@@ -177,32 +174,26 @@ const MealTable = ({
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-              {!matches && (
-                <Button
-                  sx={{
-                    position: 'absolute',
-                    right: '-7rem',
-                    bottom: 0,
-                  }}
-                  variant="contained"
-                  type="submit"
-                >
-                  Add Meal
-                </Button>
-              )}
-              {matches && (
-                <Button
-                  sx={{
-                    position: 'absolute',
-                    left: 0,
-                    bottom: '-42px',
-                  }}
-                  variant="contained"
-                  type="submit"
-                >
-                  Add Meal
-                </Button>
-              )}
+
+              <Button
+                sx={
+                  `${matches}`
+                    ? {
+                        position: 'absolute',
+                        left: 0,
+                        bottom: '-42px',
+                      }
+                    : {
+                        position: 'absolute',
+                        right: '-7rem',
+                        bottom: 0,
+                      }
+                }
+                variant="contained"
+                type="submit"
+              >
+                Add Meal
+              </Button>
             </Grid>
           </Paper>
         </form>
