@@ -43,7 +43,7 @@
       <a href="#if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
   </li>
   <li>
-    <a href="#Q-&-A">Q & A</a>
+    <a href="#q-&-a">Q & A</a>
   </li>
   </ol>
 </details>
