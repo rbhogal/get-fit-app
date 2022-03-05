@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import { Grid, Paper } from '@mui/material';
 import { Button } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 import ReadOnlyRow from './ReadOnlyRow';
 import EditableRow from './EditableRow';
@@ -41,18 +42,26 @@ const MealTable = ({
   handleDeleteClick,
   formRef,
 }) => {
+  const matches = useMediaQuery('(max-width: 900px)');
   return (
     <>
       {/* <Typography variant="h6" sx={{ marginLeft: '.5rem' }}>
         <strong>{title}</strong>
       </Typography> */}
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          // gap: '0.625rem',
-          padding: '.5rem',
-        }}
+        style={
+          `${matches}`
+            ? {
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '2rem',
+              }
+            : {
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '.5rem',
+              }
+        }
       >
         <Paper>
           <form onSubmit={e => handleEditFormSubmit(e, rowsStringName)}>
@@ -168,17 +177,32 @@ const MealTable = ({
                   onChange={handleAddFormMealChange}
                 />
               </Grid>
-              <Button
-                sx={{
-                  position: 'absolute',
-                  right: '-7rem',
-                  bottom: 0,
-                }}
-                variant="contained"
-                type="submit"
-              >
-                Add Meal
-              </Button>
+              {!matches && (
+                <Button
+                  sx={{
+                    position: 'absolute',
+                    right: '-7rem',
+                    bottom: 0,
+                  }}
+                  variant="contained"
+                  type="submit"
+                >
+                  Add Meal
+                </Button>
+              )}
+              {matches && (
+                <Button
+                  sx={{
+                    position: 'absolute',
+                    left: 0,
+                    bottom: '-42px',
+                  }}
+                  variant="contained"
+                  type="submit"
+                >
+                  Add Meal
+                </Button>
+              )}
             </Grid>
           </Paper>
         </form>

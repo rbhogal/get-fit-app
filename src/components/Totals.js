@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 
 import authContext from '../context/authContext';
 import { getUserDataFirebase } from '../features/userSlice';
@@ -115,6 +115,7 @@ const Totals = ({ mealPlan }) => {
   const currentUserId = authCtx.currentUserId;
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
+  const matches = useMediaQuery('(max-width: 900px)');
 
   useEffect(() => {
     // This is to persist the data
@@ -226,7 +227,17 @@ const Totals = ({ mealPlan }) => {
   }, [total, userData]);
 
   return (
-    <Box style={{ padding: '0.5rem', overflowX: 'auto' }}>
+    <Box
+      style={
+        `${matches}`
+          ? {
+              padding: '0.5rem',
+              overflowX: 'auto',
+              marginTop: '1rem',
+            }
+          : { padding: '0.5rem', overflowX: 'auto' }
+      }
+    >
       <table
         style={{
           borderCollapse: 'collapse',
