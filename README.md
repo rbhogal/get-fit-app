@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-### ⚠ Work in progress
+
 
 <!-- PROJECT HEADER -->
 <br />
@@ -18,33 +18,36 @@
 </div>
 <!-- TABLE OF CONTENTS -->
 
-<!--
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
      <li>
       <a href="#about-the-project">About the Project</a>
-    </li>
-    <li>
-      <a href="#how-i-worked-on-this-project">How I Worked On This Project</a>
-      <ul>
-        <li><a href="#designing">Designing</a></li>
-        <li><a href="#planning:-user-stories-&-features">Planning: User Stories & Features</a></li>
-        <li><a href="#organization:-task-&-bug-tracking">Organization: Task & Bug Tracking</a></li>
+        <ul>
+        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#features">Features</a></li>
       </ul>
     </li>
     <li>
-      <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
-    </li>
-    <li><a href="#why-i-built-the-project-this-way">Why I Built the Project This Way</a></li>
-    <li><a href="#if-i-had-more-time-i-would-change-this">If I Had More Time I Would Change This</a></li>
-     <li>
       <a href="#the-idea-behind-this-project">The Idea Behind This Project</a>
     </li>
-    <li><a href="#available-scripts">Available Scripts</a></li>
+    </li>
+    <li>
+      <a href="#how-i-worked-on-this-project">How I Worked On This Project</a>
+    </li>
+    <li>
+      <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
+  </li>
+  <li>
+      <a href="if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
+  </li>
+  <li>
+    <a href="Q-&-A">Q & A</a>
+  </li>
   </ol>
 </details>
--->
+
 <!-- ABOUT THE PROJECT -->
 ## About the Project
 <br />
@@ -117,8 +120,21 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247): Calculating Suggested Macros 
 
+* Form Validation
+
+![Calorie Calculator Form Validation](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/Profile%20Input%20Validation.png)
+
+* User Warning if Calories Are Too Low
+
+![Calories Warning](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/Too%20Low%20Calories%20Validation.png)
+
 #### Calculating Custom Set Macros
 * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/hooks/useInputMacros.js#L17): Handling user inputed percentages to calculate macros in grams for protein, carbs, and fats
+
+#### Calculating Total Calories and Macros for Meal Plan
+* [Code](https://github.com/rbhogal/get-fit-app/blob/43de1167a62fd4018b80e0794c125056f9dcd5a5/src/components/Totals.js)
+
+![Total and +/- Calories and Macros](https://raw.githubusercontent.com/rbhogal/get-fit-app/main/src/images/screenshots/Totals%20Changes.png)
 
 #### Handling Adding, Editing, and Deleting Meals
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/components/MealPlan.js)
