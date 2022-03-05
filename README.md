@@ -40,10 +40,10 @@
       <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
   </li>
   <li>
-      <a href="if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
+      <a href="#if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
   </li>
   <li>
-    <a href="Q-&-A">Q & A</a>
+    <a href="#q-&-a">Q & A</a>
   </li>
   </ol>
 </details>
@@ -95,7 +95,7 @@ My main issue is that meal plans are saved on a calender so when you log back in
 This tracker allows you create new meal plans but when you log back in you'll see your latest meal plan. You can create as many new plans as you like. Features are simple, no clutter of the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
 
 #### Passion for Fitness
-Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off as first calculating my calories and macros using a calculator and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
+Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -156,7 +156,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 ## If I Had More Time I Would Add This
 ### Quick Add Meals
-Favorite/Save meals to quick add later
+Favorite/Save meals to quickly add later
 ### Weight Log
 A weight log to track your daily weight with graph and calculations to see trends
 
@@ -174,7 +174,7 @@ A weight log to track your daily weight with graph and calculations to see trend
     Women: 
       BMR = (10 x weight in kg) + (6.25 height in cm) - (5 x age in years) - 161
     
-#### 2. Find the Total Daily Energy Expenditure (TDEE) to find maintainence calories using Katch-McArdle activity multipliers 
+#### 2. Find the Total Daily Energy Expenditure (TDEE) to Find Maintainence Calories Using Katch-McArdle Activity Multipliers 
 
     TDEE = (BMR x Activity Level)
 
@@ -192,11 +192,11 @@ A weight log to track your daily weight with graph and calculations to see trend
       Moderate = 0.7% per lb of bodyweight
       Fast = 1% of per lb of bodyweight
 
-    Lbs to Lose/Gain = Weight (lbs) x Rate of Fat Loss/Muscle Gain
+    Lbs to Lose/Gain per Week = Weight (lbs) x Rate of Fat Loss/Muscle Gain
       
 #### 4. Find Caloric Deficit/Surplus (Daily Calories)
 
-    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain per Week x 3500 kcal) / 7 days  
+    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain (lbs) per Week x 3500 kcal) / 7 days  
 
     
 #### 5. Suggested Macros
