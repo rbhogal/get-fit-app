@@ -192,11 +192,11 @@ A weight log to track your daily weight with graph and calculations to see trend
       Moderate = 0.7% per lb of bodyweight
       Fast = 1% of per lb of bodyweight
 
-    Lbs to Lose/Gain = Weight (lbs) x Rate of Fat Loss/Muscle Gain
+    Lbs to Lose/Gain per Week = Weight (lbs) x Rate of Fat Loss/Muscle Gain
       
 #### 4. Find Caloric Deficit/Surplus (Daily Calories)
 
-    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain per Week x 3500 kcal) / 7 days  
+    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain (lbs) per Week x 3500 kcal) / 7 days  
 
     
 #### 5. Suggested Macros
