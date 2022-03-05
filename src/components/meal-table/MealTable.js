@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, Box } from '@mui/material';
 import { Button } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 
@@ -45,20 +45,16 @@ const MealTable = ({
   const matches = useMediaQuery('(max-width: 900px)');
   return (
     <>
-      <div
-        style={
-          `${matches}`
-            ? {
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '2rem 0',
-              }
-            : {
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '.5rem',
-              }
-        }
+      {/* <Typography variant="h6" sx={{ marginLeft: '.5rem' }}>
+        <strong>{title}</strong>
+      </Typography> */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          // gap: '0.625rem',
+          padding: { xs: '2rem 0', md: '.5rem' },
+        }}
       >
         <Paper>
           <form onSubmit={e => handleEditFormSubmit(e, rowsStringName)}>
@@ -176,19 +172,11 @@ const MealTable = ({
               </Grid>
 
               <Button
-                sx={
-                  `${matches}`
-                    ? {
-                        position: 'absolute',
-                        left: 0,
-                        bottom: '-42px',
-                      }
-                    : {
-                        position: 'absolute',
-                        right: '-7rem',
-                        bottom: 0,
-                      }
-                }
+                sx={{
+                  position: 'absolute',
+                  right: { xs: 'unset', md: '-7rem' },
+                  bottom: { xs: '-45px', md: 0 },
+                }}
                 variant="contained"
                 type="submit"
               >
@@ -197,7 +185,7 @@ const MealTable = ({
             </Grid>
           </Paper>
         </form>
-      </div>
+      </Box>
     </>
   );
 };
