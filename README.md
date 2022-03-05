@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-### ⚠ Work in progress
+
 
 <!-- PROJECT HEADER -->
 <br />
@@ -18,33 +18,28 @@
 </div>
 <!-- TABLE OF CONTENTS -->
 
-<!--
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
      <li>
       <a href="#about-the-project">About the Project</a>
-    </li>
-    <li>
-      <a href="#how-i-worked-on-this-project">How I Worked On This Project</a>
-      <ul>
-        <li><a href="#designing">Designing</a></li>
-        <li><a href="#planning:-user-stories-&-features">Planning: User Stories & Features</a></li>
-        <li><a href="#organization:-task-&-bug-tracking">Organization: Task & Bug Tracking</a></li>
+        <ul>
+        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#features">Features</a></li>
       </ul>
     </li>
     <li>
-      <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
-    </li>
-    <li><a href="#why-i-built-the-project-this-way">Why I Built the Project This Way</a></li>
-    <li><a href="#if-i-had-more-time-i-would-change-this">If I Had More Time I Would Change This</a></li>
-     <li>
       <a href="#the-idea-behind-this-project">The Idea Behind This Project</a>
     </li>
-    <li><a href="#available-scripts">Available Scripts</a></li>
-  </ol>
+    </li>
+      <a href="#how-i-worked-on-this-project">The Idea Behind This Project</a>
+    <li>
+    <li>
+      <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
+     </ol>
 </details>
--->
+
 <!-- ABOUT THE PROJECT -->
 ## About the Project
 <br />
