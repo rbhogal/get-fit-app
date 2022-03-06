@@ -200,8 +200,12 @@ A weight log to track your daily weight with graph and calculations to see trend
       
 #### 4. Find Caloric Deficit/Surplus (Daily Calories)
 
-    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain (lbs) per Week x 3500 kcal) / 7 days  
+    Caloric Deficit/Surplus = (Rate of Fat Loss/Muscle Gain (lbs) per Week x 3500 kcal) / 7 days  
 
+    Fat Loss: 
+      Daily Calories = TDEE - Caloric Deficit
+    Muscle Gain: 
+      Daily Calories = TDEE + Caloric Surplus
     
 #### 5. Suggested Macros
 
