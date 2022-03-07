@@ -154,7 +154,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js): Meals
 
 #### Auth Context
-* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): To persist if user is logged in and thier user id
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): Persists logged in user and user id
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
