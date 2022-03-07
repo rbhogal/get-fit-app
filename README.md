@@ -189,7 +189,7 @@ A weight log to track your daily weight with graph and calculations to see trend
       Very Active: 1.725
       Extremely Active: 1.9
     
-#### 3. Find How Many Lbs to Loss/Gain Per Week
+#### 3. Find How Many Lbs to Lose/Gain Per Week
 
     Rates
       Slow = 0.5% per lb of bodyweight
