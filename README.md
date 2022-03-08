@@ -80,8 +80,10 @@
 * Adjust your macros to fit your needs
 
 ### Meal Planner
-* Create a meal plan including breakfast, lunch, dinner, and snacks
-* Save, edit, and delete meal entries
+* Create new individual meal plans 
+* Save a meal as breakfast, lunch, dinner, or snack
+* Edit or delete meal entries
+* Total calories and macros for your meals are calculated in the bottom row with a +/- calorie/macros needed to hit your target goal
 * Meal plans saved to your user account 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
