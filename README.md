@@ -80,19 +80,21 @@
 * Adjust your macros to fit your needs
 
 ### Meal Planner
-* Create a meal plan including breakfast, lunch, dinner, and snacks
-* Save, edit, and delete meal entries
-* Meal plans saved to your user account 
+* Create new individual meal plans 
+* Save a meal as breakfast, lunch, dinner, or snack
+* Edit or delete meal entries
+* Total calories and macros for your meals are calculated in the bottom row with a +/- calorie/macros needed to hit your target goal
+* Save your meal plans with your user account 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## The Idea Behind This Project
 
 #### What's Wrong With Other Trackers?
-My main issue is that meal plans are saved on a calender so when you log back in you start with a blank slate to input the meals for your current day. However I prefer to eat the same meals for a couple weeks, so I find this doesn't work for me. I like to have a record of it to remember what I'm supposed to be cooking and eating without having to search back through the calender. 
+My main issue is that meal plans are saved on a calender so when you log back in you start with a blank slate to input the meals for your current day. However I prefer to eat the same meals for a couple weeks, so I find this doesn't work for me. I like to have a record of it to remember what I'm supposed to be cooking and eating without having to search back through the calender. I also find them cluttered and difficult to navigate.
 
 #### What's Different About This Tracker?
-This tracker allows you create new meal plans but when you log back in you'll see your latest meal plan. You can create as many new plans as you like. Features are simple, no clutter of the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
+You can create new meal plans but when you log back in you'll see your latest meal plan. You can create and save as many new plans as you like. Features are simple, no clutter from the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
 
 #### Passion for Fitness
 Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
@@ -154,7 +156,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js): Meals
 
 #### Auth Context
-* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): To persist if user is logged in and thier user id
+* [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): Persists logged in user and user id
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -189,7 +191,7 @@ A weight log to track your daily weight with graph and calculations to see trend
       Very Active: 1.725
       Extremely Active: 1.9
     
-#### 3. Find How Many Lbs to Loss/Gain Per Week
+#### 3. Find How Many Lbs to Lose/Gain Per Week
 
     Rates
       Slow = 0.5% per lb of bodyweight
@@ -200,10 +202,14 @@ A weight log to track your daily weight with graph and calculations to see trend
       
 #### 4. Find Caloric Deficit/Surplus (Daily Calories)
 
-    Calories (kcal) per Day = (Rate of Fat Loss/Muscle Gain (lbs) per Week x 3500 kcal) / 7 days  
+    Caloric Deficit/Surplus = (Rate of Fat Loss/Muscle Gain (lbs) per Week x 3500 kcal) / 7 days  
 
+    Fat Loss: 
+      Daily Calories = TDEE - Caloric Deficit
+    Muscle Gain: 
+      Daily Calories = TDEE + Caloric Surplus
     
-#### 5. Suggested Macros
+#### 5. Suggested Macros (Accurate for those losing <50lbs)
 
     Protein (g) = 1 g per lb of bodyweight
     Fats (g) = 0.3 g per lb of bodyweight
