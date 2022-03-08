@@ -209,7 +209,7 @@ A weight log to track your daily weight with graph and calculations to see trend
     Muscle Gain: 
       Daily Calories = TDEE + Caloric Surplus
     
-#### 5. Suggested Macros
+#### 5. Suggested Macros (Accurate for those losing <50lbs)
 
     Protein (g) = 1 g per lb of bodyweight
     Fats (g) = 0.3 g per lb of bodyweight
