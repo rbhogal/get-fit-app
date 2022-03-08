@@ -84,7 +84,7 @@
 * Save a meal as breakfast, lunch, dinner, or snack
 * Edit or delete meal entries
 * Total calories and macros for your meals are calculated in the bottom row with a +/- calorie/macros needed to hit your target goal
-* Meal plans saved to your user account 
+* Save your meal plans with your user account 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
