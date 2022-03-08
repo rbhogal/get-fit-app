@@ -45,9 +45,6 @@ const MealTable = ({
   const matches = useMediaQuery('(max-width: 900px)');
   return (
     <>
-      {/* <Typography variant="h6" sx={{ marginLeft: '.5rem' }}>
-        <strong>{title}</strong>
-      </Typography> */}
       <Box
         sx={{
           display: 'flex',
@@ -58,7 +55,11 @@ const MealTable = ({
       >
         <Paper>
           <form onSubmit={e => handleEditFormSubmit(e, rowsStringName)}>
-            <div style={{ overflowX: 'auto' }}>
+            <div
+              style={{
+                overflowX: 'auto',
+              }}
+            >
               <table
                 style={{
                   borderCollapse: 'collapse',

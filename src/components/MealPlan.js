@@ -205,7 +205,7 @@ const MealPlan = ({
           <CircularProgress />
         </Box>
       ) : (
-        <div>
+        <>
           <MealTable
             title={'Breakfast'}
             mealType={'breakfast'}
@@ -267,7 +267,7 @@ const MealPlan = ({
             formRef={snacksFormRef}
           />
           <Totals mealPlan={mealPlan} />
-        </div>
+        </>
       )}
     </>
   );

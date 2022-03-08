@@ -151,8 +151,7 @@ export default function SignIn() {
               Stay fit.
             </Typography>
             <Typography variant="subtitle2" color="text.secondary">
-              {/* Meal planning made easy. */}
-              Calorie tracking made easy.
+              Meal planning made easy.
             </Typography>
 
             <Box
