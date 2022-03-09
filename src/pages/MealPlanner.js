@@ -190,61 +190,63 @@ export default function MealPlanner() {
   };
 
   return (
-    <Box sx={{ marginBottom: '20rem' }}>
-      {isGuest === 'true' && (
-        <WelcomeDialog
-          open={openWelcome === 'true' ? true : false}
-          handleClickYes={handleCloseWelcome}
-          // handleCheckbox={handleCheckbox}
-        />
-      )}
-      <DeleteMealDialog
-        open={openDeletePlanDialog}
-        handleClickYes={deleteMealPlan}
-        handleCloseAlert={handleCloseDeletePlanDialog}
-      />
-      <PageHeader title={'Meal Planner'} divider={false} />
-      <Box
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          display: 'flex',
-        }}
-      >
-        <IconButton onClick={addNewMealPlan} aria-label="add new meal plan">
-          <AddIcon />
-        </IconButton>
-        <Tabs
-          value={value}
-          onChange={handleChangeTab}
-          aria-label="meal plan tabs"
-          variant="scrollable"
-          scrollButtons="auto"
-        >
-          {mealPlans.map((mealPlan, index) => (
-            <Tab key={index} label={mealPlan.tabName} {...a11yProps(0)} />
-          ))}
-        </Tabs>
-        <IconButton
-          onClick={handleOpenDeletePlanDialog}
-          aria-label="delete meal plan"
-        >
-          <DeleteForeverIcon />
-        </IconButton>
-      </Box>
-
-      {mealPlans.map((mealPlan, index) => (
-        <TabPanel key={index} value={value} index={index}>
-          <MealPlan
-            mealPlan={mealPlan}
-            tabName={mealPlans[index].tabName}
-            mealPlanIndex={index}
-            mealPlans={mealPlans}
-            setMealPlans={setMealPlans}
-            value={value}
+    <>
+      <Box sx={{ marginBottom: '20rem' }}>
+        {isGuest === 'true' && (
+          <WelcomeDialog
+            open={openWelcome === 'true' ? true : false}
+            handleClickYes={handleCloseWelcome}
+            // handleCheckbox={handleCheckbox}
           />
-        </TabPanel>
-      ))}
-    </Box>
+        )}
+        <DeleteMealDialog
+          open={openDeletePlanDialog}
+          handleClickYes={deleteMealPlan}
+          handleCloseAlert={handleCloseDeletePlanDialog}
+        />
+        <PageHeader title={'Meal Planner'} divider={false} />
+        <Box
+          sx={{
+            borderBottom: 1,
+            borderColor: 'divider',
+            display: 'flex',
+          }}
+        >
+          <IconButton onClick={addNewMealPlan} aria-label="add new meal plan">
+            <AddIcon />
+          </IconButton>
+          <Tabs
+            value={value}
+            onChange={handleChangeTab}
+            aria-label="meal plan tabs"
+            variant="scrollable"
+            scrollButtons="auto"
+          >
+            {mealPlans.map((mealPlan, index) => (
+              <Tab key={index} label={mealPlan.tabName} {...a11yProps(0)} />
+            ))}
+          </Tabs>
+          <IconButton
+            onClick={handleOpenDeletePlanDialog}
+            aria-label="delete meal plan"
+          >
+            <DeleteForeverIcon />
+          </IconButton>
+        </Box>
+
+        {mealPlans.map((mealPlan, index) => (
+          <TabPanel key={index} value={value} index={index}>
+            <MealPlan
+              mealPlan={mealPlan}
+              tabName={mealPlans[index].tabName}
+              mealPlanIndex={index}
+              mealPlans={mealPlans}
+              setMealPlans={setMealPlans}
+              value={value}
+            />
+          </TabPanel>
+        ))}
+      </Box>
+    </>
   );
 }

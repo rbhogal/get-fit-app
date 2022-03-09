@@ -13,8 +13,6 @@ const Layout = () => {
         <Outlet />
         <Footer />
       </Container>
-
-      {/* </Box> */}
     </div>
   );
 };
