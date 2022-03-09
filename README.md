@@ -150,12 +150,12 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 * [Code](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/components/MacrosModal.js#L31): Custom hook to get input data when adjusting macros
 
-#### Redux 
+#### Redux State Management
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/userSlice.js): User
 
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/features/mealSlice.js): Meals
 
-#### Auth Context
+#### Auth Context State Management: Login
 * [Code](https://github.com/rbhogal/get-fit-app/blob/main/src/context/AuthContext.js): Persists logged in user and user id
 
 <p align="right">(<a href="#top">back to top</a>)</p>
