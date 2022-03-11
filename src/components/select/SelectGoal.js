@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const selectItems = ['Fat Loss', 'Muscle Gain'];
+const selectItems = ['Maintain', 'Fat Loss', 'Muscle Gain'];
 
 export default function SelectGoal({ value, error, onChange }) {
   return (

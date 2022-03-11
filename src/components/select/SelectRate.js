@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const selectItems = [
+  'Maintenance — Maintain current weight',
   'Slow — 0.5% per lb of bodyweight',
   'Moderate — 0.7% per lb of bodyweight',
   'Fast — 1% per lb of bodyweight',
@@ -17,6 +18,7 @@ export default function SelectRate({ error, value, onChange }) {
         error={error}
         variant="outlined"
         sx={{ m: 1, minWidth: 120 }}
+        helperText="Maintain"
       >
         <InputLabel>Rate</InputLabel>
         <Select

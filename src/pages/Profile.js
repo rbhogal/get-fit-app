@@ -51,6 +51,7 @@ const activityLevelMultipliers = {
 };
 
 const ratePercentages = {
+  Maintenance: 0,
   Slow: 0.005,
   Moderate: 0.007,
   Fast: 0.01,
@@ -329,6 +330,10 @@ const Profile = () => {
 
     if (goal === 'Muscle Gain') {
       dailyCalories = tdee + caloricDeficitOrSurplus;
+    }
+
+    if (goal === 'Maintain') {
+      dailyCalories = tdee;
     }
 
     ///////////////////////////////////////////////////////////////////////////////
