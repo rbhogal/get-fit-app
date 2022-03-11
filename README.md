@@ -167,6 +167,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 - [ ] Notes
 - [X] Add option to maintain calories
 - [ ] Improve Meal Planner UI
+- [ ] Persist form input data
 <!--     - [ ] Nested Feature -->
 
 See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full list of proposed features (and known issues).
