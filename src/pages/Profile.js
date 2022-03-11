@@ -51,7 +51,7 @@ const activityLevelMultipliers = {
 };
 
 const ratePercentages = {
-  Maintenance: 0,
+  Maintain: 0,
   Slow: 0.005,
   Moderate: 0.007,
   Fast: 0.01,
@@ -371,8 +371,6 @@ const Profile = () => {
       userStatsExist: true,
     };
 
-    console.log(newUserData, currentUserId);
-
     dispatch(
       addUserDataFirebase({
         userData: newUserData,
@@ -385,6 +383,7 @@ const Profile = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
     setIsFormSubmittedToTrueSex();
     setIsFormSubmittedToTrueAge();
     setIsFormSubmittedToTrueFeet();
@@ -524,14 +523,17 @@ const Profile = () => {
                       />
                     </TableCell>
                   </TableRow>
+
                   <TableRow
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
                       <strong>Rate of Fat Loss/Muscle Gain</strong>
                     </TableCell>
+
                     <TableCell size="small" align="right">
                       <SelectRate
+                        enteredGoal={enteredGoal}
                         value={enteredRate}
                         error={rateInputHasError}
                         onChange={rateChangeHandler}
