@@ -40,7 +40,7 @@
       <a href="#how-to-navigate-this-project">How To Navigate This Project</a>
   </li>
   <li>
-      <a href="#if-i-had-more-time-i-would-add-this">If I Had More Time I Would Add This</a>
+      <a href="#future-improvements">Future Improvements</a>
   </li>
   <li>
     <a href="#q--a">Q & A</a>
@@ -97,7 +97,7 @@ My main issue is that meal plans are saved on a calender so when you log back in
 You can create new meal plans but when you log back in you'll see your latest meal plan. You can create and save as many new plans as you like. Features are simple, no clutter from the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
 
 #### Passion for Fitness
-Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
+Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets wFulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -160,11 +160,17 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## If I Had More Time I Would Add This
-### Quick Add Meals
-Favorite/Save meals to quickly add later
-### Weight Log
-A weight log to track your daily weight with graph and calculations to see trends
+## Future Improvements
+
+- [ ] Quick Add Meals: Favorite/Save meals to quickly add later
+- [ ] Weight Log: A weight log to track your daily weight with graph and calculations to see trends
+- [ ] Notes
+- [X] Add option to maintain calories
+- [ ] Improve Meal Planner UI
+- [ ] Persist the selected inputs
+<!--     - [ ] Nested Feature -->
+
+See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
