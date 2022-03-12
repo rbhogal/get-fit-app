@@ -615,7 +615,7 @@ const Profile = () => {
             }}
           >
             {_.isEmpty(userData.sex) && userStatsExist ? (
-              <Stack spacing={0.2}>
+              <Stack width={'100%'} spacing={0.2}>
                 <Skeleton variant="rectangular" height={58} />
                 <Skeleton variant="rectangular" height={52} />
                 <Skeleton variant="rectangular" height={52} />
