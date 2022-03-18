@@ -164,11 +164,11 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 - [ ] Quick Add Meals: Favorite/Save meals to quickly add later
 - [ ] Weight Log: A weight log to track your daily weight with graph and calculations to see trends
-- [ ] Notes
+- [ ] Notes feature
 - [X] Add option to maintain calories
 - [ ] Improve Meal Planner UI 
 - [ ] Better responsiveness of meal plan tables and inputs
-- [ ] Persist the selected inputs
+- [ ] Persist the selected inputs on profile page
 <!--     - [ ] Nested Feature -->
 
 See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full list of proposed features (and known issues).
