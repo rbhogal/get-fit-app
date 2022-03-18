@@ -166,7 +166,8 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 - [ ] Weight Log: A weight log to track your daily weight with graph and calculations to see trends
 - [ ] Notes
 - [X] Add option to maintain calories
-- [ ] Improve Meal Planner UI
+- [ ] Improve Meal Planner UI 
+- [ ] Better responsiveness of meal plan tables and inputs
 - [ ] Persist the selected inputs
 <!--     - [ ] Nested Feature -->
 
