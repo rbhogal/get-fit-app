@@ -164,6 +164,7 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 - [ ] Quick Add Meals: Favorite/Save meals to quickly add later
 - [ ] Weight Log: A weight log to track your daily weight with graph and calculations to see trends
+- [ ] Better closeable tabs (will also fix padding issue for meal plans on mobile)
 - [ ] Notes feature
 - [X] Add option to maintain calories
 - [ ] Improve Meal Planner UI 
