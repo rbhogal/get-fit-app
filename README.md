@@ -232,8 +232,31 @@ See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full 
 ### State Management
 Updating (nested) state using hooks without mutating data was the biggest challenge. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
 
-### Tabs 
-Material UI provides a tabs component however it does allow for you to dynamically add new tabs and close them. So I had to code my own functionality. However I'm not happy with my solution and it would need to be improved upon in the future. However what I did do was add an add and delete button on the sides of tab window. To add a new one you click add, to delete a tab you have to first select the tab you want to delete and then the delete button, as opposed to having the delete button inside of each tab. I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan n+1... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say Meal Plan 2, the new tab would be named Meal Plan 2 and then the next Meal plan 3 and now you have two tabs named Meal Plan 3s. 
+### Dynamic Tabs 
+
+#### Problem 1
+Material UI provides a tabs component however it doesn't allow for you to dynamically add new tabs and close them. So I had to code my own functionality. What I did was add an add and delete button on the sides of tab window. To add a new one you click add, to delete a tab you have to first select the tab you want to delete and then the delete button, as opposed to having the delete button inside of each tab. This is not an ideal solution and I have to improve upon it in the future. The two buttons on each side also cause a padding issue on mobile, the meal plan's container leaves a padding the width of the buttons on the sides. 
+
+#### Fixes
+Added buttons, created an addMealPlan function which adds a new meal plan to the array and a deleteMealPlan which removes it from the array
+
+[Add Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L131)
+
+[Delete Meal Plan Fucntion](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L161)
+
+#### Problem 2
+I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan n+1... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say Meal Plan 2, the new tab would be named Meal Plan 2 and then the next would be named Meal Plan 3 and now you have two tabs named Meal Plan 3. 
+
+#### Fixes
+[Setting Active Tab](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L170)
+
+[Preventing Duplicate Tab Names](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L132)
+
+### Responsiveness of Meal Plan
+The Meal Plan is a table which is not truly capable of being viewed on mobile so I had given up on creating a solution as I don't really see this being an app to be used on mobile. It doesn't break but it sure is ugly and not effective. The improvement I would like to make is just give the whole table a scroll bar. Again, not great because it's a table afterall, but it's the only solution I think would make sense. The other option being keeping the meal name and calories column, and getting rid of the rest on mobile. 
+
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
