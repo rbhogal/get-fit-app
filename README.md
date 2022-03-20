@@ -245,7 +245,7 @@ Added buttons, created an addMealPlan function which adds a new meal plan to the
 [Delete Meal Plan Fucntion](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L161)
 
 #### Problem 2
-I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan n+1... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say Meal Plan 2, the new tab would be named Meal Plan 2 and then the next would be named Meal Plan 3 and now you have two tabs named Meal Plan 3. 
+I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan n+1... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say Meal Plan 2, the new tab would be named Meal Plan 2 and then the next would be named Meal Plan 3 and now you have two tabs named Meal Plan 3. I fixed this by looping the array (forEach) and checking for duplicates and making sure if one is found that it's named Meal Plan 3 (1), if even that one exits it'll be named Meal Plan 3 (2) and so forth. 
 
 #### Fixes
 [Setting Active Tab](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L170)
