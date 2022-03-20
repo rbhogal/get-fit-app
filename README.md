@@ -227,9 +227,13 @@ See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full 
 
 #### [Code: Calculating Macros](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247)
 
-### What Was The Biggest Challenge? 
+## Challenges
 
-Updating (nested) state using hooks without mutating data. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
+### State Management
+Updating (nested) state using hooks without mutating data was the biggest challenge. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
+
+### Tabs 
+Material UI provides a tabs component however it does allow for you to dynamically add new tabs and close them. So I had to code my own functionality. However I'm not happy with my solution and it would need to be improved upon in the future. However what I did do was add an add and delete button on the sides of tab window. To add a new one you click add, to delete a tab you have to first select the tab you want to delete and then the delete button, as opposed to having the delete button inside of each tab. I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan n+1... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say Meal Plan 2, the new tab would be named Meal Plan 2 and then the next Meal plan 3 and now you have two tabs named Meal Plan 3s. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
