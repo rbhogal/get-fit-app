@@ -235,7 +235,7 @@ Updating (nested) state using hooks without mutating data was the biggest challe
 ### Dynamic Tabs 
 
 #### Problem 1
-Material UI provides a tabs component however it doesn't allow for you to dynamically add new tabs and close them. So I had to code my own functionality. What I did was add an add and delete button on the sides of tab window. To add a new one you click add, to delete a tab you have to first select the tab you want to delete and then the delete button, as opposed to having the delete button inside of each tab. This is not an ideal solution and I have to improve upon it in the future. The two buttons on each side also cause a padding issue on mobile, the meal plan's container leaves a padding the width of the buttons on the sides. 
+Material UI provides a tabs component however it doesn't allow for you to dynamically add new tabs and close them. So I had to code my own functionality. What I did was add an add and delete button to the sides of the tab window. To add a new one you click add, to delete a tab you have to first select the tab you want to delete and then the delete button, as opposed to having the delete button inside of each tab. This is not an ideal solution and I have to improve upon it in the future. The two buttons on each side also cause a padding issue on mobile, the meal plan's container leaves a padding the width of the buttons on the sides. 
 
 #### Fixes
 Added buttons, created an addMealPlan function which adds a new meal plan to the array and a deleteMealPlan which removes it from the array
