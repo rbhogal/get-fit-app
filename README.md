@@ -230,7 +230,7 @@ See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full 
 
 ## Challenges
 
-### State Management
+### Nested Arrays and Objects / State Management
 Updating (nested) state using hooks without mutating data was the biggest challenge. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
 
 ### Dynamic Tabs 
