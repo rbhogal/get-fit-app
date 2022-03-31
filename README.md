@@ -241,7 +241,7 @@ Material UI provides a tabs component however it doesn't allow for you to dynami
 #### Fixes
 Added buttons, created an addMealPlan function which adds a new meal plan to the array and a deleteMealPlan which removes it from the array
 
-[Add Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/52c41eb92eafed4e5fa8ca5a8ec4238c8b5935e9/src/pages/MealPlanner.js#L131)
+[Add Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/eac1e1848f189f982c19a1852ca89df6c6020a92/src/pages/MealPlanner.js#L131)
 
 [Delete Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/52c41eb92eafed4e5fa8ca5a8ec4238c8b5935e9/src/pages/MealPlanner.js#L165)
 
