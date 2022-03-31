@@ -130,24 +130,28 @@ export default function MealPlanner() {
 
   const addNewMealPlan = () => {
     // Handle naming the new tab if duplicate name(s) exist
-    let i = 0;
+    let duplicateNum = 0;
     mealPlans.forEach(mealPlan => {
       const strIndex = mealPlan.tabName.indexOf('(');
 
+      // check how many duplicates currently exist (represented by i)
       if (strIndex !== -1) {
         const tabNameSlice = mealPlan.tabName.slice(0, strIndex - 1);
-        if (tabNameSlice === `Meal Plan ${mealPlans.length + 1}`) i++;
+        if (tabNameSlice === `Meal Plan ${mealPlans.length + 1}`)
+          duplicateNum++;
       } else {
-        if (mealPlan.tabName === `Meal Plan ${mealPlans.length + 1}`) i++;
+        if (mealPlan.tabName === `Meal Plan ${mealPlans.length + 1}`)
+          duplicateNum++;
       }
     });
 
-    i > 0
+    // if one or more duplicates exist, add a parenthesis and number it the duplicate number i, otherwise just name it normally
+    duplicate > 0
       ? setMealPlans([
           ...mealPlans,
           {
             ...newMealPlan,
-            tabName: `Meal Plan ${mealPlans.length + 1} (${i})`,
+            tabName: `Meal Plan ${mealPlans.length + 1} (${duplicateNum})`,
           },
         ])
       : setMealPlans([
