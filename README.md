@@ -97,7 +97,7 @@ My main issue is that meal plans are saved on a calender so when you log back in
 You can create new meal plans but when you log back in you'll see your latest meal plan. You can create and save as many new plans as you like. Features are simple, no clutter from the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
 
 #### Passion for Fitness
-Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets wFulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
+Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -162,12 +162,15 @@ Years ago I lost 110 lbs and have kept it off and ever since developed a passion
 
 ## Future Improvements
 
+- [ ] Integrate Food API 
 - [ ] Quick Add Meals: Favorite/Save meals to quickly add later
 - [ ] Weight Log: A weight log to track your daily weight with graph and calculations to see trends
-- [ ] Notes
+- [ ] Better closeable tabs (will also fix padding issue for meal plans on mobile)
+- [ ] Notes feature
 - [X] Add option to maintain calories
-- [ ] Improve Meal Planner UI
-- [ ] Persist the selected inputs
+- [ ] Improve Meal Planner UI 
+- [ ] Better responsiveness of meal plan tables and inputs
+- [ ] Persist the selected inputs on profile page
 <!--     - [ ] Nested Feature -->
 
 See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full list of proposed features (and known issues).
@@ -225,9 +228,36 @@ See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full 
 
 #### [Code: Calculating Macros](https://github.com/rbhogal/get-fit-app/blob/4636e5a6642a07c53faee8e77cd38c4ef3113caf/src/pages/Profile.js#L247)
 
-### What Was The Biggest Challenge? 
+## Challenges
 
-Updating (nested) state using hooks without mutating data. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
+### Nested Arrays and Objects / State Management
+Updating (nested) state using hooks without mutating data was the biggest challenge. My meal plans are stored in an array with nested objects that have further nested objects and arrays. At first I wasn't sure how to safely update a nested array directly inside the setState hook without mutating the data. Eventually I figured I could just create new block scoped variables to update the nested data and then setState with the new object. 
+
+### Dynamic Tabs 
+
+#### Problem 1
+Material UI provides a tabs component however it doesn't allow for you to dynamically add new tabs and close them. So I had to code my own functionality. What I did was add an add and delete button to the sides of the tab window. To add a new one you click add, to delete a tab you have to first select the tab you want to delete and then the delete button, as opposed to having the delete button inside of each tab. This is not an ideal solution and I have to improve upon it in the future. The two buttons on each side also cause a padding issue on mobile, the meal plan's container leaves a padding the width of the buttons on the sides. 
+
+#### Fixes
+Added buttons, created an addMealPlan function which adds a new meal plan to the array and a deleteMealPlan which removes it from the array
+
+[Add Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L131)
+
+[Delete Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L161)
+
+#### Problem 2
+I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan `${mealPlanArray.length + 1}`... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say you have 3 meals plans and you delete Meal Plan 2, the new tab would be named Meal Plan 3 and now you have a duplicate (Meal Plan 1, Meal Plan 3, Meal Plan 3). I fixed this by looping the array (forEach) and checking for duplicates and making sure if one is found that it's named Meal Plan 3 (1), if even that one exits it'll be named Meal Plan 3 (2) and so forth. 
+
+#### Fixes
+[Setting Active Tab](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L170)
+
+[Preventing Duplicate Tab Names](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L132)
+
+### Responsiveness of Meal Plan
+The Meal Plan is a table which is not truly capable of being viewed on mobile so I had given up on creating a solution as I don't really see this being an app to be used on mobile. It doesn't break but it sure is ugly and not effective. The improvement I would like to make is just give the whole table a scroll bar. Again, not great because it's a table afterall, but it's the only solution I think would make sense. The other option being keeping the meal name and calories column, and getting rid of the rest on mobile. 
+
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
