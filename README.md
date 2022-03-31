@@ -243,7 +243,7 @@ Added buttons, created an addMealPlan function which adds a new meal plan to the
 
 [Add Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/52c41eb92eafed4e5fa8ca5a8ec4238c8b5935e9/src/pages/MealPlanner.js#L131)
 
-[Delete Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/3274fdfef895974e09ee7bdbc39feecfefe9905e/src/pages/MealPlanner.js#L161)
+[Delete Meal Plan Function](https://github.com/rbhogal/get-fit-app/blob/52c41eb92eafed4e5fa8ca5a8ec4238c8b5935e9/src/pages/MealPlanner.js#L165)
 
 #### Problem 2
 I also had to address a new issue this caused which was setting the active tab once the selected tab was deleted, and then also the naming of the tabs which are labeled as Meal Plan `${mealPlanArray.length + 1}`... (Meal Plan 1, Meal Plan 2, Meal Plan 3...) with the issue being that if you delete a tab, lets say you have 3 meals plans and you delete Meal Plan 2, the new tab would be named Meal Plan 3 and now you have a duplicate (Meal Plan 1, Meal Plan 3, Meal Plan 3). I fixed this by looping the array (forEach) and checking for duplicates and making sure if one is found that it's named Meal Plan 3 (1), if even that one exits it'll be named Meal Plan 3 (2) and so forth. 
