@@ -146,7 +146,7 @@ export default function MealPlanner() {
     });
 
     // if one or more duplicates exist, add a parenthesis and number it the duplicate number i, otherwise just name it normally
-    duplicate > 0
+    duplicateNum > 0
       ? setMealPlans([
           ...mealPlans,
           {
