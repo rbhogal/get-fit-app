@@ -11,7 +11,7 @@ const styleTh = {
   border: '1px solid #DDDDDD',
   textAlign: 'left',
   padding: '8px',
-  width: '100%',
+  // width: '100%',
 };
 
 const styleNumbers = {
@@ -42,23 +42,23 @@ const MealTable = ({
   handleDeleteClick,
   formRef,
 }) => {
-  const matches = useMediaQuery('(max-width: 900px)');
   return (
     <>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          // gap: '0.625rem',
           padding: { xs: '2rem 0', md: '.5rem' },
         }}
       >
         <Paper>
           <form onSubmit={e => handleEditFormSubmit(e, rowsStringName)}>
             <div
-              style={{
-                overflowX: 'auto',
-              }}
+              style={
+                {
+                  // overflowX: 'auto',
+                }
+              }
             >
               <table
                 style={{
@@ -71,18 +71,49 @@ const MealTable = ({
                     <th
                       style={{
                         ...styleTh,
-                        width: '100%',
+                        width: '27.613rem',
                       }}
                     >
                       {title}
                     </th>
-                    <th style={{ ...styleTh, minWidth: '8rem' }}>Calories</th>
-                    <th style={{ ...styleTh, minWidth: '8rem' }}>
+                    <th
+                      style={{
+                        ...styleTh,
+                        width: '8rem',
+                      }}
+                    >
+                      Calories
+                    </th>
+                    <th
+                      style={{
+                        ...styleTh,
+                        width: '8rem',
+                      }}
+                    >
                       Protein (g)
                     </th>
-                    <th style={{ ...styleTh, minWidth: '8rem' }}>Carbs (g)</th>
-                    <th style={{ ...styleTh, minWidth: '8rem' }}>Fats (g)</th>
-                    <th style={{ ...styleTh, minWidth: '5.2rem' }}></th>
+                    <th
+                      style={{
+                        ...styleTh,
+                        width: '8rem',
+                      }}
+                    >
+                      Carbs (g)
+                    </th>
+                    <th
+                      style={{
+                        ...styleTh,
+                        width: '8rem',
+                      }}
+                    >
+                      Fats (g)
+                    </th>
+                    <th
+                      style={{
+                        ...styleTh,
+                        width: '5.2rem',
+                      }}
+                    ></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -119,6 +150,7 @@ const MealTable = ({
             handleAddFormMealDataSubmit(e, rowsStringName, formRef)
           }
         >
+          {/*         
           <Paper>
             <Grid container style={{ position: 'relative' }}>
               <Grid item xs={5.13}>
@@ -184,7 +216,7 @@ const MealTable = ({
                 Add Meal
               </Button>
             </Grid>
-          </Paper>
+          </Paper> */}
         </form>
       </Box>
     </>

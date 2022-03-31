@@ -227,7 +227,10 @@ const Totals = ({ mealPlan }) => {
 
   return (
     <Box
-      sx={{ padding: { xs: '2rem 0 0 0', md: '0.5rem' }, overflowX: 'auto' }}
+      sx={{
+        padding: { xs: '2rem 0 0 0', md: '0.5rem' },
+        //  overflowX: 'auto'
+      }}
     >
       <table
         style={{

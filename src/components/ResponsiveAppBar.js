@@ -177,6 +177,7 @@ const ResponsiveAppBar = () => {
             {pages.map(page => (
               <Link key={page.title} to={page.path}>
                 <Button
+                  aria-label="nav menu"
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
