@@ -97,7 +97,7 @@ My main issue is that meal plans are saved on a calender so when you log back in
 You can create new meal plans but when you log back in you'll see your latest meal plan. You can create and save as many new plans as you like. Features are simple, no clutter from the fitness app trying to make more money off you by adding more features that only make the app more confusing to navigate and use. 
 
 #### Passion for Fitness
-Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
+Years ago I lost 110 lbs and have kept it off and ever since developed a passion for fitness and nutrition. What started off first as calculating my calories and macros using a calculator, pen, and paper eventually evolved to storing it in a word doc, then to creating more and more complex excel spreadsheets with formulas, tables, and graphs to keep track of my meals and progress. So naturally I thought why not take all that knowledge I have built up and centralize it by creating an app that fits my needs.  
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
