@@ -32,7 +32,7 @@
     <li>
       <a href="#the-idea-behind-this-project">The Idea Behind This Project</a>
     </li>
-    </li>
+    </li>H
     <li>
       <a href="#how-i-worked-on-this-project">How I Worked On This Project</a>
     </li>
@@ -184,7 +184,7 @@ See the [open issues](https://github.com/rbhogal/get-fit-app/issues) for a full 
 #### 1. Find Basal Metabolic Rate (BMR) using the The Mifflin St. Jeor Equation
 
     Men:
-      BMR = (10 x weight in kg) + (6.25 heigh in cm) - (5 x age in years) + 5
+      BMR = (10 x weight in kg) + (6.25 height in cm) - (5 x age in years) + 5
     
     Women: 
       BMR = (10 x weight in kg) + (6.25 height in cm) - (5 x age in years) - 161
